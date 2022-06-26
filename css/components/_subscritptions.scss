@@ -1,0 +1,66 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+
+.subscribe {
+    @extend %section;
+    display: flex;
+    width: 100%;
+    background-color: var.$background-color-primary;
+
+	.inner {
+		@extend %wrap;
+		display: flex;
+        flex-direction: column;
+		justify-content: center;
+        text-align: center;
+
+        .features {
+            display: flex;
+            align-items: center;
+
+            @include mix.tablet{
+                display: block;
+            }
+        }
+
+        form {
+            display: flex;
+			max-width: 100%;
+            margin: 0 auto;
+
+			@include mix.tablet {
+				display: block;
+			}
+
+			input[type="email"] {
+                width: 300px;
+				flex: 1 1 auto;
+                font-size: 11px;
+				border: 1px solid var.$text-color-secondary;
+				padding: math.div(var.$gutter-base, 3);
+				border-radius: var.$border-radius;
+                margin-right: math.div(var.$gutter-base, 3);
+
+                @include mix.tablet {
+                    width: 100%;
+                    margin-bottom: math.div(var.$gutter-base, 3);
+                }
+			}
+
+			input[type="submit"] {
+                text-transform: uppercase;
+                font-size: 11px;
+                font-weight: bold;
+				padding: math.div(var.$gutter-base, 3) var.$gutter-base;
+				border-radius: var.$border-radius;
+				background-color: var.$background-color-secondary;
+				color: var.$text-color-primary;
+				border: 0;
+			}
+            input[type="submit"]:hover {
+                background-color: rgba($color: var.$background-color-secondary, $alpha: 0.8);             }
+		}
+    }
+}

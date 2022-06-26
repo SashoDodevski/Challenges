@@ -1,0 +1,73 @@
+@use "../abstracts/variables" as var;
+@use "../abstracts/mixins" as mix;
+@use "sass:math";
+
+body {
+  font-family: var.$font-family-base;
+  font-size: var.$font-size-base;
+  font-weight: var.$font-weight-base;
+  line-height: var.$line-height-base;
+  color: var.$text-color-base;
+}
+
+h1,
+h2 {
+  margin-bottom: math.div(var.$gutter-base, 2);
+  line-height: var.$line-height-small;
+  font-weight: var.$font-weight-bold;
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: var.$gutter-base*1.7;
+  font-weight: var.$font-weight-normal;
+}
+
+
+h2 {
+  font-size: var.$gutter-base;
+}
+
+.disp_flex {
+  display: flex;
+}
+
+.button {
+  background-color: var.$background-color-secondary;
+  padding: math.div(var.$gutter-base, 2.5) var.$gutter-base;
+  border: none;
+  border-radius: var.$border-radius;
+  color: var.$text-color-primary;
+  text-transform: uppercase;
+  font-weight: var.$font-weight-base * 2;
+}
+
+.button:hover {
+  background-color: rgba($color: var.$background-color-secondary, $alpha: 0.8);  
+}
+
+.Logo {
+  @include mix.mobile {
+    font-size: var.$gutter-base;
+  }
+}
+
+hr {
+  height: 2px;
+  background-color: var.$background-color-secondary;
+  border: none;
+  width: 150px;
+  margin-bottom: (var.$gutter-base * 2)
+}
+
+
+.description {
+  padding: math.div(var.$gutter-base, 1) 20%;
+  line-height: var.$line-height-base * 1.5;
+
+  @include mix.tablet {
+    padding-bottom: math.div(var.$gutter-base, 2); 
+    padding-right:0;
+    padding-left:0;
+  }
+}

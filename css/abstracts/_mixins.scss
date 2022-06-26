@@ -1,0 +1,37 @@
+@use "./variables" as var;
+@use 'sass:math';
+
+%section {
+  padding-top: (var.$gutter-base * 2);
+  padding-bottom: (var.$gutter-base * 2);
+
+  @media (max-width: 768px) {
+    padding-top: (var.$gutter-base * 1.8);
+    padding-bottom: (var.$gutter-base * 1.8);
+  }
+}
+
+
+%wrap {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 999px) {
+    width: 90%;
+    padding-left: math.div(var.$gutter-base, 2);
+    padding-right: math.div(var.$gutter-base, 2);
+  }
+}
+
+@mixin tablet {
+	@media (max-width: 769px) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media (max-width: 426px) {
+  	@content;
+	}
+}

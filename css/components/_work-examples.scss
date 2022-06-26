@@ -1,0 +1,80 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+
+.work_examples {
+    @extend %section;
+    display: flex;
+    width: 100%;
+
+	.inner {
+		@extend %wrap;
+		display: flex;
+        flex-direction: column;
+		justify-content: center;
+        text-align: center;
+
+		@include mix.mobile {
+			display: block;
+			text-align: center;
+		}
+
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-between;
+
+            @include mix.tablet {
+                display: block;
+            }
+            
+            .photo {
+                height: 250px;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                @include mix.tablet {
+                    width: 100%;
+                }
+
+				&:not(:nth-child(n+3)) {
+                    margin-bottom: 2%;
+                    @include mix.tablet {
+                        margin-bottom: 30px;
+                    }
+				}
+            }
+
+            .photo1,
+            .photo4 {
+                flex-basis: 39%;
+            }
+
+            .photo2,
+            .photo3 {
+                flex-basis: 59%;
+            }
+
+            .photo1 {
+                background-image: url(../../images/coast.jpg);
+            }
+
+            .photo2 {
+                background-image: url(../../images/island.jpg);
+            }
+
+            .photo3 {
+                background-image: url(../../images/balloon.jpg);
+                @include mix.tablet {
+                    margin-bottom: 30px;
+                }
+            }
+            .photo4 {
+                background-image: url(../../images/mountain.jpg);
+            }
+        }
+	}
+}

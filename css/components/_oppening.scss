@@ -1,0 +1,19 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+.oppening {
+    background-image: url(../../images/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: var.$text-color-primary;
+
+    .opacity {
+        background: rgba($color: #6b6b6b, $alpha: 0.6);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+

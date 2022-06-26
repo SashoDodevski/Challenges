@@ -1,0 +1,16 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-basis: 100%;
+
+    p {
+        padding-bottom: math.div(var.$gutter-base, 1.5);
+    }
+}
