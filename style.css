@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding:0;
+}
+
+.color-primary {
+    color: #FCD232;
+}
+
+.color-secondary {
+    color: #302F38;
+}
+
+.color-tertiary {
+    color: #EB3B3B;
+}
