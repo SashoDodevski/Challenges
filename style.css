@@ -33,3 +33,41 @@
     padding: 0 !important;
 }
 
+/* Banner */
+
+.banner {
+    margin-top: 56px;
+    background-image: url(./images/Banner.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 65vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.banner h1 {
+    background-color: rgba(75, 75, 75, 0.5);
+    width: 100%;
+    padding: 20px;
+    color: white;
+}
+
+.glow {
+    font-size: 80px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6a900, 0 0 40px #e6a900, 0 0 50px #e6a900, 0 0 60px #e6a900, 0 0 70px #e6a900;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #EB3B3B, 0 0 40px #fffc5b, 0 0 50px #fffc5b, 0 0 60px #fffc5b, 0 0 70px #fffc5b, 0 0 80px #fffc5b;
+    }
+  }
