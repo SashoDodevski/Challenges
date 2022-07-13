@@ -17,39 +17,55 @@
     <!-- Local CSS -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2acadc57f5.js" crossorigin="anonymous"></script>
+
     <!-- Document title -->
     <title>Document</title>
   </head>
   <body>
 
+    <div class="container-fluid">
     <!-- Navbar -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+    <div class="row">
 
-    
+      <div class="navbar bg-primary m-0 p-0 w-100">
+
+        <a class="logo p-0" href="#">
+          <img src="./Images/Brainster Logo2.jpg" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 ">
+        </a>
+
+        <label for="toggle" class="navbar-toggler mx-2"><span><i class="fa-solid fa-bars"></i></span></label>
+        <input type="checkbox" id="toggle" class="checkbox">
+
+
+        <div class="navigation d-flex ml-auto mr-0 p-0">
+          <a class="nav-link active color-secondary" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-5">Вработи наш студент</button>
+        </div>
+
+        <div class="hidden w-100 p-0 pl-4 bg-secondary">
+          <div class="X-button">
+            <label for="toggle" class="text-white"><span><i class="fa-solid fa-xmark "></i></span></label>
+            <input type="checkbox" id="toggle" class="checkbox">
+          </div>
+          <a class="nav-link active color-secondary mt-5" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-3 my-4">Вработи наш студент</button>
+        </div>
+
+      </div>
+    </div>
+
+  
+
+
     <!-- Banner -->
 
 
@@ -61,7 +77,8 @@
 
     <!-- Footer -->
 
-    
+
+  </div>
 
     <!-- Bootstrap scripts -->
     <script
