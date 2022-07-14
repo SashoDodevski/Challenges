@@ -8,7 +8,7 @@
 }
 
 .bg-primary {
-    background-color: FCD232 !important;
+    background-color: #FCD232 !important;
 }
 
 .color-secondary {
@@ -25,4 +25,23 @@
 
 .bg-tertiary {
     background-color: #EB3B3B !important;
+}
+
+/* Filter&Cards */
+
+#filter-coding,
+#filter-design,
+#filter-marketing {
+    visibility:hidden;
+}
+
+.filters .filter:hover {
+background-color: #EB3B3B !important;
+color: #302F38 !important;
+font-weight: 700;
+}
+
+.card-container:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
 }
