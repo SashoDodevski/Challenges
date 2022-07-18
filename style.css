@@ -29,19 +29,51 @@
 
 /* Filter&Cards */
 
+.filter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 #filter-coding,
 #filter-design,
 #filter-marketing {
-    visibility:hidden;
+    visibility:visible;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    height: 50px;
+    width: 50px;
+    background-color: #d5d5d5;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:after{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f00c";
+    font-weight: 900;
+    font-size: 35px;
+    color: rgb(242, 239, 239);
+}
+
+input[type="checkbox"]:checked{
+    background-color: #5bcd3e;
+    color: white;
+    transition: 0.3s;
 }
 
 .filters .filter:hover {
 background-color: #EB3B3B !important;
 color: #302F38 !important;
-font-weight: 700;
+transition: 0.3s;
 }
 
-.card-container:hover {
-    transform: scale(1.1);
-    transition: 0.5s;
-}
