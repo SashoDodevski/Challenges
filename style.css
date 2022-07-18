@@ -41,6 +41,13 @@
     font-weight: 700;
 }
 
+@media (max-width: 768px) {
+    .logo img {
+        margin-left: 15px !important;
+        margin-right: 15px !important;
+    }
+}
+
 .navigation {
     display: flex !important;
 }
