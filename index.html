@@ -17,23 +17,55 @@
     <!-- Local CSS -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2acadc57f5.js" crossorigin="anonymous"></script>
+
     <!-- Document title -->
     <title>Document</title>
   </head>
   <body>
 
-<div class="container-fluid">
+    <div class="container-fluid p-0 m-0">
     <!-- Navbar -->
 
-     <!-- Banner -->
+    <div class="row">
+      <div class="col-12 navbar bg-primary m-0 p-0 w-100">
+        <a class="logo p-0" href="#">
+          <img src="./Images/Brainster Logo2.jpg" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 ">
+        </a>
+        <label for="toggle" class="navbar-toggler mx-2"><span><i class="fa-solid fa-bars"></i></span></label>
+        <input type="checkbox" id="toggle" class="checkbox">
 
-     <div class="row banner">
-      <div class="col">
-        <div>
+        <div class="navigation d-flex ml-auto mr-0 p-0">
+          <a class="nav-link active color-secondary" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-5">Вработи наш студент</button>
+        </div>
+
+        <div class="hidden w-100 p-0 pl-4 bg-secondary">
+          <div class="X-button">
+            <label for="toggle" class="text-white"><span><i class="fa-solid fa-xmark "></i></span></label>
+            <input type="checkbox" id="toggle" class="checkbox">
+          </div>
+          <a class="nav-link active color-secondary mt-5" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-3 my-4">Вработи наш студент</button>
+        </div>
+
+      </div>
+    </div>
+
+     <div class="row banner m-0 w-100">
+      <div class="col p-0">
+        <div class="p-0">
             <h1 class="glow">Brainster Labs</h1>
         </div>
+       </div>
       </div>
-        </div>
       
    
     <!-- Filters & Cards -->
