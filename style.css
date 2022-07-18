@@ -5,6 +5,7 @@
 }
 
 .color-primary {
+<<<<<<< HEAD
     color: #FCD232!important;
 }
 
@@ -123,4 +124,27 @@
     text-shadow:none !important;
     transform: none !important;
 
+=======
+    color: #FCD232 !important;
+}
+
+.bg-primary {
+    background-color: FCD232 !important;
+}
+
+.color-secondary {
+    color: #302F38 !important;
+}
+
+.bg-secondary {
+    background-color: #302F38 !important;
+}
+
+.color-tertiary {
+    color: #EB3B3B !important;
+}
+
+.bg-tertiary {
+    background-color: #EB3B3B !important;
+>>>>>>> Project01
 }
