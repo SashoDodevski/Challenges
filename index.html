@@ -11,20 +11,68 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
       integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-      crossorigin="anonymous"
+      crossorigin="anonymous" 
     />
 
     <!-- Local CSS -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2acadc57f5.js" crossorigin="anonymous"></script>
+
     <!-- Document title -->
     <title>Document</title>
   </head>
   <body>
+
+    <div class="container-fluid p-0 m-0">
     <!-- Navbar -->
 
-    <!-- Banner -->
+    <div class="row">
 
+      <div class="col-12 navbar bg-primary m-0 p-0 w-100">
+
+        <a class="logo p-0" href="#">
+          <img src="./Images/Brainster Logo.jpg" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 ">
+        </a>
+
+        <label for="toggle" class="navbar-toggler mx-2"><span><i class="fa-solid fa-bars"></i></span></label>
+        <input type="checkbox" id="toggle" class="checkbox">
+
+
+        <div class="navigation d-flex ml-auto mr-0 p-0">
+          <a class="nav-link active color-secondary" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-5">Вработи наш студент</button>
+        </div>
+
+        <div class="hidden w-100 p-0 pl-4 bg-secondary">
+          <div class="X-button">
+            <label for="toggle" class="text-white"><span><i class="fa-solid fa-xmark "></i></span></label>
+            <input type="checkbox" id="toggle" class="checkbox">
+          </div>
+          <a class="nav-link active color-secondary mt-5" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <button type="button" class="btn btn-danger bg-tertiary mx-3 my-4">Вработи наш студент</button>
+        </div>
+
+      </div>
+    </div>
+
+
+     <div class="row banner m-0 w-100">
+      <div class="col p-0">
+        <div class="p-0">
+            <h1 class="glow">Brainster Labs</h1>
+        </div>
+       </div>
+      </div>
+      
+   
     <!-- Filters & Cards -->
 
     <div class="row filters">
@@ -51,7 +99,7 @@
     <div class="row bg-primary py-4">
       <div class="offset-2 col-8 d-flex flex-wrap cards">
 
-        <div class="card-container coding col-4 p-3">
+        <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
           <div class="card" style="width: 18rem">
             <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
@@ -64,7 +112,7 @@
           </div>
         </div>
 
-        <div class="card-container design col-4 p-3">
+        <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
           <div class="card" style="width: 18rem">
           <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
           <div class="card-body">
@@ -77,11 +125,11 @@
         </div>
       </div>
 
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Маркетинг</h5>
+          <div class="card-body mt-1">
+            <h5 class="card-title pt-1">Маркетинг</h5>
             <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
@@ -90,7 +138,7 @@
         </div>
       </div>
 
-      <div class="card-container design col-4 p-3">
+      <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
           <div class="card-body">
@@ -103,7 +151,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -116,7 +164,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -129,7 +177,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -142,12 +190,12 @@
         </div>
       </div>
 
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
         <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-2">
-            <h5 class="card-title">Маркетинг</h5>
-            <p class="card-text">
+        <div class="card-body mt-1">
+          <h5 class="card-title pt-1">Маркетинг</h5>
+          <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
@@ -155,7 +203,7 @@
         </div>
       </div>
 
-      <div class="card-container design col-4 p-3">
+      <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
           <div class="card-body">
@@ -168,7 +216,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -181,11 +229,11 @@
         </div>
       </div>
     
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-2">
-            <h5 class="card-title">Маркетинг</h5>
+          <div class="card-body mt-1">
+            <h5 class="card-title pt-1">Маркетинг</h5>
             <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
@@ -194,7 +242,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -207,7 +255,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -220,7 +268,7 @@
         </div>
       </div>
 
-      <div class="card-container design col-4 p-3">
+      <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
           <div class="card-body">
@@ -233,11 +281,11 @@
         </div>
       </div>
 
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-2">
-            <h5 class="card-title">Маркетинг</h5>
+          <div class="card-body mt-1">
+            <h5 class="card-title pt-1">Маркетинг</h5>
             <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
@@ -246,11 +294,11 @@
         </div>
       </div>
 
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-2">
-            <h5 class="card-title">Маркетинг</h5>
+          <div class="card-body mt-1">
+            <h5 class="card-title pt-1">Маркетинг</h5>
             <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
@@ -259,7 +307,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -272,7 +320,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -285,7 +333,7 @@
         </div>
       </div>
 
-      <div class="card-container coding col-4 p-3">
+      <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -298,15 +346,15 @@
         </div>
       </div>
 
-      <div class="card-container marketing col-4 p-3">
+      <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
         <div class="card" style="width: 18rem">
           <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-2">
-            <h5 class="card-title">Маркетинг</h5>
+          <div class="card-body mt-1">
+            <h5 class="card-title pt-1">Маркетинг</h5>
             <p class="card-text">
               Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
             </p>
-            <a href="#" class="btn btn-success text-white">Go somewhere</a>
+            <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
         </div>
       </div>
@@ -314,7 +362,8 @@
       </div>
     </div>
 
-    
+
+  </div>
 
     <!-- Footer -->
 
