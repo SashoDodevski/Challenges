@@ -35,6 +35,18 @@
     padding: 0;
 }
 
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.5)!important;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.card-body  > :first-child {
+    font-size: 13px;
+    font-weight: 500;
+}
 
 /* Section Navbar */
 
@@ -112,10 +124,15 @@
     text-shadow: 0px 0px 30px white,0px 0px 30px white,0px 0px 30px white !important;
 }
 
-.navigation button:hover {
+.btn {
+    font-weight: 500!important;
+}
+
+.navigation .btn:hover {
     box-shadow: 0px 0px 15px white,0px 0px 15px white,0px 0px 15px white;
     transform: scale(1.009);
 }
+
 
 .navbar .checkbox {
     display: none;
@@ -194,7 +211,13 @@
     z-index: 1;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 1024px) {
+    .filters {
+        top: 74px;
+    }
+}
+
+@media (max-width: 769px) {
     .filters {
         position: relative;
         top: 0;
@@ -224,8 +247,8 @@
 
 input[type="checkbox"] {
     appearance: none;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     background-color: #d5d5d5;
     border-radius: 50%;
     cursor: pointer;
@@ -242,7 +265,7 @@ input[type="checkbox"]:after{
     font-family: 'Font Awesome 5 Free';
     content: "\f00c";
     font-weight: 900;
-    font-size: 35px;
+    font-size: 27px;
     color: rgb(242, 239, 239);
 }
 
@@ -266,6 +289,7 @@ transition: 0.3s;
 @media (max-width:426px) {
     .filter {
         flex-direction: row-reverse;
+        padding-left: 20px;
     }
     .filter label {
         margin-right: auto !important;
@@ -278,6 +302,24 @@ transition: 0.3s;
     input[type="checkbox"]:after{
         font-size: 20px;
     }
+}
+
+.card-image {
+    height: 180px;
+}
+.card-body {
+    height: 250px !important;
+    overflow-x: hidden;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.btn {
+    position: relative;
+    bottom: 0;
+    top: auto;
 }
 
 /* Footer */

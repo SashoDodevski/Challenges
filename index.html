@@ -29,8 +29,8 @@
 
         <div class="col-12 navbar bg-primary m-0 p-0 w-100 shadow">
 
-          <a class="logo p-0" href="#">
-            <img src="./Images/Brainster Logo.jpg" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 ">
+          <a class="logo p-0" href="index.html">
+            <img src="./Images/brainster-logo.png" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 " href="index.html">
           </a>
 
           <label for="toggle" class="navbar-toggler mx-2"><span><i class="fa-solid fa-bars"></i></span></label>
@@ -42,7 +42,7 @@
             <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
-            <button type="button" class="btn btn-danger bg-tertiary mx-5">Вработи наш студент</button>
+            <a type="button" class="btn btn-danger bg-tertiary mx-5" href="./form.html">Вработи наш студент</a>
           </div>
 
           <div class="hidden w-100 p-0 pl-4 bg-secondary">
@@ -54,7 +54,7 @@
             <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
-            <button type="button" class="btn btn-danger bg-tertiary mx-3 my-4">Вработи наш студент</button>
+            <a type="button" class="btn btn-danger bg-tertiary mx-3 my-4" href="./form.html">Вработи наш студент</a>
           </div>
 
         </div>
@@ -76,20 +76,20 @@
 
     <div class="row filters m-0">
       <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-coding" class="ml-4">Filter only coding</label>
+        <label for="filter-coding" class="ml-4">Проекти на студенти од <br>Академија за програмирање</label>
         <input type="checkbox" id="filter-coding">
       </div>
       <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-design" class="ml-4">Filter only design</label>
+        <label for="filter-design" class="ml-4">Проекти на студенти од <br>Академија за  дизајн</label>
         <input type="checkbox" id="filter-design">
       </div>
       <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-marketing" class="ml-4">Filter only marketing</label>
+        <label for="filter-marketing" class="ml-4">Проекти на студенти од <br>Академија за маркетинг</label>
         <input type="checkbox" id="filter-marketing">
       </div>
     </div>
     
-    <div class="row bg-primary pt-2 pb-1 m-0">
+    <div class="row bg-primary pt-1 pb-1 m-0">
       <div class="col text-center">
         <h2><i class="fa-solid fa-chevron-down pb-4 fa-2x"></i></h2>
         <h2 class="h1 font-weight-bold">Проекти</h2>
@@ -100,12 +100,13 @@
       <div class="mx-auto col-xl-8 d-flex flex-wrap cards">
 
         <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-          <div class="card mx-auto " style="width: 18rem">
-            <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+          <div class="card mx-auto shadow" style="width: 18rem">
+            <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
             <div class="card-body">
+              <p class="bg-primary px-1 inline-block mt-2">Академија за програмирање</p>
               <h5 class="card-title">Програмирање</h5>
               <p class="card-text">
-                Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+                Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
               </p>
               <a href="#" class="btn btn-primary">Дознај повеќе</a>
             </div>
@@ -113,12 +114,13 @@
         </div>
 
         <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
-          <div class="card mx-auto " style="width: 18rem">
-            <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
+          <div class="card mx-auto shadow" style="width: 18rem">
+            <div class="card-image"><img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/></div>
             <div class="card-body">
+              <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за дизајн</p>
               <h5 class="card-title">Дизајн</h5>
               <p class="card-text">
-                Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на дизајн.
+                Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на дизајн.
               </p>
               <a href="#" class="btn btn-warning text-white">Дознај повеќе</a>
             </div>
@@ -126,12 +128,13 @@
         </div>
 
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..." />
-          <div class="card-body mt-1">
-            <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..." /></div>
+          <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+            <h5 class="card-title">Маркетинг</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
@@ -139,12 +142,13 @@
       </div>
 
       <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за дизајн</p>
             <h5 class="card-title">Дизајн</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на дизајн.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на дизајн.
             </p>
             <a href="#" class="btn btn-warning text-white">Дознај повеќе</a>
           </div>
@@ -152,12 +156,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -165,12 +170,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -178,12 +184,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -191,25 +198,27 @@
       </div>
 
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-        <div class="card-body mt-1">
-          <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..."/></div>
+          <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+          <h5 class="card-title">Маркетинг</h5>
           <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
-            </p>
+            Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
+          </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
         </div>
       </div>
 
       <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за дизајн</p>
             <h5 class="card-title">Дизајн</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на дизајн.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на дизајн.
             </p>
             <a href="#" class="btn btn-warning text-white">Дознај повеќе</a>
           </div>
@@ -217,12 +226,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -230,12 +240,13 @@
       </div>
     
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-1">
-            <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..."/></div>
+          <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+            <h5 class="card-title">Маркетинг</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
@@ -243,12 +254,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -256,12 +268,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -269,12 +282,13 @@
       </div>
 
       <div class="card-container design col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/graphic_design.jpg" class="card-img-top" alt="..."/></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за дизајн</p>
             <h5 class="card-title">Дизајн</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на дизајн.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на дизајн.
             </p>
             <a href="#" class="btn btn-warning text-white">Дознај повеќе</a>
           </div>
@@ -282,12 +296,13 @@
       </div>
 
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-1">
-            <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..."/></div>
+          <div class="card-body ">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+            <h5 class="card-title">Маркетинг</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
@@ -295,12 +310,13 @@
       </div>
 
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-1">
-            <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..."/></div>
+          <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+            <h5 class="card-title">Маркетинг</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
@@ -308,12 +324,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -321,12 +338,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -334,12 +352,13 @@
       </div>
 
       <div class="card-container coding col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/coding.jpg" class="card-img-top" alt="..." />
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/coding.jpg" class="card-img-top" alt="..." /></div>
           <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за програмирање</p>
             <h5 class="card-title">Програмирање</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на програмирање.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на програмирање.
             </p>
             <a href="#" class="btn btn-primary">Дознај повеќе</a>
           </div>
@@ -347,12 +366,13 @@
       </div>
 
       <div class="card-container marketing col-sm-12 col-md-6 col-lg-4 p-3">
-        <div class="card mx-auto " style="width: 18rem">
-          <img src="./images/cards/digitalMarketing2.png" class="card-img-top" alt="..."/>
-          <div class="card-body mt-1">
-            <h5 class="card-title pt-1">Маркетинг</h5>
+        <div class="card mx-auto shadow" style="width: 18rem">
+          <div class="card-image"><img src="./images/cards/digitalMarketing2.png" class="card-img-top p-3" alt="..."/></div>
+          <div class="card-body">
+            <p class="bg-primary px-1 pb-1 inline-block mt-2">Академија за маркетинг</p>
+            <h5 class="card-title">Маркетинг</h5>
             <p class="card-text">
-              Некој текст во кој се дава некоја кратка информација за некој дел од академијата кој се однесува на маркетинг.
+              Tекст во кој се дава некоја кратка информација за дел од академијата кој се однесува на маркетинг.
             </p>
             <a href="#" class="btn btn-success text-white">Дознај повеќе</a>
           </div>
