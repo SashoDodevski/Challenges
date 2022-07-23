@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"/>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2acadc57f5.js" crossorigin="anonymous"></script>
+
+    <!-- Document title -->
+    <title>Document</title>
+
+  </head>
+
+  <body>
+    
+    <div class="container-fluid p-0 m-0 vh-100 bg-primary">
+
+     <!-- Navbar -->
+
+     <div class="row m-0">
+
+      <div class="col-12 navbar bg-primary m-0 p-0 w-100 shadow">
+
+        <a class="logo p-0" href="index.html">
+          <img src="./Images/brainster-logo.png" width="50" height="50" alt="Brainster Logo" class="mx-5 my-2 " href="index.html">
+        </a>
+
+        <label for="toggle" class="navbar-toggler mx-2"><span><i class="fa-solid fa-bars"></i></span></label>
+        <input type="checkbox" id="toggle" class="checkbox">
+
+
+        <div class="navigation d-flex ml-auto mr-0 p-0">
+          <a class="nav-link active color-secondary" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <a type="button" class="btn btn-danger mx-5" href="./index.html">Brainster Labs</a>
+        </div>
+
+        <div class="hidden w-100 p-0 pl-4 bg-secondary">
+          <div class="X-button">
+            <label for="toggle" class="text-white"><span><i class="fa-solid fa-xmark "></i></span></label>
+            <input type="checkbox" id="toggle" class="checkbox">
+          </div>
+          <a class="nav-link active color-secondary mt-5" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
+          <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+          <a type="button" class="btn btn-danger mx-3 my-4" href="./index.html">Brainster Labs</a>
+        </div>
+
+      </div>
+    </div>
+
+
+      <!-- Form -->
+      
+      <div class="row m-0 p-0 bg-primary">
+        <div class="form-container d-flex flex-column offset-lg-3 col-lg-6 align-center">
+          <div class="row">
+            <div class="col-12 pt-md-5">
+                <h2 class="pt-3">Вработи студенти</h2>
+              </div>
+          </div>
+          <form action="" class="w-100 mt-3 mt-md-5 font-weight-bold">
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="Name&Surname">Име и презиме</label>
+                    <input type="text" class="form-control" id="Name&Surname" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="company_name">Име на компанија</label>
+                    <input type="text" class="form-control" id="company_name" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="email">Контакт e-mail</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="telephone_number">Контакт телефон</label>
+                    <input type="text" class="form-control" id="telephone_number" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="students">Тип на студенти</label>
+                    <select class="form-control" id="students" required>
+                      <option value="">Одбери тип на студент</option>
+                      <option value="1">Студент од маркетинг</option>
+                      <option value="2">Студент од програмирање</option>
+                      <option value="3">Студент од data-science</option>
+                      <option value="4">Студент од дизајн</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6 d-flex align-bottom mt-auto mb-3">
+                  <button type="submit" class="btn btn-danger w-100 h-50">Испрати</button>
+                </div>
+              </div>
+          </form>
+          
+        </div>
+      
+      <!-- Footer -->
+      
+      <div class="row form-footer bg-secondary text-white p-2 m-0 w-100 text-center">
+        <div class="col">
+          <h6>
+            Изработено со <img src="./images/heart.png" alt=""> од студентите на Brainster
+          </h6>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+    <!-- Font awesome -->
+
+    <script src="https://kit.fontawesome.com/2acadc57f5.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
