@@ -326,6 +326,8 @@ transition: 0.3s;
 
 .footer {
     text-align: center;
+    position: relative;
+    bottom: 0;
 
 }
 .footer img {
@@ -342,3 +344,25 @@ transition: 0.3s;
         width: 15px;
     }
 }
+
+/* Form */
+.form-container {
+    margin-top: 66px;
+    align-items: center;
+}
+
+.form {
+    align-items: center;
+    flex-direction: row;
+    height: 85%;
+}
+
+@media (max-width: 500px) {
+ .mobile-form {
+    height:max-content !important;
+ }
+.form-container h2 {
+    font-size: 25px;
+}
+}
+
