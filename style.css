@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding:0;
+    scroll-behavior: smooth;
 }
 
 /* Common elements */
@@ -30,10 +31,6 @@
     background-color: #EB3B3B!important;
 }
 
-.container {
-    margin: 0;
-    padding: 0;
-}
 
 .shadow {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.5)!important;
@@ -172,7 +169,17 @@
     z-index: 0.9;
 }
 
+.banner a {
+    text-decoration: none;
+}
+
 @media (max-width:768px) {
+    .banner {
+        height: 75vh;
+    }
+}
+
+@media (max-width:500px) {
     .banner {
         height: 100vh;
     }
@@ -211,12 +218,6 @@
     z-index: 1;
 }
 
-@media (max-width: 1024px) {
-    .filters {
-        top: 74px;
-    }
-}
-
 @media (max-width: 769px) {
     .filters {
         position: relative;
@@ -225,19 +226,19 @@
     }
 }
 
+@media (max-width: 769px) {
+    #filters {
+        margin-top: -66px;
+        padding-top: 66px;
+    }
+}
+
+
 .filter {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-
-@media (max-width: 769px) {
-    .filter {
-       padding-left: 0;
-       padding-right: 0;
-    }
-}
-
 
 #filter-coding,
 #filter-design,
@@ -286,12 +287,29 @@ transition: 0.3s;
     transition: 0.3s;
 }
 
+@media (max-width: 1025px) {
+    .filter {
+       padding-left: 25px !important;
+       padding-right: 15px !important;
+       margin-left: 0;
+       margin-right: 0;
+    }
+
+    label {
+        font-size: smaller;
+        font-weight: 500;
+        margin-right: auto !important;
+        margin-left: 0px !important;
+        margin-bottom: 0;
+    }
+}
+
 @media (max-width:426px) {
     .filter {
         flex-direction: row-reverse;
         padding-left: 20px;
     }
-    .filter label {
+    label {
         margin-right: auto !important;
         margin-left: 20px !important;
     }
@@ -302,10 +320,18 @@ transition: 0.3s;
     input[type="checkbox"]:after{
         font-size: 20px;
     }
+
+    .chevron-container {
+        padding-top: 40px;
+    }
+
+    .chevron {
+        display: none;
+    }
 }
 
 .card-image {
-    height: 180px;
+    height: 190px;
 }
 .card-body {
     height: 250px !important;
@@ -325,12 +351,12 @@ transition: 0.3s;
 /* Footer */
 
 .footer {
-    text-align: center;
     position: relative;
     bottom: 0;
 
 }
-.footer img {
+.footer img,
+.form-footer img {
     width: 20px;
 }
 
@@ -340,15 +366,31 @@ transition: 0.3s;
         font-weight: 500;
     }
 
-    .footer img {
+    .footer img,
+    .form-footer img {
         width: 15px;
     }
 }
+
+@media (min-width: 500px) {
+    .form-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+    }
+}
+
 
 /* Form */
 .form-container {
     margin-top: 66px;
     align-items: center;
+}
+
+@media (min-width: 500px) {
+    .form-container {
+        height: 85vh;
+    }
 }
 
 .form {
