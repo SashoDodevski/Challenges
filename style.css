@@ -23,15 +23,6 @@
     background-color: #302F38!important;
 }
 
-.color-tertiary {
-    color: #EB3B3B!important;
-}
-
-.bg-tertiary {
-    background-color: #EB3B3B!important;
-}
-
-
 .shadow {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.5)!important;
 }
@@ -65,10 +56,6 @@
         margin-left: 15px !important;
         margin-right: 15px !important;
     }
-}
-
-.navigation {
-    display: flex !important;
 }
 
 @media (max-width: 768px) {
@@ -123,6 +110,7 @@
 
 .btn {
     font-weight: 500!important;
+    width: 185px;
 }
 
 .navigation .btn:hover {
@@ -277,7 +265,7 @@ input[type="checkbox"]:checked{
 }
 
 .filters .filter:hover {
-background-color: #EB3B3B !important;
+background-color: #dc3545 !important;
 color: #302F38 !important;
 transition: 0.3s;
 }
@@ -314,11 +302,11 @@ transition: 0.3s;
         margin-left: 20px !important;
     }
     input[type="checkbox"] {
-        height: 35px;
-        width: 35px;
+        height: 30px;
+        width: 30px;
     }
     input[type="checkbox"]:after{
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .chevron-container {
@@ -360,7 +348,7 @@ transition: 0.3s;
     width: 20px;
 }
 
-@media (max-width: 500px) {
+@media (max-width:426px) {
     .footer h6{
         font-size: smaller;
         font-weight: 500;
@@ -372,7 +360,7 @@ transition: 0.3s;
     }
 }
 
-@media (min-width: 500px) {
+@media (min-width:426px) {
     .form-footer {
         position: absolute;
         bottom: 0;
@@ -387,7 +375,7 @@ transition: 0.3s;
     align-items: center;
 }
 
-@media (min-width: 500px) {
+@media (min-width:426px) {
     .form-container {
         height: 85vh;
     }
@@ -399,7 +387,7 @@ transition: 0.3s;
     height: 85%;
 }
 
-@media (max-width: 500px) {
+@media (max-width:426px) {
  .mobile-form {
     height:max-content !important;
  }
