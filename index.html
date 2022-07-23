@@ -42,7 +42,7 @@
             <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
-            <a type="button" class="btn btn-danger bg-tertiary mx-5" href="./form.html">Вработи наш студент</a>
+            <a type="button" class="btn btn-danger mx-5" href="./form.html">Вработи наш студент</a>
           </div>
 
           <div class="hidden w-100 p-0 pl-4 bg-secondary">
@@ -54,7 +54,7 @@
             <a class="nav-link active color-secondary" href="https://brainster.co/full-stack/">Академија за програмирање</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/data-science/">Академија за data science</a>
             <a class="nav-link active color-secondary" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
-            <a type="button" class="btn btn-danger bg-tertiary mx-3 my-4" href="./form.html">Вработи наш студент</a>
+            <a type="button" class="btn btn-danger mx-3 my-4" href="./form.html">Вработи наш студент</a>
           </div>
 
         </div>
@@ -66,32 +66,33 @@
     <div class="row banner m-0 p-0">
       <div class="col-12 m-0 p-0 w-100">
         <div class="p-0">
-          <h1 class="glow">Brainster Labs</h1>
+          <a href="#filters"><h1 class="glow">Brainster Labs</h1></a>
         </div>
       </div>
     </div>
       
    
     <!-- Filters & Cards -->
-
-    <div class="row filters m-0">
-      <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-coding" class="ml-4">Проекти на студенти од <br>Академија за програмирање</label>
-        <input type="checkbox" id="filter-coding">
-      </div>
-      <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-design" class="ml-4">Проекти на студенти од <br>Академија за  дизајн</label>
-        <input type="checkbox" id="filter-design">
-      </div>
-      <div class="col-md-4 bg-secondary text-white px-lg-5 py-3 filter">
-        <label for="filter-marketing" class="ml-4">Проекти на студенти од <br>Академија за маркетинг</label>
-        <input type="checkbox" id="filter-marketing">
+    <div id="filters" class="filters">
+      <div class="row m-0">
+        <div class="col-md-4 bg-secondary text-white px-lg-5 py-2 filter">
+          <label for="filter-coding">Проекти на студенти од <br>Академија за програмирање</label>
+          <input type="checkbox" id="filter-coding">
+        </div>
+        <div class="col-md-4 bg-secondary text-white px-lg-5 py-2 filter">
+          <label for="filter-design">Проекти на студенти од <br>Академија за  дизајн</label>
+          <input type="checkbox" id="filter-design">
+        </div>
+        <div class="col-md-4 bg-secondary text-white px-lg-5 py-2 filter">
+          <label for="filter-marketing">Проекти на студенти од <br>Академија за маркетинг</label>
+          <input type="checkbox" id="filter-marketing">
+        </div>
       </div>
     </div>
-    
-    <div class="row bg-primary pt-1 pb-1 m-0">
-      <div class="col text-center">
-        <h2><i class="fa-solid fa-chevron-down pb-4 fa-2x"></i></h2>
+
+    <div class="row bg-primary pt-1 m-0">
+      <div class="chevron-container col text-center">
+        <a href="#filters" class="color-secondary chevron"><i class="fa-solid fa-chevron-down pb-2 fa-4x"></i></a>
         <h2 class="h1 font-weight-bold">Проекти</h2>
       </div>
     </div>
@@ -385,7 +386,7 @@
 
     <!-- Footer -->
 
-    <div class="row footer bg-secondary text-white p-3 m-0">
+    <div class="row footer bg-secondary text-white p-2 m-0  text-center">
       <div class="col">
         <h6>
           Изработено со <img src="./images/heart.png" alt=""> од студентите на Brainster
