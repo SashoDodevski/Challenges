@@ -1,3 +1,18 @@
+<?php
+
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "vraboti_student_db";
+
+$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+
+$query1 = "SELECT * FROM `studenti`";
+
+$result1 = mysqli_query($connect, $query1);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,9 +35,9 @@
 
   </head>
 
-  <body>
-    
-    <div class="container-fluid p-0 m-0 vh-100 bg-primary">
+    <body>
+
+ <div class="container-fluid p-0 m-0 vh-100 bg-primary">
 
      <!-- Navbar -->
 
@@ -68,48 +83,59 @@
         <div class="form-container d-flex flex-column offset-lg-3 col-lg-6 align-center">
           <div class="row">
             <div class="col-12 pt-md-5">
-                <h2 class="pt-3">Вработи студенти</h2>
-              </div>
+              <h2 class="pt-3">Вработи студенти</h2>
+            </div>
           </div>
-          <form action="" class="w-100 mt-3 mt-md-5 font-weight-bold">
+          <form action="./post-form.php" method="post" class="w-100 mt-3 mt-md-5 font-weight-bold">
               <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name&Surname">Име и презиме</label>
-                    <input type="text" class="form-control" id="Name&Surname" required>
+                    <input type="text" class="form-control" id="Name&Surname" name="name" required placeholder="Вашето име и презиме">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="company_name">Име на компанија</label>
-                    <input type="text" class="form-control" id="company_name" required>
+                    <input type="text" class="form-control" id="company_name" name="company" required placeholder="Име на Вашата компанија">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="email">Контакт e-mail</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Контакт e-mail од Вашата компанија">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="telephone_number">Контакт телефон</label>
-                    <input type="text" class="form-control" id="telephone_number" required>
+                    <input type="text" class="form-control" id="telephone_number" name="phone" required placeholder="Контакт телефон од Вашата компанија">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="students">Тип на студенти</label>
-                    <select class="form-control" id="students" required>
-                      <option value="">Одбери тип на студент</option>
-                      <option value="1">Студент од маркетинг</option>
-                      <option value="2">Студент од програмирање</option>
-                      <option value="3">Студент од data-science</option>
-                      <option value="4">Студент од дизајн</option>
+                    <label for="students">Тип на студенти</label><br>
+                    <select class="form-control" id="students" name="students" required>
+      
+                        <?php while($row1 = mysqli_fetch_array($result1)):;?>
+                                 
+                        <option value="<?php echo $row1["1"];?>"><?php echo $row1['students'];?></option>
+                
+                        <?php endwhile;?>
+   
+                
                     </select>
                   </div>
                   <div class="form-group col-md-6 d-flex align-bottom mt-auto mb-3">
-                  <button type="submit" class="btn btn-danger w-100 h-50">Испрати</button>
+
+                  <button type="submit" class="btn btn-danger w-100 h-50" id="send_form">Испрати</button>
+                  <?php
+                      if(isset($_GET['send_form']))
+                        {
+                            echo "Data commited";                  
+                        }
+                  ?>
                 </div>
               </div>
           </form>
           
         </div>
+        
       
       <!-- Footer -->
       
@@ -141,5 +167,9 @@
       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
       crossorigin="anonymous"
     ></script>
-  </body>
+
+        
+
+    </body>
+
 </html>
