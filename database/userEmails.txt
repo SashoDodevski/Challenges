@@ -1,2 +1,0 @@
-John@something.com,John=$2y$10$TmGxMbLRXV209I07yZTMyeSqc6Iym35OqAiTHYsiigacdOwX7Y7oe
-Jane@agoodcompany.com,Jane=$2y$10$b9bpVswo92E7YrXKs.xDVOVVu/wWs7jJEO2RDVnKasSaJ9scfBSiO

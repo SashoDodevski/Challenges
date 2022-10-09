@@ -11,18 +11,26 @@ $warnings = [];
 
 if($_POST['action'] == 'register') {
 
-    $username = $_POST['username']; //min4, unique
+    $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = $_POST['password']; //min6,
+    $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_BCRYPT); 
 
 
-    if(strlen($username) < 4) {
-        array_push($errors, 'Username must be at least 4 chars');
+    if($username == '' || $email == '' || $password == '') {
+        array_push($errors, 'All inputs are required (no empty fields are allowed) !');
     }
 
-    if(strlen($password) < 6) {
-        array_push($errors, 'Password must be at least 6 chars');
+    if( !preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+        array_push($errors, 'Username cannot contain empty spaces or special signs!');
     }
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailCheck = explode("@", $email);
+        if(strlen($emailCheck[0]) <= 5) {
+            array_push($errors, 'Email must have at least 5 characters before @ !');
+        }
+      }
 
     if( !preg_match('/[a-z]+/', $password)  
         || !preg_match('/[A-Z]+/', $password)
@@ -41,11 +49,7 @@ if($_POST['action'] == 'register') {
     $allUsers = explode(PHP_EOL, $allUsers);
 
     foreach($userEmails as $userEmail) {
-        // $user: "1|john@example.com|john|$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"
-        // $user: "2|jane@example.com|jane|$2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"
         $userEmail = explode(",", $userEmail);
-        // $user: ["1", "john@example.com", "john", "$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"]
-        // $user: ["2", "jane@example.com", "jane", $2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"]
         if(($email == $userEmail[0])) {
             $_SESSION['email'] = $userEmail[0];
             array_push($warnings, "A user with this email already exists");
@@ -53,7 +57,6 @@ if($_POST['action'] == 'register') {
     }
 
     foreach($allUsers as $user) {
-        //1|john@example.com|john|$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu
         $user = explode("=", $user);
         if($username == $user[0]) {
             array_push($errors, " username must be unique");
@@ -67,9 +70,6 @@ if($_POST['action'] == 'register') {
     if(count($warnings) > 0) {
         redirect("register.php", "warning", $warnings);
     }
-
-    $password = password_hash($password, PASSWORD_BCRYPT); 
-
 
 
     $usernamePassword = "$username=$password";
@@ -114,18 +114,9 @@ if($_POST['action'] == 'register') {
     $allUsers = file_get_contents(__DIR__ . "/database/users.txt");
     $allUsers = trim($allUsers);
     $allUsers = explode(PHP_EOL, $allUsers);
-    // [
-    //  "1|john@example.com|john|$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu",
-    //  "2|jane@example.com|jane|$2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou",
-    //  "3|mike@example.com|mike|$2y$10$dNqCdksJgQCNL39aQaUDFeNkhgrDrOqoeTiFVT3RvGbKp1rHZhGia"
-    // ]
 
     foreach($userEmails as $userEmail) {
-        // $user: "1|john@example.com|john|$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"
-        // $user: "2|jane@example.com|jane|$2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"
         $userEmail = explode(",", $userEmail);
-        // $user: ["1", "john@example.com", "john", "$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"]
-        // $user: ["2", "jane@example.com", "jane", $2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"]
         if(($email == $userEmail[0])) {
             $_SESSION['email'] = $userEmail[0];
             array_push($warnings, "A user with this email already exists.");
@@ -133,11 +124,7 @@ if($_POST['action'] == 'register') {
     }
 
     foreach($allUsers as $user) {
-        // $user: "1|john@example.com|john|$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"
-        // $user: "2|jane@example.com|jane|$2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"
         $user = explode("=", $user);
-        // $user: ["1", "john@example.com", "john", "$2y$10$mxjw3ZLBDx9xYEK.tXGG8.tSXEJYq0R9ZFS.hTHtH7evqoFY7kBZu"]
-        // $user: ["2", "jane@example.com", "jane", $2y$10$50SnWDRDcNu3PFq4RJL4bO9GQvMZxMqojUaelMueTR1JfQ.7cOaou"]
         if(($username == $user[0]) && password_verify($password, $user[1])) {
             $_SESSION['username'] = $user[0];
             redirect("membersonly.php", "", $errors);
