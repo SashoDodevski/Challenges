@@ -37,13 +37,6 @@
     $allUsers = trim($allUsers);
     $allUsers = explode(PHP_EOL, $allUsers);
 
-    foreach($userEmails as $userEmail) {
-        $userEmail = explode(",", $userEmail);
-        if(($email == $userEmail[0])) {
-            $_SESSION['email'] = $userEmail[0];
-            array_push($warnings, "A user with this email already exists.");
-        }
-    }
 
     foreach($allUsers as $user) {
         $user = explode("=", $user);

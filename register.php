@@ -22,7 +22,7 @@ include_once "./parts/header.php";
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="text" class="form-control" placeholder="Enter password" id="password" name="password" />
+                        <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" />
                     </div>
                     <button type="submit" class="btn btn-info">Sign Up</button>
                 </form>
