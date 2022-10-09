@@ -1,0 +1,11 @@
+/* Banner */
+
+.banner {
+    height: 100vh;
+    background-image: url(./images/img1.png);
+    background-repeat: no-repeat;
+    background-size:70%;
+    background-position: center;
+
+
+}
