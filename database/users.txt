@@ -1,1 +1,3 @@
 Johny=$2y$10$YgRaTjRuSyeL4n4nzTyCI.oLILxBJr/abMMihm0X.7mdJ9wVfSkWm
+elena=$2y$10$LTRVwoADxsBSKDU4/AhcKuYy1LDZ8fTfMl09uCyx9o9QXRf5I7Hey
+Sasho=$2y$10$OOhyIU45JmMkNtAwyzvPoe7uSK1AdYSMxQ2RMJ.YynVoiHXblj9lq

@@ -85,7 +85,6 @@ if (file_put_contents(__DIR__ . "/database/userEmails.txt", $registerText . PHP_
 
 
 
-//ako stigne do tuka, korisnikot ne postoi
 redirect("login.php", "danger", ["Wrong username/password combination"]);
 
 header("Location: login.php");

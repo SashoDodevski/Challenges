@@ -9,12 +9,25 @@
     $warnings = [];
 
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    checkFields($username, $email, $password);
+    checkLoginFields($username, $password);
     checkUsername($username);
     checkPassword($password);
+
+    $checkLoginFields = checkLoginFields($username, $password);
+    $checkUsername = checkUsername($username);
+    $checkPassword = checkPassword($password);
+
+    if (isset($checkLoginFields)) {
+        array_push($errors, $checkLoginFields);
+    }
+    if (isset($checkUsername)) {
+        array_push($errors, $checkUsername);
+    }
+    if (isset($checkPassword)) {
+        array_push($errors, $checkPassword);
+    }
 
     if(count($errors) > 0) {
         redirect("login.php", "danger", $errors);

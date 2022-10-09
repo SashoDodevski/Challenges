@@ -27,6 +27,13 @@ function checkFields($username, $email, $password) {
     }  
 }
 
+function checkLoginFields($username, $password) {
+    if($username == '' || $password == '') {
+        $error = 'All inputs are required (no empty fields are allowed) !';
+        return $error;
+    }  
+}
+
 function checkUsername($username) {
     if( !preg_match('/^[a-zA-Z0-9]+$/', $username)) {
         $error = 'Username cannot contain empty spaces or special signs !';
