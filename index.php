@@ -13,12 +13,12 @@ include_once "./parts/header.php";
 
                 <div class="col-md-6 d-flex justify-content-center h-50">
                     <div>
-                    <a type="button" class="btn btn-info mx-3 my-4 btn-lg " href="./register.php">Sign Up</a>
+                    <a type="button" class="btn btn-info mx-3 my-4 btn-lg " href="./register.php">SignUp</a>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-center h-50">
                     <div>
-                        <a type="button" class="btn btn-info mx-3 my-4 btn-lg " href="./login.php">Log In</a>
+                        <a type="button" class="btn btn-info mx-3 my-4 btn-lg " href="./login.php">LogIn</a>
                     </div>
                 </div>            
 

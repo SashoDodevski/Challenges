@@ -9,8 +9,8 @@ include_once "./parts/header.php";
 
             <div class="col-md-12 d-flex align-items-center">
             <div class="col-md-6 offset-md-3">
-                <h2 class="mb-3 text-info">Sign Up</h2>
-                <form class="pt-3 pb-5" method="POST" action="authentication.php">
+                <h2 class="mb-3 text-info">SignUp</h2>
+                <form class="pt-3 pb-5" method="POST" action="registerAuth.php">
                 <input type="hidden" name="action" value="register" />
                     <div class="form-group">
                         <label for="username">Username:</label>
@@ -26,6 +26,7 @@ include_once "./parts/header.php";
                     </div>
                     <button type="submit" class="btn btn-info">Sign Up</button>
                 </form>
+
 
                 <p class="bg-white">Already have an account? <br/> 
                     Than click <a href="./login.php">here</a>.</p> 

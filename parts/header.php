@@ -24,12 +24,14 @@
         <ul class="navbar-nav">
         
         <li class="nav-item">
-            <a class="nav-link" href="register.php">Sign Up</a>
+            <a class="nav-link" href="register.php">SignUp</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="login.php">Log In</a>
+            <a class="nav-link" href="login.php">LogIn</a>
         </li>
-        
+        <li class="nav-item">
+            <a class="nav-link" href="logout.php">LogOut</a>
+        </li>
         </ul>
     </div>
 </nav>
@@ -67,4 +69,5 @@
         unset($_SESSION['status']);
         unset($_SESSION['msg']);
     }
+
     ?>
