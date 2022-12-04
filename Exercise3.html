@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+
+    <!-- Document title -->
+    <title>Exercise 3</title>
+  </head>
+  <body>
+    <div class="m-5">
+      <h1 class="h2">Exercise 3</h1>
+    </div>
+
+    <script>
+      let number1 = prompt("Please enter your first number");
+      let number2 = prompt("Please enter your second number");
+      let number3 = prompt("Please enter your third number");
+
+      arr = [Number(number1), Number(number2), Number(number3)];
+
+      console.log(arr);
+
+      let maxNumber = Math.max.apply(Math, arr);
+      console.log(`Largest number is ${maxNumber}.`);
+
+      let isPrimeMax = true;
+
+      if (maxNumber === 1) {
+        console.log("1 is neither prime nor composite number.");
+      } else if (maxNumber === 0) {
+        console.log("0 is neither prime nor composite number.");
+      } else if (maxNumber < 0) {
+        console.log("Negative numbers are neither prime nor composite numbers.");
+      } else if (maxNumber > 1) {
+        for (let i = 2; i < maxNumber; i++) {
+          if (maxNumber % i == 0) {
+            isPrimeMax = false;
+            break;
+          }
+        }
+
+        if (isPrimeMax) {
+          console.log(`${maxNumber} is a prime number.`);
+        } else {
+          console.log(`${maxNumber} is a not prime number.`);
+        }
+      }
+
+      let minNumber = Math.min.apply(Math, arr);
+      console.log(`Smallest number is ${minNumber}.`);
+
+      let isPrimeMin = true;
+
+      if (minNumber === 1) {
+        console.log("1 is neither prime nor composite number.");
+      } else if (minNumber === 0) {
+        console.log("0 is neither prime nor composite number.");
+      } else if (minNumber < 0) {
+        console.log("Negative numbers are neither prime nor composite numbers.");
+      } else if (minNumber > 1) {
+        for (let i = 2; i < minNumber; i++) {
+          if (minNumber % i == 0) {
+            isPrimeMin = false;
+            break;
+          }
+        }
+
+        if (isPrimeMin) {
+          console.log(`${minNumber} is a prime number.`);
+        } else {
+          console.log(`${minNumber} is a not prime number.`);
+        }
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
