@@ -33,12 +33,12 @@
       function checkNumber() {
         let number = prompt("Please enter your number");
         if (number % 2 == 0) {
-          document.getElementById("demo").innerHTML = "Your number is even!";
-          console.log("Your number is even!");
+          document.getElementById("demo").innerHTML = `Your number ${number} is even!`;
+          console.log(`Your number ${number} is even!`);
         } else {
           document.getElementById("demo").innerHTML =
-            "Your number is not even!";
-          console.log("Your number is not even!");
+            `Your number ${number} is not even!`;
+          console.log(`Your number ${number} is not even!`);
         }
       }
     </script>
