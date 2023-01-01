@@ -41,6 +41,9 @@ tryAgainButton.addEventListener("click", function () {
   location.reload();
 });
 
+score.classList.add("animate__animated")
+score.classList.add("animate__pulse")
+
 async function quizGame() {
   try {
     let response = await fetch(url);
@@ -90,10 +93,10 @@ async function quizGame() {
           <div class="text-left my-5 col-md-10 offset-md-1 w-100 border p-0 d-none" id="${questionId}">
               <p class="h5 bg-light p-4 m-0 border-bottom" id="question">${element.question}</p>
               <div id="answerOptionsDiv" class="d-flex justify-content-around p-3 w-100" name="#question-${questionId}">
-                <a class="btn btn-warning answerOption" role="button" id="question${questionId}option1" href="index.html#question-${questionId + 1}">${answer1}</a>
-                <a class="btn btn-warning answerOption" role="button" id="question${questionId}option2" href="index.html#question-${questionId + 1}">${answer2}</a>
-                <a class="btn btn-warning answerOption" role="button" id="question${questionId}option3" href="index.html#question-${questionId + 1}">${answer3}</a>
-                <a class="btn btn-warning answerOption" role="button" id="question${questionId}option4" href="index.html#question-${questionId + 1}">${answer4}</a>
+                <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option1" href="index.html#question-${questionId + 1}">${answer1}</a>
+                <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option2" href="index.html#question-${questionId + 1}">${answer2}</a>
+                <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option3" href="index.html#question-${questionId + 1}">${answer3}</a>
+                <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option4" href="index.html#question-${questionId + 1}">${answer4}</a>
               </div>
             <p class="font-weight-bold small bg-light m-0 p-2 pl-4 border-top" id="category">From category: "${element.category}"</p>
           </div>
@@ -103,10 +106,10 @@ async function quizGame() {
           <div class="text-left my-5 col-md-10 offset-md-1 w-100 border p-0 d-none" id="${questionId}">
             <p class="h5 bg-light p-4 m-0 border-bottom" id="question">${element.question}</p>
             <div id="answerOptionsDiv" class="d-flex justify-content-around p-3 w-100" name="#question-${questionId}">
-              <a class="btn btn-warning answerOption" role="button" id="question${questionId}option1" href="index.html#score">${answer1}</a>
-              <a class="btn btn-warning answerOption" role="button" id="question${questionId}option2" href="index.html#score">${answer2}</a>
-              <a class="btn btn-warning answerOption" role="button" id="question${questionId}option3" href="index.html#score">${answer3}</a>
-              <a class="btn btn-warning answerOption" role="button" id="question${questionId}option4" href="index.html#score">${answer4}</a>
+              <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option1" href="index.html#score">${answer1}</a>
+              <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option2" href="index.html#score">${answer2}</a>
+              <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option3" href="index.html#score">${answer3}</a>
+              <a class="btn btn-outline-secondary answerOption animate__animated animate__fadeIn" role="button" id="question${questionId}option4" href="index.html#score">${answer4}</a>
             </div>
           <p class="font-weight-bold small bg-light m-0 p-2 pl-4 border-top" id="category">From category: "${element.category}"</p>
           </div>
