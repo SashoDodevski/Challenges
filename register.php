@@ -5,14 +5,21 @@ include_once "./page_parts/header.php";
 ?>
 
     <!-- Register Form-->
-    <section class="bg-gray-50 dark:bg-gray-900 mt-28 mb-14">
+    <section class="bg-gray-50 dark:bg-gray-900 pt-24 pb-14">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8 text-blue-900">
                     <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
                         Register your account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <div class="mt-0">
+                        <p href="#" class="text-sm text-red-500 h-1"><?php if (isset($_SESSION['msg'])) { 
+                            echo $_SESSION['msg']; 
+                        } 
+                        unset($_SESSION['msg'])?>
+                        </p>
+                    </div>
+                    <form class="space-y-4 md:space-y-6" action="./userRegistration.php" method="POST">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
                             <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required="">
@@ -28,9 +35,6 @@ include_once "./page_parts/header.php";
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                             <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        </div>
-                        <div>
-                            <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                         </div>
                         <button type="submit" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800">Register</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">

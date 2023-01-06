@@ -9,30 +9,32 @@ include_once "./page_parts/header.php";
       <a class="mx-auto" href="#books">Book library</a>
     </div>
 
-    <!-- Content -->
-    <div class="w-10/12 mx-auto grid grid-cols-3 gap-4 content-centers p-8" id="books">
+    <!-- Book content -->
+    <div class="w-10/12 mx-auto grid grid-cols-3 gap-8 content-centers p-8" id="books">
 
+          <!-- Book cards -->
       <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
-          <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+          <img class="rounded-t-lg" src="" alt="" />
         </a>
         <div class="p-5">
           <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Book title</h5>
           </a>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+          <h6 class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white">Author</h6>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Category</p>
           <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Read more
           </a>
         </div>
       </div>
 
-
       <div>02</div>
       <div>03</div>
       <div>04</div>
       <div>05</div>
       <div>06</div>
+
     </div>
 
 
@@ -45,7 +47,8 @@ include_once "./page_parts/header.php";
     </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>

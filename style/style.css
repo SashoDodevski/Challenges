@@ -1,14 +1,14 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding:0;
+    padding: 0;
     scroll-behavior: smooth;
 }
 
 /* Commons */
 
 .negative-top-positioning {
-    margin-top: -56px;
+    margin-top: -60px;
 }
 .top-positioning {
     margin-top: 60px;
@@ -17,11 +17,19 @@
     z-index: 1;
 }
 
+.showContentToClients {
+    display: none;
+}
+
+.hideContentToClients {
+    display: block;
+}
+
 /* Banner */
 
 .banner {
     margin-top: 56px;
-    background-image: url(./images/banner_img.png);
+    background-image: url(../images/banner_img.png);
     background-position: top;
     background-repeat: no-repeat;
     background-size:cover;
