@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once __DIR__ . "./database/db.php";
@@ -8,10 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam('email', $email);
     $stmt->execute([
         'email' => $email
     ]);
@@ -32,12 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "INSERT INTO users (email, password, name, surname) 
                 VALUES(:email, :password, :name, :surname)";
             $stmt = $pdo->prepare($sql);
+            // $stmt->bindParam(':name', $name);
+            // $stmt->bindParam(':surname', $surname);
+            // $stmt->bindParam(':email', $email);
+            // $stmt->bindParam(':password', $password);
             $stmt->execute(
                 [
-                    'email' => $_POST['email'],
-                    'password' => $_POST['password'],
-                    'name' => $_POST['name'],
-                    'surname' => $_POST['surname']
+                    'email' => $email,
+                    'password' => $password,
+                    'name' => $name,
+                    'surname' => $surname
                 ]
             );
 

@@ -8,4 +8,5 @@ $(function(){
     let navbarSignOut = $("#navbarSignOut");
 
     // navbarSignOut.addClass("hidden")
+
 })
