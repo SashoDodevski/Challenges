@@ -22,29 +22,20 @@ $(function(){
                 no_of_pages: numberOfPages.val(),
                 book_image: bookImageUrl.val()
             }
-                
-                console.log(data);
-
-                let stringed = JSON.stringify(data);
-                console.log(stringed);
 
             $.ajax({
                 url: "insertBook.php",
                 type: "POST",
                 contentType: 'application/json',
-                dataType: "json",
                 data: JSON.stringify(data),
                 success: function(data) {
-                    alert(result)
+                    console.log("Successfuly sent AJAX POST request." + data)
                 },
                 error: function(error) {
-                    alert("something went wrong")
+                    console.log("Error: " + JSON.stringify(error))
                 }
               });
-        
 
         }
-    )
-
-    
+    )  
 })
