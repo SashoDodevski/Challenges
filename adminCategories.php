@@ -1,6 +1,6 @@
 <?php
 
-include_once "./page_parts/header.php";
+include_once __DIR__ . "./page_parts/header.php";
 
 ?>
         <!-- Book data -->

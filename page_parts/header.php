@@ -18,7 +18,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Local CSS -->
-  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="./style/style.css" />
 
   <!-- Document title -->
   <title id="pageTitle"></title>

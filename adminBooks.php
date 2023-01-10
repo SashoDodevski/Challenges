@@ -1,6 +1,6 @@
 <?php
 
-include_once "./page_parts/header.php";
+include_once __DIR__ . "./page_parts/header.php";
 
 ?>
 
@@ -19,11 +19,15 @@ include_once "./page_parts/header.php";
                         </div>
                         <div>
                             <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
-                            <input type="text" name="author" id="author" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author" required="">
+                            <select type="text" name="author" id="author" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author" required="">
+                            <option value="" disabled selected class="text-gray-400">Select author</option>
+                            </select>
                         </div>
                         <div>
                             <label for="bookCategory" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <input type="text" name="bookCategory" id="bookCategory" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book category" required="">
+                            <select type="text" name="bookCategory" id="bookCategory" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book category" required="">
+                            <option value="" disabled selected class="text-gray-400">Select book category</option>
+                            </select>
                         </div>
                         <div>
                             <label for="publicationYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Publication Year</label>
@@ -41,57 +45,42 @@ include_once "./page_parts/header.php";
                     </form>
                 </div>
 
-        </div>
+            </div>
 
         </div>
         
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 relative overflow-x-auto" id="divTableBooks">
     <p class="m-3">Books</p>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3 w-4/12">
+                <th scope="col" class="px-3 py-3 w-1/12">
+                    Actions
+                </th>
+                <th scope="col" class="px-3 py-3 w-1/12">
+                    Book ID
+                </th>
+                <th scope="col" class="px-3 py-3 w-4/12">
                     Book title
                 </th>
-                <th scope="col" class="px-6 py-3 w-2/12">
+                <th scope="col" class="px-3 py-3 w-2/12">
                     Author
                 </th>
-                <th scope="col" class="px-6 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3 w-3/24">
                     Category
                 </th>
-                <th scope="col" class="pl-6 py-3 w-3/24">
+                <th scope="col" class="pl-3 py-3 w-3/24">
                     Year of publication
                 </th>
-                <th scope="col" class="px-6 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3 w-3/24">
                     No. of pages
                 </th>
-                <th scope="col" class="px-6 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3 w-3/24">
                     Image url
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">
-                    Sliver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-            </tr>
-            
+        <tbody id="tableBodyBooks">
         </tbody>
     </table>
 </div>

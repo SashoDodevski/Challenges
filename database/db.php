@@ -1,6 +1,6 @@
 <?php
 
-require_once './database/constants.php';
+require_once __DIR__ . './constants.php';
 
 try {
     $pdo = new PDO('mysql:host=' . HOST . '; dbname=' . DB_NAME, USERNAME, PASSWORD);
