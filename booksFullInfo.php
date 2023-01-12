@@ -7,8 +7,8 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 require_once __DIR__ . "./database/db.php";
 
 $sql = "SELECT * FROM `books` 
-        LEFT JOIN authors ON books.author_id = authors.id
-        LEFT JOIN book_categories ON books.book_category_id = book_categories.id";
+        LEFT JOIN authors ON books.book_author_id = authors.author_id
+        LEFT JOIN book_categories ON books.book_category_id = book_categories.category_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 

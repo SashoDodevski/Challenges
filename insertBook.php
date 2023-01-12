@@ -22,16 +22,17 @@ if(!is_array($data)){
     throw new Exception('Received content contained invalid JSON!');
 }
 
-$sql = "INSERT INTO books (book_title, author_id, book_category_id, publication_year, no_of_pages, book_image) VALUES (:book_title, :author_id, :book_category_id, :publication_year, :no_of_pages, :book_image)";
+$sql = "INSERT INTO books (book_title, book_author_id, book_category_id, publication_year, no_of_pages, book_image, book_status) VALUES (:book_title, :book_author_id, :book_category_id, :publication_year, :no_of_pages, :book_image, :book_status)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(
     [
         'book_title' => $data['book_title'],
-        'author_id' => $data['author_id'],
+        'book_author_id' => $data['book_author_id'],
         'book_category_id' => $data['book_category_id'],
         'publication_year' => $data['publication_year'],
         'no_of_pages' => $data['no_of_pages'],
-        'book_image' => $data['book_image']
+        'book_image' => $data['book_image'],
+        'book_status' => "ACTIVE"
     ]
 );
 

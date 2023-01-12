@@ -5,12 +5,13 @@ include_once __DIR__ . "./page_parts/header.php";
 ?>
 
         <!-- Book data -->
-        <div class="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700 mx-auto mt-24 mb-10 w-10/12 m-0 p-10" id="divBook">
 
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mx-auto">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8 text-blue-900">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
-                        Enter book
+                <div class="w-4/12 p-6 space-y-4 md:space-y-6 sm:p-8 bg-gray-50 text-blue-900 shadow-lg rounded-lg mx-auto mt-10 mb-10 hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex" id="divBook">
+                    <div class="w-10/12 mx-auto my-auto">
+                        <div id="xmark"><i class="fa-solid fa-xmark"></i></div>
+                    
+                    <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white mb-2">
+                        Add new book
                     </h1>
                     <form class="space-y-4 md:space-y-6" id="formBook">
                         <div>
@@ -41,41 +42,51 @@ include_once __DIR__ . "./page_parts/header.php";
                             <label for="bookImageUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image url</label>
                             <input type="text" name="bookImageUrl" id="bookImageUrl" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image url" required="">
                         </div>
+                        <div class="mt-0">
+                        <p href="#" class="text-sm h-1 mb-1 text-center" id="msgBookForm"></p>
+                    </div>
                         <button type="submit" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitBook">Submit book</button>
+                        <button type="submit" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitEditedBook">Edit book</button>
+                        <button type="submit" class="w-full text-red-500/90 hover:text-red-400 bg-none hover:bg-none font-medium text-sm px-5 py-2.5 text-center" id="btnCloseBookForm">Close</button>
                     </form>
+                    </div>
                 </div>
+                <div class="hidden flex opacity-25 fixed inset-0 z-40 bg-black" id="divBook-backdrop"></div>
 
-            </div>
-
-        </div>
         
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 relative overflow-x-auto" id="divTableBooks">
-    <p class="m-3">Books</p>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 relative overflow-x-auto mt-24" id="divTableBooks">
+    <div class="flex justify-between">
+    <p class="m-3 text-3xl">Books</p>
+    <button stype="submit" class="m-3 text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnAddBook"><i class="fa-solid fa-plus"></i> Add new book</button>
+    </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-3 py-3 w-1/12">
+                <th scope="col" class="px-3 py-3">
                     Actions
                 </th>
-                <th scope="col" class="px-3 py-3 w-1/12">
+                <th scope="col" class="px-3 py-3">
+                    Book status
+                </th>
+                <th scope="col" class="px-3 py-3">
                     Book ID
                 </th>
-                <th scope="col" class="px-3 py-3 w-4/12">
+                <th scope="col" class="px-3 py-3">
                     Book title
                 </th>
-                <th scope="col" class="px-3 py-3 w-2/12">
+                <th scope="col" class="px-3 py-3">
                     Author
                 </th>
-                <th scope="col" class="px-3 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3">
                     Category
                 </th>
-                <th scope="col" class="pl-3 py-3 w-3/24">
+                <th scope="col" class="pl-3 py-3">
                     Year of publication
                 </th>
-                <th scope="col" class="px-3 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3">
                     No. of pages
                 </th>
-                <th scope="col" class="px-3 py-3 w-3/24">
+                <th scope="col" class="px-3 py-3">
                     Image url
                 </th>
             </tr>

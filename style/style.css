@@ -25,6 +25,12 @@
     display: block;
 }
 
+#xmark {
+    display:table;
+    margin-right: 0;
+    margin-left: auto;
+}
+
 /* Banner */
 
 .banner {
