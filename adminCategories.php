@@ -3,7 +3,7 @@
 include_once __DIR__ . "./page_parts/header.php";
 
 ?>
-        <!-- Book data -->
+        <!-- Categories data -->
         <div class="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700 mx-auto mt-24 mb-10 w-10/12 p-10">
 
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mx-auto">
@@ -51,9 +51,3 @@ include_once __DIR__ . "./page_parts/header.php";
         </tbody>
     </table>
 </div>
-
-    </div>
-
-    </div>
-
-    </div>

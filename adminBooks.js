@@ -10,7 +10,7 @@ $(function () {
   let divBook = $("#divBook");
   let divBookBackdrop = $("#divBook-backdrop");
   let formBook = $("#formBook");
-  let bookID = $("#bookID")
+  let bookID = $("#bookID");
   let bookTitle = $("#bookTitle");
   let author = $("#author");
   let bookCategory = $("#bookCategory");
@@ -18,13 +18,233 @@ $(function () {
   let numberOfPages = $("#numberOfPages");
   let bookImageUrl = $("#bookImageUrl");
   let msgBookForm = $("#msgBookForm");
-  let btnSubmitBook = $("#btnSubmitBook");
+  let btnCreateBook = $("#btnCreateBook");
   let btnSubmitEditedBook = $("#btnSubmitEditedBook");
   let btnAddBook = $("#btnAddBook");
-  let btnCloseBookForm = $("#btnCloseBookForm");
-
+  let btnCloseBookForm = $(".btnCloseBookForm");
   let divTableBooks = $("#divTableBooks");
   let tableBodyBooks = $("#tableBodyBooks");
+  let bookPageNumbers = $("#bookPageNumbers");
+
+  let showBooksContent = function () {
+    // AJAX GET data from BOOKS FULL INFO endpoint
+    let bookPage = {
+      page: location.hash.slice(12),
+    };
+    let url = "";
+    if (location.hash === "") {
+      url = urlBooks;
+    } else {
+      url = urlBooks + "?page=" + bookPage["page"];
+    }
+
+    $.ajax({
+      url: url,
+      type: "GET",
+      contentType: "application/json",
+      data: JSON.stringify(bookPage),
+      success: function (booksFullInfo) {
+
+        // Setup Pagination Buttons
+        function createPagination(wrapper, totalPages, page) {
+          let active;
+          wrapper.empty()
+          if (page > 1) {
+            let firstPageBtn = $(`<button  value="1" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">First
+            </button>`);
+            firstPageBtn.click(function () {
+              let pageNumber = location.hash.slice(12);
+              pageNumber = 1;
+              let urlHash = "Books_Page_" + pageNumber;
+              location.hash = urlHash;
+              tableBodyBooks.empty();
+              showBooksContent();
+            });
+            wrapper.append(firstPageBtn);
+          }
+
+          for (let plength = parseFloat(page)-1; plength <= parseFloat(page)+1; plength++) {
+            if (plength > totalPages) {
+              continue;
+            }
+            if (plength == 0) {
+              plength = plength + 1;
+            }
+            if (page == plength) {
+              active = "text-blue-500";
+            } else {
+              active = "";
+            }
+            let button = $(`<button value="${plength}" class="px-4 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${active}">${plength}</button>`);
+            button.click(function () {
+              let urlHash = "Books_Page_" + button.val();
+              location.hash = urlHash;
+              tableBodyBooks.empty();
+              showBooksContent();
+            });
+            wrapper.append(button);
+          }
+
+          if (page < totalPages) {
+            let nextBtn = $(`<button value="${totalPages}" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Last</button>`);
+            wrapper.append(nextBtn);
+            nextBtn.click(function () {
+                let pageNumber = location.hash.slice(12);
+                pageNumber = parseFloat(pageNumber)
+                pageNumber = totalPages;
+                let urlHash = "Books_Page_" + pageNumber;
+                location.hash = urlHash;
+                tableBodyBooks.empty();
+                showBooksContent();
+            });
+          }
+        }
+        bookPageNumbers.html(
+          createPagination(bookPageNumbers, booksFullInfo.Total_pages, booksFullInfo.Page)
+        );
+
+        // Create books
+        booksFullInfo.data.forEach((element) => {
+          let tableRow = $(`
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableBookRow${
+                    element["book_id"]
+                  }">
+                  <td class="px-3 py-3">
+                  <form method="POST">
+                  <input type="hidden" name="action" value="edit">
+                    <button type="submit" class="w-full text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditBook${
+                      element["book_id"]
+                    }">Edit</button>
+                    </form>
+                    <form method="POST">
+                    <input type="hidden" name="action" value="delete">
+                    <button type="submit" class="w-full text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${
+                      element["book_id"]
+                    }">Delete</button>
+                  </form>
+                  </td>
+                  <td class="px-3 py-3 text-xs">
+                    <div>
+                      <p class="text-xs">${element["book_status"]}</p>
+                    </div>
+                  </td>
+                  <td class="px-3 py-3 text-right">
+                      ${element["book_id"]}
+                  </td>
+                  <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      ${element["book_title"]}
+                  </th>
+                  <td class="px-3 py-3">
+                      ${
+                        element["author_name"] + " " + element["author_surname"]
+                      }
+                  </td>
+                  <td class="px-3 py-3 text-center">
+                      ${element["book_category"]}
+                  </td>
+                  <td class="px-3 py-3 text-center">
+                      ${element["publication_year"]}
+                  </td>
+                  <td class="px-3 py-3 text-center">
+                      ${element["no_of_pages"]}
+                  </td>
+                  <td class="px-3 py-3">
+                      ${element["book_image"]}
+                  </td>
+              </tr>`);
+
+          tableBodyBooks.append(tableRow);
+          if (element["book_status"] === "DELETED") {
+            $(`#btnDeleteBook${element["book_id"]}`).addClass("hidden");
+            $(`#btnEditBook${element["book_id"]}`).text("Activate");
+            // btnSubmitEditedBook.text("Activate book")
+            $(`#tableBookRow${element["book_id"]}`).addClass("bg-red-50");
+          }
+
+          // Soft delete BOOK in database
+          $(`#btnDeleteBook${element["book_id"]}`).click(function () {
+            let deleteBook = {
+              action: "delete",
+              book_status: "DELETED",
+              book_id: element["book_id"],
+            };
+
+            $.ajax({
+              url: urlBooks,
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(deleteBook),
+              success: function (deleteBook) {},
+              error: function (error) {
+                console.log("Error: " + JSON.stringify(error));
+              },
+            });
+          });
+
+          // Edit BOOK in database
+          $(`#btnEditBook${element["book_id"]}`).click(function (e) {
+            e.preventDefault();
+            $(`#author value:${element["book_author_id"]}`).prop(
+              "selected",
+              true
+            );
+            $(`#bookCategory value:${element["book_category_id"]}`).prop(
+              "selected",
+              true
+            );
+
+            bookTitle.val(element["book_title"]);
+            author.val(element["book_author_id"]);
+            bookCategory.val(element["book_category_id"]);
+            publicationYear.val(element["publication_year"]);
+            numberOfPages.val(element["no_of_pages"]);
+            bookImageUrl.val(element["book_image"]);
+
+            divBook.toggleClass("hidden");
+            divBookBackdrop.toggleClass("hidden");
+            divBook.toggleClass("flex");
+            divBookBackdrop.toggleClass("flex");
+            btnCreateBook.addClass("hidden");
+            btnCreateBook.removeClass("block");
+            btnSubmitEditedBook.addClass("block");
+            btnSubmitEditedBook.removeClass("hidden");
+
+            btnSubmitEditedBook.click(function () {
+              let editBook = {
+                action: "edit",
+                book_status: "ACTIVE",
+                book_id: element["book_id"],
+                book_title: bookTitle.val(),
+                book_author_id: author.val(),
+                book_category_id: bookCategory.val(),
+                publication_year: publicationYear.val(),
+                no_of_pages: numberOfPages.val(),
+                book_image: bookImageUrl.val(),
+              };
+
+              $.ajax({
+                url: urlBooks,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(editBook),
+                success: function (editBook) {},
+                error: function (error) {
+                  console.log("Error: " + JSON.stringify(error));
+                },
+              });
+              location.reload();
+            });
+          });
+        });
+      },
+      error: function (error) {
+        console.log("Error: " + JSON.stringify(error));
+      },
+    });
+  };
+
+  // on load show content in BOOK table
+  $(document).ready(showBooksContent);
 
   // AJAX GET data from AUTHORS endpoint
   $.ajax({
@@ -32,7 +252,9 @@ $(function () {
     type: "GET",
     success: function (authorData) {
       authorData.forEach((element) => {
-        let authorOption = $(`<option value="${element["author_id"]}"></option>`);
+        let authorOption = $(
+          `<option value="${element["author_id"]}"></option>`
+        );
         authorOption.text(
           element["author_name"] + " " + element["author_surname"]
         );
@@ -60,7 +282,9 @@ $(function () {
     type: "GET",
     success: function (categoryData) {
       categoryData.forEach((element) => {
-        let categoryOption = $(`<option value="${element["category_id"]}"></option>`);
+        let categoryOption = $(
+          `<option value="${element["category_id"]}"></option>`
+        );
         categoryOption.text(element["book_category"]);
         bookCategory.append(categoryOption);
       });
@@ -80,144 +304,12 @@ $(function () {
     },
   });
 
-  // AJAX GET data from BOOKS FULL INFO endpoint
-  $.ajax({
-    url: urlBooksFullInfo,
-    type: "GET",
-    success: function (booksFullData) {
-      // Insert data to BOOK TABLE
-      booksFullData.forEach((element) => {
-        let tableRow = $(`
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableBookRow${element["book_id"]}">
-                <td class="px-3 py-3">
-                <form action="" method="POST">
-                <input type="hidden" name="action" value="edit">
-                  <button type="submit" class="w-full text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditBook${element["book_id"]}">Edit</button>
-                  </form>
-                  <form action="" method="POST">
-                  <input type="hidden" name="action" value="delete">
-                  <button type="submit" class="w-full text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${element["book_id"]}">Delete</button>
-                </form>
-                </td>
-                <td class="px-3 py-3 text-xs">
-                  <div>
-                    <p class="text-xs">${element["book_status"]}</p>
-                  </div>
-                </td>
-                <td class="px-3 py-3 text-right">
-                    ${element["book_id"]}
-                </td>
-                <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    ${element["book_title"]}
-                </th>
-                <td class="px-3 py-3">
-                    ${element["author_name"] + " " + element["author_surname"]}
-                </td>
-                <td class="px-3 py-3 text-center">
-                    ${element["book_category"]}
-                </td>
-                <td class="px-3 py-3 text-center">
-                    ${element["publication_year"]}
-                </td>
-                <td class="px-3 py-3 text-center">
-                    ${element["no_of_pages"]}
-                </td>
-                <td class="px-3 py-3">
-                    ${element["book_image"]}
-                </td>
-            </tr>
-                `);
-        tableBodyBooks.append(tableRow);
-        if(element["book_status"] === "DELETED"){
-          $(`#btnDeleteBook${element["book_id"]}`).addClass("hidden")
-          $(`#tableBookRow${element["book_id"]}`).addClass("bg-gray-100")
-        }
-
-        // Soft delete BOOK in database
-       $(`#btnDeleteBook${element["book_id"]}`).click(function () {
-
-          let deleteBook = ({
-            action: "delete",
-            book_status: "DELETED",
-            book_id: element["book_id"]
-          })
-
-          $.ajax({
-            url: urlBooks,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(deleteBook),
-            success: function (deleteBook) {},
-            error: function (error) {
-              console.log("Error: " + JSON.stringify(error));
-            },
-          });
-          location. reload()
-        });
-
-        // Edit BOOK in database
-        $(`#btnEditBook${element["book_id"]}`).click(function(e){
-          e.preventDefault()
-          $(`#author value:${element["book_author_id"]}`).prop("selected", true)
-          $(`#bookCategory value:${element["book_category_id"]}`).prop("selected", true)
-          
-          bookTitle.val(element["book_title"])
-          author.val(element["book_author_id"])
-          bookCategory.val(element["book_category_id"])
-          publicationYear.val(element["publication_year"])
-          numberOfPages.val(element["no_of_pages"])
-          bookImageUrl.val(element["book_image"])
-
-          function toggleModal(){
-            divBook.toggleClass("hidden");
-            divBookBackdrop.toggleClass("hidden");
-            divBook.toggleClass("flex");
-            divBookBackdrop.toggleClass("flex");
-            btnSubmitBook.addClass("hidden")
-          }
-          toggleModal()
-
-          btnSubmitEditedBook.click(function () {
-
-            let editBook = ({
-              action: "edit",
-              book_status: "ACTIVE",
-              book_id: element["book_id"],
-              book_title: bookTitle.val(),
-              book_author_id: author.val(),
-              book_category_id: bookCategory.val(),
-              publication_year: publicationYear.val(),
-              no_of_pages: numberOfPages.val(),
-              book_image: bookImageUrl.val(),
-            })
-  
-            $.ajax({
-              url: urlBooks,
-              type: "POST",
-              contentType: "application/json",
-              data: JSON.stringify(editBook),
-              success: function (editBook) {},
-              error: function (error) {
-                console.log("Error: " + JSON.stringify(error));
-              },
-            });
-            location. reload()
-          });
-        })
-
-      });
-
-    },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
-    },
-  });
-
-  // Submit BOOK to database
-  btnSubmitBook.click(function (e) {
+  // Submit new BOOK to database
+  btnCreateBook.click(function (e) {
     e.preventDefault();
 
     let bookData = {
+      action: "create",
       book_title: bookTitle.val(),
       book_author_id: author.val(),
       book_category_id: bookCategory.val(),
@@ -242,7 +334,7 @@ $(function () {
         msgBookForm.addClass("text-green-500");
 
         $.ajax({
-          url: "insertBook.php",
+          url: urlBooks,
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify(bookData),
@@ -254,36 +346,27 @@ $(function () {
           },
         });
       }
-
-      formBook[0].reset();
-      formBook[1].reset();
-      formBook[2].reset();
-      formBook[3].reset();
-      formBook[4].reset();
-      formBook[5].reset();
+      window.setTimeout(function(){location.reload()},700)
     };
     formBookValidation();
   });
 
-  btnAddBook.click(
-    function toggleModal(){
-      divBook.toggleClass("hidden");
-      divBookBackdrop.toggleClass("hidden");
-      divBook.toggleClass("flex");
-      divBookBackdrop.toggleClass("flex");
-      btnSubmitEditedBook.addClass("hidden")
-    }
-  )
+  btnCloseBookForm.click(function () {
+    divBook.toggleClass("hidden");
+    divBookBackdrop.toggleClass("hidden");
+    divBook.toggleClass("flex");
+    divBookBackdrop.toggleClass("flex");
+  });
 
-  btnCloseBookForm.click(
-    function toggleModal(){
-      divBook.toggleClass("hidden");
-      divBookBackdrop.toggleClass("hidden");
-      divBook.toggleClass("flex");
-      divBookBackdrop.toggleClass("flex");
-    }
-  )
-  
-
+  btnAddBook.click(function () {
+    divBook.toggleClass("hidden");
+    divBookBackdrop.toggleClass("hidden");
+    divBook.toggleClass("flex");
+    divBookBackdrop.toggleClass("flex");
+    btnCreateBook.addClass("block");
+    btnCreateBook.removeClass("hidden");
+    btnSubmitEditedBook.addClass("hidden");
+    btnSubmitEditedBook.removeClass("block");
+  });
 
 });

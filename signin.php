@@ -48,8 +48,6 @@ include_once __DIR__ . "./page_parts/header.php";
 </section>
 
 
-
-
 <script src="main.js"></script>
 </body>
 
