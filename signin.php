@@ -2,6 +2,8 @@
 
 include_once __DIR__ . "./page_parts/header.php";
 
+include_once __DIR__ . "./clientRouter.php";
+
 ?>
 
 <!-- SignIn Form-->

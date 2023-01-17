@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__ . "./page_parts/header.php";
+include_once __DIR__ . "./clientRouter.php";
 
 ?>
         <!-- Categories data -->
@@ -51,3 +52,9 @@ include_once __DIR__ . "./page_parts/header.php";
         </tbody>
     </table>
 </div>
+
+<?php
+
+include_once "./page_parts/footer.php";
+
+?>

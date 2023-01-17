@@ -2,7 +2,6 @@
 if(session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +36,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
           <img src="./images/Navbar_img.png" class="h-6 mr-3 sm:w-20 sm:h-10 object-cover m-2" alt="Online book library">
         </a>
         <span class="self-center text-sm text-green-600 italic mr-1 mt-1 whitespace-nowrap dark:text-white ">go to</span>
-        <a class="self-center text-xl font-semibold text-blue-900 whitespace-nowrap dark:text-white" href="#books"> Book library</a>
+        <a class="self-center text-xl font-semibold text-blue-900 whitespace-nowrap dark:text-white" href="index.php#books"> Book library</a>
       </div>
 
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -66,6 +65,9 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
           </li>
           <li class="showContentToClients">
             <a href="./signout.php" class="py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarSignOut">Sign out</a>
+          </li>
+          <li>
+            <button onclick="history.back()" class="py-2 pl-3 pr-4 text-blue-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Go back</button>
           </li>
         </ul>
       </div>

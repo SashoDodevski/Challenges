@@ -18,13 +18,17 @@ $(function () {
   let numberOfPages = $("#numberOfPages");
   let bookImageUrl = $("#bookImageUrl");
   let msgBookForm = $("#msgBookForm");
-  let btnCreateBook = $("#btnCreateBook");
+  let btnSubmitBook = $("#btnSubmitBook");
   let btnSubmitEditedBook = $("#btnSubmitEditedBook");
   let btnAddBook = $("#btnAddBook");
   let btnCloseBookForm = $(".btnCloseBookForm");
   let divTableBooks = $("#divTableBooks");
   let tableBodyBooks = $("#tableBodyBooks");
   let bookPageNumbers = $("#bookPageNumbers");
+  let showPageNo = $("#showPageNo");
+  let deleteModal = $("#deleteModal");
+  let deleteModalBtn = $(".deleteModalBtn");
+  let closeDeleteModal = $(".closeDeleteModal");
 
   let showBooksContent = function () {
     // AJAX GET data from BOOKS FULL INFO endpoint
@@ -103,7 +107,9 @@ $(function () {
           createPagination(bookPageNumbers, booksFullInfo.Total_pages, booksFullInfo.Page)
         );
 
-        // Create books
+        showPageNo.text(`Page ${booksFullInfo.Page} of ${booksFullInfo.Total_pages}`)
+
+        // Inserting book data in book table
         booksFullInfo.data.forEach((element) => {
           let tableRow = $(`
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableBookRow${
@@ -118,7 +124,7 @@ $(function () {
                     </form>
                     <form method="POST">
                     <input type="hidden" name="action" value="delete">
-                    <button type="submit" class="w-full text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${
+                    <button data-modal-target="deleteModal" data-modal-toggle="defaultModal" type="button" class="w-full text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${
                       element["book_id"]
                     }">Delete</button>
                   </form>
@@ -163,6 +169,10 @@ $(function () {
 
           // Soft delete BOOK in database
           $(`#btnDeleteBook${element["book_id"]}`).click(function () {
+            divBookBackdrop.fadeIn(100)
+            deleteModal.fadeIn(100)
+            deleteModalBtn.attr("id", `deleteModalBtn${element["book_id"]}`)
+            $(`#deleteModalBtn${element["book_id"]}`).click(function () {
             let deleteBook = {
               action: "delete",
               book_status: "DELETED",
@@ -179,6 +189,14 @@ $(function () {
                 console.log("Error: " + JSON.stringify(error));
               },
             });
+            deleteModal.fadeOut(200)
+            divBookBackdrop.fadeOut(200)
+            window.setTimeout(function(){location.reload()},200)
+            })
+            closeDeleteModal.click(function(){
+              deleteModal.fadeOut(200)
+              divBookBackdrop.fadeOut(200)
+            })
           });
 
           // Edit BOOK in database
@@ -200,13 +218,9 @@ $(function () {
             numberOfPages.val(element["no_of_pages"]);
             bookImageUrl.val(element["book_image"]);
 
-            divBook.toggleClass("hidden");
-            divBookBackdrop.toggleClass("hidden");
-            divBook.toggleClass("flex");
-            divBookBackdrop.toggleClass("flex");
-            btnCreateBook.addClass("hidden");
-            btnCreateBook.removeClass("block");
-            btnSubmitEditedBook.addClass("block");
+            divBookBackdrop.fadeIn(150);
+            divBook.fadeIn(150);
+            btnSubmitBook.addClass("hidden");
             btnSubmitEditedBook.removeClass("hidden");
 
             btnSubmitEditedBook.click(function () {
@@ -305,7 +319,7 @@ $(function () {
   });
 
   // Submit new BOOK to database
-  btnCreateBook.click(function (e) {
+  btnSubmitBook.click(function (e) {
     e.preventDefault();
 
     let bookData = {
@@ -330,9 +344,6 @@ $(function () {
         msgBookForm.text("All field are required!");
         msgBookForm.addClass("text-red-500");
       } else {
-        msgBookForm.text("Book successfuly added!");
-        msgBookForm.addClass("text-green-500");
-
         $.ajax({
           url: urlBooks,
           type: "POST",
@@ -345,28 +356,24 @@ $(function () {
             console.log("Error: " + JSON.stringify(error));
           },
         });
+        msgBookForm.text("Book successfuly added!");
+        msgBookForm.addClass("text-green-500");
+        window.setTimeout(function(){location.reload()},700)
       }
-      window.setTimeout(function(){location.reload()},700)
     };
     formBookValidation();
   });
 
   btnCloseBookForm.click(function () {
-    divBook.toggleClass("hidden");
-    divBookBackdrop.toggleClass("hidden");
-    divBook.toggleClass("flex");
-    divBookBackdrop.toggleClass("flex");
+    divBookBackdrop.fadeOut(150);
+    divBook.fadeOut(150);
   });
 
   btnAddBook.click(function () {
-    divBook.toggleClass("hidden");
-    divBookBackdrop.toggleClass("hidden");
-    divBook.toggleClass("flex");
-    divBookBackdrop.toggleClass("flex");
-    btnCreateBook.addClass("block");
-    btnCreateBook.removeClass("hidden");
+    divBookBackdrop.fadeIn(150);
+    divBook.fadeIn(150);
+    btnSubmitBook.removeClass("hidden");
     btnSubmitEditedBook.addClass("hidden");
-    btnSubmitEditedBook.removeClass("block");
   });
 
 });
