@@ -4,7 +4,6 @@ $(function () {
   let urlBooks = "dataBooks.php";
   let urlCategories = "dataCategories.php";
   let urlComments = "dataComments.php";
-  let urlBooksFullInfo = "booksFullInfo.php";
 
   // admin BOOKS elements
   let divBook = $("#divBook");
@@ -115,46 +114,44 @@ $(function () {
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableBookRow${
                     element["book_id"]
                   }">
-                  <td class="px-3 py-3">
+                  <td class="px-3 py-3 grid content-start h-20">
                   <form method="POST">
                   <input type="hidden" name="action" value="edit">
-                    <button type="submit" class="w-full text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditBook${
+                    <button type="submit" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditBook${
                       element["book_id"]
                     }">Edit</button>
                     </form>
                     <form method="POST">
                     <input type="hidden" name="action" value="delete">
-                    <button data-modal-target="deleteModal" data-modal-toggle="defaultModal" type="button" class="w-full text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${
+                    <button data-modal-target="deleteModal" data-modal-toggle="defaultModal" type="button" class="w-20 text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteBook${
                       element["book_id"]
                     }">Delete</button>
                   </form>
                   </td>
-                  <td class="px-3 py-3 text-xs">
-                    <div>
+                  <td class="px-3 py-3 text-xs align-text-top text-center h-20 text-center">
                       <p class="text-xs">${element["book_status"]}</p>
-                    </div>
                   </td>
-                  <td class="px-3 py-3 text-right">
+                  <td class="px-3 py-3 align-text-top text-right h-20 text-right">
                       ${element["book_id"]}
                   </td>
-                  <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top text-left h-20">
                       ${element["book_title"]}
                   </th>
-                  <td class="px-3 py-3">
+                  <td class="px-3 py-3 align-text-top text-left h-20">
                       ${
                         element["author_name"] + " " + element["author_surname"]
                       }
                   </td>
-                  <td class="px-3 py-3 text-center">
+                  <td class="px-3 py-3 align-text-top text-left h-20">
                       ${element["book_category"]}
                   </td>
-                  <td class="px-3 py-3 text-center">
+                  <td class="px-3 py-3  align-text-top text-center h-20">
                       ${element["publication_year"]}
                   </td>
-                  <td class="px-3 py-3 text-center">
+                  <td class="px-3 py-3  align-text-top text-center h-20">
                       ${element["no_of_pages"]}
                   </td>
-                  <td class="px-3 py-3">
+                  <td class="px-3 py-3 align-text-top text-left h-20">
                       ${element["book_image"]}
                   </td>
               </tr>`);
@@ -265,7 +262,7 @@ $(function () {
     url: urlAuthors,
     type: "GET",
     success: function (authorData) {
-      authorData.forEach((element) => {
+      authorData.data.forEach((element) => {
         let authorOption = $(
           `<option value="${element["author_id"]}"></option>`
         );

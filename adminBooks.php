@@ -47,7 +47,7 @@ include_once __DIR__ . "./clientRouter.php";
                 <input type="text" name="bookImageUrl" id="bookImageUrl" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image url" required="">
             </div>
             <div class="mt-0">
-                <p href="#" class="text-sm h-1 mb-1 text-center" id="msgBookForm"></p>
+                <p class="text-sm h-1 mb-1 text-center" id="msgBookForm"></p>
             </div>
             <button type="button" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitBook">Submit book</button>
             <button type="button" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitEditedBook">Edit book</button>
@@ -58,7 +58,7 @@ include_once __DIR__ . "./clientRouter.php";
 <div class="hidden flex opacity-25 fixed inset-0 z-40 bg-black" id="divBook-backdrop"></div>
 
 <!-- Table Book for books in database -->
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 mt-24 border" id="divTableBooks">
+<div class="relative text-ellipsis overflow-x-hidden ... shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 mt-24 border" id="divTableBooks">
     <div class="flex justify-between">
         <p class="m-3 text-3xl">Books</p>
         <!-- Create new book button / Shows book form modal -->
@@ -69,13 +69,13 @@ include_once __DIR__ . "./clientRouter.php";
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-3 py-3">
+                <th scope="col" class="px-3 py-3 w-20 text-center">
                     Actions
                 </th>
-                <th scope="col" class="px-3 py-3">
+                <th scope="col" class="px-3 py-3 w-20 text-center">
                     Book status
                 </th>
-                <th scope="col" class="px-3 py-3">
+                <th scope="col" class="px-3 py-3 w-20 text-center">
                     Book ID
                 </th>
                 <th scope="col" class="px-3 py-3">
@@ -87,10 +87,10 @@ include_once __DIR__ . "./clientRouter.php";
                 <th scope="col" class="px-3 py-3">
                     Category
                 </th>
-                <th scope="col" class="pl-3 py-3">
+                <th scope="col" class="px-3 py-3 text-center">
                     Year of publication
                 </th>
-                <th scope="col" class="px-3 py-3">
+                <th scope="col" class="px-3 py-3 text-center">
                     No. of pages
                 </th>
                 <th scope="col" class="px-3 py-3">

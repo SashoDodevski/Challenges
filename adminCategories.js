@@ -1,13 +1,11 @@
 $(function () {
     // Endpoint URL
-    let urlData = "dataAuthors.php";
+    let urlData = "dataCategories.php";
   
     // admin Authors elements
     let divMain = $("#divMain");
     let divMainBackdrop = $("#divMain-backdrop");
-    let authorName = $("#authorName");
-    let authorSurname = $("#authorSurname");
-    let authorCV = $("#authorCV");
+    let category = $("#category");
     let msgForm = $("#msgForm");
     let btnSubmitForm = $("#btnSubmitForm");
     let btnSubmitEditedItem = $("#btnSubmitEditedItem");
@@ -27,13 +25,13 @@ $(function () {
       };
       let url = "";
       if (location.hash === "") {
-        url = urlData;
+        url = url;
       } else {
-        url = urlData + "?page=" + getItem["page"];
+        url = url + "?page=" + getItem["page"];
       }
   
       $.ajax({
-        url: url,
+        url: urlData,
         type: "GET",
         contentType: "application/json",
         data: JSON.stringify(getItem),
@@ -103,58 +101,52 @@ $(function () {
           data.data.forEach((element) => {
             let tableRow = $(`
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableRow${
-                      element["author_id"]
+                      element["category_id"]
                     }">
                     <td class="px-3 py-3 grid content-start">
                     <form method="POST">
                     <input type="hidden" name="action" value="edit">
                       <button type="submit" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${
-                        element["author_id"]
+                        element["category_id"]
                       }">Edit</button>
                       </form>
                       <form method="POST">
                       <input type="hidden" name="action" value="delete">
                       <button data-modal-target="deleteModal" data-modal-toggle="defaultModal" type="button" class="w-20 text-white bg-red-500/90 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-300 font-medium rounded text-xs px-2 py-1 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 "id="btnDeleteItem${
-                        element["author_id"]
+                        element["category_id"]
                       }">Delete</button>
                     </form>
                     </td>
                     <td class="px-3 py-3 text-xs h-full align-text-top text-center">
-                        ${element["author_status"]}
+                        ${element["category_status"]}
                     </td>
                     <td class="px-3 py-3 align-text-top text-right">
-                        ${element["author_id"]}
+                        ${element["category_id"]}
                     </td>
                     <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top">
-                    ${element["author_name"]}
+                    ${element["category"]}
                     </th>
-                    <td scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top">
-                        ${element["author_surname"]}
-                    </td>
-                    <td class="px-3 py-3 text-left">
-                        ${element["author_CV"]}
-                    </td>
                 </tr>`);
   
             tableBody.append(tableRow);
-            if (element["author_status"] === "DELETED") {
-              $(`#btnDeleteItem${element["author_id"]}`).addClass("hidden");
-              $(`#btnEditItem${element["author_id"]}`).text("Activate");
+            if (element["category_status"] === "DELETED") {
+              $(`#btnDeleteItem${element["category_id"]}`).addClass("hidden");
+              $(`#btnEditItem${element["category_id"]}`).text("Activate");
               // btnSubmitEditedItem.text("Activate book")
-              $(`#tableRow${element["author_id"]}`).addClass("bg-red-50");
+              $(`#tableRow${element["category_id"]}`).addClass("bg-red-50");
             }
   
             // Soft delete item in database
-            $(`#btnDeleteItem${element["author_id"]}`).click(function () {
+            $(`#btnDeleteItem${element["category_id"]}`).click(function () {
               divMainBackdrop.fadeIn(100)
               deleteModal.fadeIn(100)
-              deleteModalBtn.attr("id", `deleteModalBtn${element["author_id"]}`)
+              deleteModalBtn.attr("id", `deleteModalBtn${element["category_id"]}`)
 
-              $(`#deleteModalBtn${element["author_id"]}`).click(function () {
+              $(`#deleteModalBtn${element["category_id"]}`).click(function () {
               let deleteItem = {
                 action: "delete",
-                author_status: "DELETED",
-                author_id: element["author_id"],
+                category_status: "DELETED",
+                category_id: element["category_id"],
               };
   
               $.ajax({
@@ -178,12 +170,10 @@ $(function () {
             });
   
             // Edit item in database
-            $(`#btnEditItem${element["author_id"]}`).click(function (e) {
+            $(`#btnEditItem${element["category_id"]}`).click(function (e) {
               e.preventDefault();
 
-              authorName.val(element["author_name"]);
-              authorSurname.val(element["author_surname"]);
-              authorCV.val(element["author_CV"]);
+              category.val(element["category"]);
   
               divMainBackdrop.fadeIn(150);
               divMain.fadeIn(150);
@@ -193,11 +183,9 @@ $(function () {
               btnSubmitEditedItem.click(function () {
                 let editItem = {
                   action: "edit",
-                  author_status: "ACTIVE",
-                  author_id: element["author_id"],
-                  author_name: authorName.val(),
-                  author_surname: authorSurname.val(),
-                  author_CV: authorCV.val(),
+                  category_id: element["category_id"],
+                  category: element["category"],
+                  category_status: "ACTIVE",
                 };
   
                 $.ajax({
@@ -231,17 +219,13 @@ $(function () {
   
       let submitItem = {
         action: "create",
-        author_name: authorName.val(),
-        author_surname: authorSurname.val(),
-        author_CV: authorCV.val(),
-        author_status: "ACTIVE"
+        category: category.val(),
+        category_status: "ACTIVE"
       };
   
       let formValidation = function () {
         if (
-          authorName.val() === "" ||
-          authorSurname.val() === "" ||
-          authorCV.val() === ""
+            category.val() === ""
         ) {
           msgForm.text("All field are required!");
           msgForm.addClass("text-red-500");
@@ -258,7 +242,7 @@ $(function () {
               console.log("Error: " + JSON.stringify(error));
             },
           });
-          msgForm.text("Author successfuly added!");
+          msgForm.text("Category successfuly added!");
           msgForm.addClass("text-green-500");
           window.setTimeout(function(){location.reload()},700)
         }

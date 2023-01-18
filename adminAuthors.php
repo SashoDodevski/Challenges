@@ -5,130 +5,116 @@ include_once __DIR__ . "./clientRouter.php";
 
 ?>
 
-<!-- Book data -->
-<div class="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700 mx-auto mt-24 mb-10 w-10/12 m-0 p-10">
+<!-- Authors data -->
 
-    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mx-auto">
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8 text-blue-900">
-            <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
-                Enter author
-            </h1>
-            <form class="space-y-4 md:space-y-6" action="#">
-                <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                    <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author name" required="">
-                </div>
-                <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
-                    <input type="text" name="surname" id="surname" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author surname" required="">
-                </div>
-                <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short biography</label>
-                    <textarea type="textarea" row="4" name="surname" id="surname" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author's short biography" required=""></textarea>
-                </div>
-
-                <button type="submit" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800">Submit</button>
-            </form>
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- Book data -->
-
-<!-- Create Book form / Modal - shows on Add new book button -->
+<!-- Create Author form / Modal - shows on Add new author button -->
 <div class="w-4/12 p-6 space-y-4 md:space-y-6 sm:p-8 bg-gray-50 text-blue-900 shadow-lg rounded-lg mx-auto mt-10 mb-10 hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex" id="divMain">
     <div class="w-10/12 mx-auto">
-        <div><i class="fa-solid fa-xmark btnCloseBookForm hover:text-blue-700"></i></div>
+        <p class="text-right"><i class="fa-solid fa-xmark btnCloseForm hover:text-blue-700"></i></p>
 
         <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white mb-2">
-            Add new book
+            Add new author
         </h1>
-        <form class="space-y-4 md:space-y-6" id="formBook">
-        <input type="hidden" name="action" value="create">
+        <form class="space-y-4 md:space-y-6" id="form">
+            <input type="hidden" name="action" value="create">
 
             <div>
-                <label for="bookTitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Book title</label>
-                <input type="text" name="bookTitle" id="bookTitle" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book title" required="">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                <input type="text" name="name" id="authorName" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author name" required="">
             </div>
             <div>
-                <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
-                <select type="text" name="author" id="author" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author" required="">
-                    <option value="" disabled selected class="text-gray-400">Select author</option>
-                </select>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                <input type="text" name="surname" id="authorSurname" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author surname" required="">
             </div>
             <div>
-                <label for="bookCategory" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select type="text" name="bookCategory" id="bookCategory" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book category" required="">
-                    <option value="" disabled selected class="text-gray-400">Select book category</option>
-                </select>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short biography</label>
+                <textarea rows="8" name="surname" id="authorCV" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author's short biography" required=""></textarea>
             </div>
-            <div>
-                <label for="publicationYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Publication Year</label>
-                <input type="text" name="publicationYear" id="publicationYear" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Publication Year" required="">
-            </div>
-            <div>
-                <label for="numberOfPages" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of pages</label>
-                <input type="text" name="numberOfPages" id="numberOfPages" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Number of pages" required="">
-            </div>
-            <div>
-                <label for="bookImageUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image url</label>
-                <input type="text" name="bookImageUrl" id="bookImageUrl" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image url" required="">
-            </div>
+
             <div class="mt-0">
-                <p href="#" class="text-sm h-1 mb-1 text-center" id="msgBookForm"></p>
+                <p class="text-sm h-1 mb-1 text-center" id="msgForm"></p>
             </div>
-            <button type="button" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitBook">Submit book</button>
-            <button type="button" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitEditedBook">Edit book</button>
-            <button type="button" class="w-full text-red-500/90 hover:text-red-400 bg-none hover:bg-none font-medium text-sm px-5 py-2.5 text-center btnCloseBookForm">Close</button>
+            <button type="button" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitForm">Submit author</button>
+            <button type="button" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitEditedItem">Edit author</button>
+            <button type="button" class="w-full text-red-500/90 hover:text-red-400 bg-none hover:bg-none font-medium text-sm px-5 py-2.5 text-center btnCloseForm">Close</button>
         </form>
     </div>
 </div>
-<div class="hidden flex opacity-25 fixed inset-0 z-40 bg-black" id="divBook-backdrop"></div>
+<div class="hidden flex opacity-25 fixed inset-0 z-40 bg-black" id="divMain-backdrop"></div>
 
 
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100">
-    <p class="m-3">Authors</p>
+<!-- Table Authors to add authors in database -->
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-10/12 mx-auto mb-10 bg-gray-100 mt-24 border" id="divTable">
+    <div class="flex justify-between">
+        <p class="m-3 text-3xl">Authors</p>
+        <!-- Create new book button / Shows book form modal -->
+        <button stype="submit" class="m-3 text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnAddItem"><i class="fa-solid fa-plus"></i> Add new author</button>
+    </div>
+
+    <!-- Table data -->
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="pl-6 py-3">
+                <th scope="col" class="px-3 py-3 w-20 text-center">
+                    Actions
+                </th>
+                <th scope="col" class="px-3 py-3 w-20 text-center">
+                    Author status
+                </th>
+                <th scope="col" class="px-3 py-3 w-20 text-center">
                     ID
                 </th>
-                <th scope="col" class="px-6 py-3 w-2/12">
+                <th scope="col" class="px-3 py-3">
                     Name
                 </th>
-                <th scope="col" class="px-6 py-3 w-2/12">
+                <th scope="col" class="px-3 py-3">
                     Surname
                 </th>
-                <th scope="col" class="pl-6 py-3 w-8/12">
+                <th scope="col" class="px-3 py-3">
                     Short biography
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    1
-                </th>
-                <td class="pl-6 py-4">
-                    Sliver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-            </tr>
-
+        <tbody id="tableBody">
         </tbody>
     </table>
+
+    <!-- Book pagination -->
+    <div class="bookPagenumbers text-center py-3 grid grid-cols-3">
+        <div></div>
+        <div>
+            <ul class="inline-flex items-center" id="paginationNumbers">
+            </ul>
+        </div>
+        <div class="ml-auto mr-0 px-6 text-gray-600 flex items-center h-full">
+            <p id="showPageNo"></p>
+        </div>
+    </div>
+
 </div>
+
+
+
+<div id="deleteModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div class="w-full h-full max-w-md md:h-auto mx-auto center-item">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white closeDeleteModal" data-modal-hide="popup-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this book?</h3>
+                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 deleteModalBtn">
+                    Yes, I'm sure
+                </button>
+                <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 closeDeleteModal">No, cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="adminAuthors.js"></script>
