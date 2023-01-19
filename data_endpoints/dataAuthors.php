@@ -4,9 +4,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-$database_table = "categories";
-
-require_once __DIR__ . "./database/db.php";
+require_once "../database/db.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -19,33 +17,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $itemsPerPage = 6;
     $initial_limit = ($page_number - 1) * $itemsPerPage;
 
-    $sqlTotalItems = "SELECT COUNT(category_id) FROM $database_table";
+    $sqlTotalItems = "SELECT COUNT(author_id) FROM `authors`";
     $stmtTotalItems = $pdo->prepare($sqlTotalItems);
     $stmtTotalItems->execute();
     $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
-    
-        $newItems = [];
-        foreach ($items as $item) {
-            $items = array_merge($newItems, $item);
-        };
-        
-            $count = "COUNT(category_id)";
-            $items['Total_items'] = $items[$count];
-            unset($items[$count]);
 
-    $sql = "SELECT * FROM $database_table 
+    $sql = "SELECT * FROM `authors` 
             LIMIT $initial_limit, $itemsPerPage";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $categories = ["data" => $categories];
+    $authors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $authors = ["data" => $authors];
+
+    $newItems = [];
+    foreach ($items as $item) {
+        $items = array_merge($newItems, $item);
+    };
+
+    $count = "COUNT(author_id)";
+    $items['Total_items'] = $items[$count];
+    unset($items[$count]);
 
     $itemsPerPage = ["Items_per_page" => $itemsPerPage];
     $page_number = ["Page" => $page_number];
     $totalPages = ceil($items['Total_items'] / $itemsPerPage["Items_per_page"]);
     $totalPages = ["Total_pages" => $totalPages];
 
-    $data = array_merge($page_number, $itemsPerPage, $items, $totalPages, $categories);
+    $data = array_merge($page_number, $itemsPerPage, $items, $totalPages, $authors);
 
     header("Content-Type:application/json");
     $jsonobject = json_encode($data);
@@ -68,34 +66,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($data['action'] == 'create') {
-        $sql = "INSERT INTO $database_table (category, category_status) VALUES (:category, :category_status)";
+        $sql = "INSERT INTO authors (author_name, author_surname, author_CV, author_status) VALUES (:author_name, :author_surname, :author_CV, :author_status)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
-                'category' => $data['category'],
-                'category_status' => $data['category_status'],
+                'author_name' => $data['author_name'],
+                'author_surname' => $data['author_surname'],
+                'author_CV' => $data['author_CV'],
+                'author_status' => $data['author_status']
             ]
         );
     } elseif ($data['action'] == 'edit') {
-        $sql = "UPDATE $database_table
-        SET category = :category, category_status = :category_status
-        WHERE category_id = :category_id";
+        $sql = "UPDATE authors
+        SET author_name = :author_name, author_surname = :author_surname, author_CV = :author_CV, author_status = :author_status
+        WHERE author_id = :author_id";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
-                'category_id' => $data['category_id'],
-                'category' => $data['category'],
-                'category_status' => $data['category_status'],
+                'author_id' => $data['author_id'],
+                'author_name' => $data['author_name'],
+                'author_surname' => $data['author_surname'],
+                'author_CV' => $data['author_CV'],
+                'author_status' => $data['author_status']
             ]
         );
     } elseif ($data['action'] == 'delete') {
-        $sql = "UPDATE $database_table SET category_status = :category_status WHERE category_id = :category_id";
+        $sql = "UPDATE authors SET author_status = :author_status WHERE author_id = :author_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
-                'category_id' => $data['category_id'],
-                'category_status' => $data['category_status'],
+                'author_id' => $data['author_id'],
+                'author_status' => $data['author_status'],
             ]
         );
     } 

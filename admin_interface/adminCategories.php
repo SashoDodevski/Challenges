@@ -1,7 +1,7 @@
 <?php
 
-include_once __DIR__ . "./page_parts/header.php";
-include_once __DIR__ . "./clientRouter.php";
+include_once "./adminHeader.php";
+include_once "../clientRouter.php";
 
 ?>
 
@@ -26,7 +26,7 @@ include_once __DIR__ . "./clientRouter.php";
             <div class="mt-0">
                 <p class="text-sm h-1 mb-1 text-center" id="msgForm"></p>
             </div>
-            <button type="button" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitForm">Submit category</button>
+            <button type="button" class="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitItem">Submit category</button>
             <button type="button" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnSubmitEditedItem">Edit category</button>
             <button type="button" class="w-full text-red-500/90 hover:text-red-400 bg-none hover:bg-none font-medium text-sm px-5 py-2.5 text-center btnCloseForm">Close</button>
         </form>
@@ -40,7 +40,7 @@ include_once __DIR__ . "./clientRouter.php";
     <div class="flex justify-between">
         <p class="m-3 text-3xl">Category</p>
         <!-- Create new book button / Shows book form modal -->
-        <button stype="submit" class="m-3 text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnAddItem"><i class="fa-solid fa-plus"></i> Add new category</button>
+        <button stype="submit" class="m-3 text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800" id="btnAddNewItem"><i class="fa-solid fa-plus"></i> Add new category</button>
     </div>
 
 
@@ -68,11 +68,11 @@ include_once __DIR__ . "./clientRouter.php";
         </table>
 
     <!-- Book pagination -->
-    <div class="bookPagenumbers text-center py-3 grid grid-cols-3">
+    <div class="pageNumbers text-center py-3 grid grid-cols-3">
         <div></div>
         <div>
-            <ul class="inline-flex items-center" id="paginationNumbers">
-            </ul>
+        <ul class="inline-flex items-center" id="pageNumbers">
+        </ul>
         </div>
         <div class="ml-auto mr-0 px-6 text-gray-600 flex items-center h-full">
             <p id="showPageNo"></p>
@@ -105,6 +105,6 @@ include_once __DIR__ . "./clientRouter.php";
 
 <?php
 
-include_once "./page_parts/footer.php";
+include_once "../page_parts/footer.php";
 
 ?>

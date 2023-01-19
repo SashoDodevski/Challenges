@@ -4,11 +4,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-require_once __DIR__ . "./database/db.php";
+require_once "../database/db.php";
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET['page'])) {
-        $page_number = 1;
+        $page_number == 1;
     } else {
         $page_number = $_GET['page'];
     }
@@ -22,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
 
     $sql = "SELECT * FROM `books` 
-            LEFT JOIN authors ON books.book_author_id = authors.author_id
-            LEFT JOIN book_categories ON books.book_category_id = book_categories.category_id
+            LEFT JOIN authors ON books.author_id = authors.author_id
+            LEFT JOIN categories ON books.category_id = categories.category_id
             LIMIT $initial_limit, $itemsPerPage";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -67,13 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($data['action'] == 'create') {
-        $sql = "INSERT INTO books (book_title, book_author_id, book_category_id, publication_year, no_of_pages, book_image, book_status) VALUES (:book_title, :book_author_id, :book_category_id, :publication_year, :no_of_pages, :book_image, :book_status)";
+        $sql = "INSERT INTO books (book_title, author_id, category_id, publication_year, no_of_pages, book_image, book_status) VALUES (:book_title, :author_id, :category_id, :publication_year, :no_of_pages, :book_image, :book_status)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
                 'book_title' => $data['book_title'],
-                'book_author_id' => $data['book_author_id'],
-                'book_category_id' => $data['book_category_id'],
+                'author_id' => $data['author_id'],
+                'category_id' => $data['category_id'],
                 'publication_year' => $data['publication_year'],
                 'no_of_pages' => $data['no_of_pages'],
                 'book_image' => $data['book_image'],
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
     } elseif ($data['action'] == 'edit') {
         $sql = "UPDATE books
-        SET book_title = :book_title, book_author_id = :book_author_id, book_category_id = :book_category_id, publication_year = :publication_year, no_of_pages = :no_of_pages, book_image = :book_image, book_status = :book_status
+        SET book_title = :book_title, author_id = :author_id, category_id = :category_id, publication_year = :publication_year, no_of_pages = :no_of_pages, book_image = :book_image, book_status = :book_status
         WHERE book_id = :book_id";
 
         $stmt = $pdo->prepare($sql);
@@ -90,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             [
                 'book_id' => $data['book_id'],
                 'book_title' => $data['book_title'],
-                'book_author_id' => $data['book_author_id'],
-                'book_category_id' => $data['book_category_id'],
+                'author_id' => $data['author_id'],
+                'category_id' => $data['category_id'],
                 'publication_year' => $data['publication_year'],
                 'no_of_pages' => $data['no_of_pages'],
                 'book_image' => $data['book_image'],

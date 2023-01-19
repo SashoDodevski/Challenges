@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $admin['password'])) {
             $_SESSION['username'] = $admin['name'];
 
-            header('Location: adminInterface.php');
+            header('Location: ./admin_interface/adminInterface.php');
         } else {
             $_SESSION['msg'] = 'Wrong password!';
 

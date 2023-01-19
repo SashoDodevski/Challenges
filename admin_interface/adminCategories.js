@@ -1,48 +1,53 @@
 $(function () {
-    // Endpoint URL
-    let urlData = "dataCategories.php";
+    // Endpoint URLs
+    let urlData = "../data_endpoints/dataCategories.php";
   
-    // admin Authors elements
+    // admin item elements
     let divMain = $("#divMain");
     let divMainBackdrop = $("#divMain-backdrop");
+    let formMain = $("#formMain");
+  
     let category = $("#category");
+  
     let msgForm = $("#msgForm");
-    let btnSubmitForm = $("#btnSubmitForm");
+    let btnSubmitItem = $("#btnSubmitItem");
     let btnSubmitEditedItem = $("#btnSubmitEditedItem");
-    let btnAddItem = $("#btnAddItem");
+    let btnAddNewItem = $("#btnAddNewItem");
     let btnCloseForm = $(".btnCloseForm");
+    let divTable = $("#divTable");
     let tableBody = $("#tableBody");
-    let paginationNumbers = $("#paginationNumbers");
+    let pageNumbers = $("#pageNumbers");
     let showPageNo = $("#showPageNo");
     let deleteModal = $("#deleteModal");
     let deleteModalBtn = $(".deleteModalBtn");
     let closeDeleteModal = $(".closeDeleteModal");
   
-    let showItemContent = function () {
+    let showContent = function () {
       // AJAX GET data from endpoint
-      let getItem = {
+      let page = {
         page: location.hash.slice(6),
       };
       let url = "";
       if (location.hash === "") {
-        url = url;
+        url = urlData;
       } else {
-        url = url + "?page=" + getItem["page"];
+        url = urlData + "?page=" + page["page"];
       }
   
       $.ajax({
-        url: urlData,
+        url: url,
         type: "GET",
         contentType: "application/json",
-        data: JSON.stringify(getItem),
-        success: function (data) {
+        data: JSON.stringify(page),
+        success: function (itemsData) {
   
           // Setup Pagination Buttons
           function createPagination(wrapper, totalPages, page) {
             let active;
-            wrapper.empty()
+            wrapper.empty();
             if (page > 1) {
-              let firstPageBtn = $(`<button  value="1" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">First
+              let firstPageBtn =
+                $(`<button  value="1" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">First
               </button>`);
               firstPageBtn.click(function () {
                 let pageNumber = location.hash.slice(6);
@@ -50,12 +55,16 @@ $(function () {
                 let urlHash = "Page_" + pageNumber;
                 location.hash = urlHash;
                 tableBody.empty();
-                showItemContent();
+                showContent();
               });
               wrapper.append(firstPageBtn);
             }
   
-            for (let plength = parseFloat(page)-1; plength <= parseFloat(page)+1; plength++) {
+            for (
+              let plength = parseFloat(page) - 1;
+              plength <= parseFloat(page) + 1;
+              plength++
+            ) {
               if (plength > totalPages) {
                 continue;
               }
@@ -67,38 +76,43 @@ $(function () {
               } else {
                 active = "";
               }
-              let button = $(`<button value="${plength}" class="px-4 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${active}">${plength}</button>`);
+              let button = $(
+                `<button value="${plength}" class="px-4 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${active}">${plength}</button>`
+              );
               button.click(function () {
                 let urlHash = "Page_" + button.val();
                 location.hash = urlHash;
                 tableBody.empty();
-                showItemContent();
+                showContent();
               });
               wrapper.append(button);
             }
   
             if (page < totalPages) {
-              let nextBtn = $(`<button value="${totalPages}" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Last</button>`);
-              wrapper.append(nextBtn);
-              nextBtn.click(function () {
-                  let pageNumber = location.hash.slice(6);
-                  pageNumber = parseFloat(pageNumber)
-                  pageNumber = totalPages;
-                  let urlHash = "Page_" + pageNumber;
-                  location.hash = urlHash;
-                  tableBody.empty();
-                  showItemContent();
+              let lastBtn = $(
+                `<button value="${totalPages}" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Last</button>`
+              );
+              wrapper.append(lastBtn);
+              lastBtn.click(function () {
+                let pageNumber = location.hash.slice(6);
+                pageNumber = parseFloat(pageNumber);
+                pageNumber = totalPages;
+                let urlHash = "Page_" + pageNumber;
+                location.hash = urlHash;
+                tableBody.empty();
+                showContent();
               });
             }
           }
-          paginationNumbers.html(
-            createPagination(paginationNumbers, data.Total_pages, data.Page)
+          pageNumbers.html(
+            createPagination(pageNumbers, itemsData.Total_pages, itemsData.Page)
           );
   
-          showPageNo.text(`Page ${data.Page} of ${data.Total_pages}`)
+          showPageNo.text(`Page ${itemsData.Page} of ${itemsData.Total_pages}`);
   
-          // Inserting item data in table
-          data.data.forEach((element) => {
+          // data from database
+          itemsData.data.forEach((element) => {
+            // Fill table with data
             let tableRow = $(`
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableRow${
                       element["category_id"]
@@ -128,72 +142,79 @@ $(function () {
                     </th>
                 </tr>`);
   
+                
             tableBody.append(tableRow);
+
+            // Important variable for the next code
+            let item = element["category_id"];
+
             if (element["category_status"] === "DELETED") {
-              $(`#btnDeleteItem${element["category_id"]}`).addClass("hidden");
-              $(`#btnEditItem${element["category_id"]}`).text("Activate");
-              // btnSubmitEditedItem.text("Activate book")
-              $(`#tableRow${element["category_id"]}`).addClass("bg-red-50");
+                $(`#btnDeleteItem${item}`).addClass("hidden");
+                $(`#btnEditItem${item}`).text("Activate");
+                btnSubmitEditedItem.text("Activate")
+                $(`#tableRow${item}`).addClass("bg-red-50");
             }
-  
+
             // Soft delete item in database
-            $(`#btnDeleteItem${element["category_id"]}`).click(function () {
-              divMainBackdrop.fadeIn(100)
-              deleteModal.fadeIn(100)
-              deleteModalBtn.attr("id", `deleteModalBtn${element["category_id"]}`)
+            $(`#btnDeleteItem${item}`).click(function () {
+              divMainBackdrop.fadeIn(100);
+              deleteModal.fadeIn(100);
+              deleteModalBtn.attr("id", `deleteModalBtn${item}`);
 
-              $(`#deleteModalBtn${element["category_id"]}`).click(function () {
-              let deleteItem = {
+              $(`#deleteModalBtn${item}`).click(function () {
+                let deleteItem = {
                 action: "delete",
-                category_status: "DELETED",
                 category_id: element["category_id"],
-              };
-  
-              $.ajax({
-                url: urlData,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(deleteItem),
-                success: function (deleteItem) {},
-                error: function (error) {
-                  console.log("Error: " + JSON.stringify(error));
-                },
-              });
-              deleteModal.fadeOut(200)
-              divMainBackdrop.fadeOut(200)
-              window.setTimeout(function(){location.reload()},200)
-              })
-              closeDeleteModal.click(function(){
-                deleteModal.fadeOut(200)
-                divMainBackdrop.fadeOut(200)
-              })
-            });
-  
-            // Edit item in database
-            $(`#btnEditItem${element["category_id"]}`).click(function (e) {
-              e.preventDefault();
-
-              category.val(element["category"]);
-  
-              divMainBackdrop.fadeIn(150);
-              divMain.fadeIn(150);
-              btnSubmitForm.addClass("hidden");
-              btnSubmitEditedItem.removeClass("hidden");
-  
-              btnSubmitEditedItem.click(function () {
-                let editItem = {
-                  action: "edit",
-                  category_id: element["category_id"],
-                  category: element["category"],
-                  category_status: "ACTIVE",
+                category_status: "DELETED",
                 };
   
                 $.ajax({
                   url: urlData,
                   type: "POST",
                   contentType: "application/json",
+                  data: JSON.stringify(deleteItem),
+                  success: function (success) {},
+                  error: function (error) {
+                    console.log("Error: " + JSON.stringify(error));
+                  },
+                });
+                deleteModal.fadeOut(200);
+                divMainBackdrop.fadeOut(200);
+                window.setTimeout(function () {
+                  location.reload();
+                }, 200);
+              });
+              closeDeleteModal.click(function () {
+                deleteModal.fadeOut(200);
+                divMainBackdrop.fadeOut(200);
+              });
+            });
+  
+            // Edit item in database
+            $(`#btnEditItem${item}`).click(function (e) {
+              e.preventDefault();
+  
+              category.val(element["category"]);
+  
+              divMainBackdrop.fadeIn(150);
+              divMain.fadeIn(150);
+              btnSubmitItem.addClass("hidden");
+              btnSubmitEditedItem.removeClass("hidden");
+  
+              btnSubmitEditedItem.click(function () {
+                let editItem = {
+                    action: "edit",
+                    category_id: element["category_id"],
+                    category: category.val(),
+                    category_status: "ACTIVE"
+                  };
+  
+                $.ajax({
+                  url: urlData,
+                  type: "POST",
+                  contentType: "application/json",
                   data: JSON.stringify(editItem),
-                  success: function (editItem) {},
+                  success: function (succsess) {},
                   error: function (error) {
                     console.log("Error: " + JSON.stringify(error));
                   },
@@ -209,21 +230,21 @@ $(function () {
       });
     };
   
-    // on load show content in table
-    $(document).ready(showItemContent);
+    // on load show content in item table
+    $(document).ready(showContent);
   
-  
+    
     // Submit new item to database
-    btnSubmitForm.click(function (e) {
+    btnSubmitItem.click(function (e) {
       e.preventDefault();
   
-      let submitItem = {
+      let newItem = {
         action: "create",
         category: category.val(),
         category_status: "ACTIVE"
       };
   
-      let formValidation = function () {
+      let formMainValidation = function () {
         if (
             category.val() === ""
         ) {
@@ -234,33 +255,33 @@ $(function () {
             url: urlData,
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify(submitItem),
-            success: function (submitItem) {
-              console.log("Successfuly sent AJAX POST request." + submitItem);
-            },
+            data: JSON.stringify(newItem),
+            success: function (success) {},
             error: function (error) {
               console.log("Error: " + JSON.stringify(error));
             },
           });
           msgForm.text("Category successfuly added!");
           msgForm.addClass("text-green-500");
-          window.setTimeout(function(){location.reload()},700)
+          window.setTimeout(function () {
+            location.reload();
+          }, 700);
         }
       };
-      formValidation();
+      formMainValidation();
     });
   
     btnCloseForm.click(function () {
       divMainBackdrop.fadeOut(150);
       divMain.fadeOut(150);
+      formMain.delay(900).trigger("reset");
     });
   
-    btnAddItem.click(function () {
+    btnAddNewItem.click(function () {
       divMainBackdrop.fadeIn(150);
       divMain.fadeIn(150);
-      btnSubmitForm.removeClass("hidden");
+      btnSubmitItem.removeClass("hidden");
       btnSubmitEditedItem.addClass("hidden");
     });
-  
   });
   
