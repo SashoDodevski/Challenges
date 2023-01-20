@@ -1,6 +1,6 @@
 <?php
 
-if(session_status() !== PHP_SESSION_ACTIVE) {
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
@@ -66,16 +66,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($data['action'] == 'create') {
-        $sql = "INSERT INTO authors (author_name, author_surname, author_CV, author_status) VALUES (:author_name, :author_surname, :author_CV, :author_status)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(
-            [
-                'author_name' => $data['author_name'],
-                'author_surname' => $data['author_surname'],
-                'author_CV' => $data['author_CV'],
-                'author_status' => $data['author_status']
-            ]
-        );
+        if (
+            empty($data['author_name'])
+        ) {
+            $_SESSION['status'] = 'text-red-500';
+            $_SESSION['msg'] = 'Item not saved. All fields in form are required!';
+
+            $success = ["Hello from here"];
+            $jsonobject = json_encode($success);
+            echo $jsonobject;
+
+            header("Location: adminAuthors.php");
+            die();
+        } else {
+            $sql = "INSERT INTO authors (author_name, author_surname, author_CV, author_status) VALUES (:author_name, :author_surname, :author_CV, :author_status)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(
+                [
+                    'author_name' => $data['author_name'],
+                    'author_surname' => $data['author_surname'],
+                    'author_CV' => $data['author_CV'],
+                    'author_status' => $data['author_status']
+                ]
+            );
+        }
     } elseif ($data['action'] == 'edit') {
         $sql = "UPDATE authors
         SET author_name = :author_name, author_surname = :author_surname, author_CV = :author_CV, author_status = :author_status
@@ -100,5 +114,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'author_status' => $data['author_status'],
             ]
         );
-    } 
+    }
 }
