@@ -16,8 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $page_number = $_GET['page'];
     }
 
-    $itemsPerPage = 6;
-    $initial_limit = ($page_number - 1) * $itemsPerPage;
+
 
     $sqlTotalItems = "SELECT COUNT(category_id) FROM $database_table";
     $stmtTotalItems = $pdo->prepare($sqlTotalItems);
@@ -32,6 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $count = "COUNT(category_id)";
             $items['Total_items'] = $items[$count];
             unset($items[$count]);
+
+    $itemsPerPage = 6;
+    $initial_limit = ($page_number - 1) * $itemsPerPage;
 
     $sql = "SELECT * FROM $database_table 
             LIMIT $initial_limit, $itemsPerPage";

@@ -2,9 +2,9 @@ import { testFunction, createPagination } from "./commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
-  let urlData = "../data_endpoints/dataBooks.php";
-  let urlAuthors = "../data_endpoints/dataAuthors.php";
-  let urlCategories = "../data_endpoints/dataCategories.php";
+  let urlData = "../data_endpoints_admins/dataBooks.php";
+  let urlAuthors = "../data_endpoints_admins/dataAuthors.php";
+  let urlCategories = "../data_endpoints_admins/dataCategories.php";
 
 
   // admin item elements

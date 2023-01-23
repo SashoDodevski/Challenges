@@ -9,7 +9,7 @@ require_once "../database/db.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET['page'])) {
-        $page_number == 1;
+        $page_number = 1;
     } else {
         $page_number = $_GET['page'];
     }

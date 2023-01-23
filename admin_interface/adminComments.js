@@ -2,8 +2,8 @@ import { testFunction, createPagination } from "./commonFunctions.js";
 
 $(function () {
     // Endpoint URLs
-    let urlData = "../data_endpoints/dataComments.php";
-    let urlStatuses = "../data_endpoints/dataStatuses.php";
+    let urlData = "../data_endpoints_admins/dataComments.php";
+    let urlStatuses = "../data_endpoints_admins/dataStatuses.php";
   
     // admin item elements
     let divMain = $("#divMain");
@@ -50,8 +50,6 @@ $(function () {
         page: location.hash.slice(6),
         status: selectStatus.val(),
       }
-
-      console.log(getItems)
 
       $.ajax({
         url: url,

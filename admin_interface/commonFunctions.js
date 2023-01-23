@@ -64,3 +64,5 @@ export function createPagination(wrapper, totalPages, page, tableBody) {
       });
     }
   }
+
+  

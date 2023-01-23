@@ -2,7 +2,7 @@ import { testFunction, createPagination } from "./commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
-  let urlData = "../data_endpoints/dataAuthors.php";
+  let urlData = "../data_endpoints_admins/dataAuthors.php";
 
   // admin item elements
   let divMain = $("#divMain");
@@ -44,11 +44,15 @@ $(function () {
       contentType: "application/json",
       data: JSON.stringify(page),
       success: function (itemsData) {
-
         // Setup Pagination Buttons
-        
+
         pageNumbers.html(
-          createPagination(pageNumbers, itemsData.Total_pages, itemsData.Page, tableBody)
+          createPagination(
+            pageNumbers,
+            itemsData.Total_pages,
+            itemsData.Page,
+            tableBody
+          )
         );
 
         showPageNo.text(`Page ${itemsData.Page} of ${itemsData.Total_pages}`);
@@ -87,7 +91,6 @@ $(function () {
 
           tableBody.append(tableRow);
 
-
           if (element.author_status === "DELETED") {
             $(`#btnDeleteItem${element.author_id}`).addClass("hidden");
             $(`#btnEditItem${element.author_id}`).text("Activate");
@@ -116,6 +119,7 @@ $(function () {
                   console.log("Error: " + JSON.stringify(error));
                 },
               });
+
               deleteModal.fadeOut(200);
               divMainBackdrop.fadeOut(200);
               window.setTimeout(function () {
@@ -181,9 +185,9 @@ $(function () {
 
   let createNewItem = function () {
     if (
-      authorName.val() === "",
+      (authorName.val() === "",
       authorSurname.val() === "",
-      authorCV.val() === ""
+      authorCV.val() === "")
     ) {
       msgForm.text("All field are required!");
       msgForm.addClass("text-red-500");
@@ -208,7 +212,7 @@ $(function () {
     }
   };
   createNewItem();
-  
+
   btnCloseForm.click(function () {
     divMainBackdrop.fadeOut(150);
     divMain.fadeOut(150);
