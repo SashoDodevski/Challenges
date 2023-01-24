@@ -239,7 +239,7 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      // location.reload();
+      location.reload();
     });
     closeModal.click(function () {
       modal.fadeOut(200);
