@@ -4,9 +4,9 @@ include_once "./page_parts/header.php";
 
 ?>
 
+<input id="user_id" type="hidden" name="user_id" value="<?php if(isset($_SESSION["user_id"])) { echo $_SESSION["user_id"]; }?>">
 
 <!-- Book info -->
-<input id="user_id" type="hidden" name="user_id" value="<?php if(isset($_SESSION["user_id"])) { echo $_SESSION["user_id"]; }?>">
 <div class="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700 mx-auto mt-24 mb-10 w-8/12 m-0">
     <div class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full mb-6 p-8">
         <img id="bookImageUrl" class="object-cover h-96 md:h-auto w-4/12" alt="Book image">
@@ -14,7 +14,9 @@ include_once "./page_parts/header.php";
             <h5 id="bookTitle" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Book title</h5>
             <h6 id="author" class="mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">Author</h6>
 
-            <p id="bookCategory" class="mb-3 font-normal text-gray-700 dark:text-gray-400">Book category</p>
+            <p id="bookCategory" class="mb-3 font-bold text-green-700 dark:text-blue-400">Book category</p>
+            <p id="publicationYear" class="mb-3 font-normal text-gray-700 dark:text-gray-400">Publication year</p>
+            <p id="numberOfPages" class="mb-3 font-normal text-gray-700 dark:text-gray-400">Number of pages</p>
         </div>
     </div>
 
@@ -22,7 +24,7 @@ include_once "./page_parts/header.php";
     <div href="#" class="p-6 flex items-left bg-white border rounded-lg shadow-md md:flex-col hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full mb-6">
         <label for="bookNote" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Make a note:</label>
         <textarea id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your note here..."></textarea>
-        <a id="btnSubmitNote" type="button" class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 mt-4 sm:w-20">Submit</a>
+        <button id="btnSubmitNote" type="button" class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 mt-4 sm:w-20">Submit</button>
     </div>
     </div>
     
@@ -35,7 +37,7 @@ include_once "./page_parts/header.php";
     <div href="#" class="p-6 flex items-left bg-white border rounded-lg shadow-md md:flex-col hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full mb-6">
           <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Leave a comment:</label>
           <textarea id="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your comment here..."></textarea>
-          <a id="btnSubmitComment" type="button" class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 mt-4 sm:w-20">Submit</a>
+          <button id="btnSubmitComment" type="button" class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 mt-4 sm:w-20">Submit</button>
       </div>
     </div>
 

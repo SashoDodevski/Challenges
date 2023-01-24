@@ -69,3 +69,24 @@
     }
   }
 
+#filterCategory{
+    width: 300px;
+}
+
+  #showFilter{
+    width: 0;
+    height: 0;
+    margin-top: 50%;
+    border-top: 20px solid transparent;
+    border-left: 14px solid #ff5a00;
+    border-bottom: 20px solid transparent;
+  }
+
+  #hideFilter{
+    width: 0;
+    height: 0;
+    margin-top: 50%;
+    border-top: 20px solid transparent;
+    border-right: 14px solid #6bbf20;
+    border-bottom: 20px solid transparent;
+  }

@@ -21,15 +21,6 @@ include_once "./page_parts/header.php";
 </div>
 
 
-<!-- Footer -->
-
-<div class="w-10/12 mx-auto content-center text-center">
-  <h6>
-    Изработено со срце од студентите на Brainster
-  </h6>
-</div>
-</div>
-
 <!-- Modal -->
 <div id="registerModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
     <div class="w-full h-full max-w-md md:h-auto mx-auto center-item">

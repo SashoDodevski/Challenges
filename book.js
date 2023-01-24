@@ -14,6 +14,8 @@ $(function () {
   let bookTitle = $("#bookTitle");
   let author = $("#author");
   let bookCategory = $("#bookCategory");
+  let publicationYear = $("#publicationYear");
+  let numberOfPages = $("#numberOfPages");
   let bookComments = $("#bookComments");
   let comment = $("#comment");
   let btnSubmitComment = $("#btnSubmitComment");
@@ -50,9 +52,11 @@ $(function () {
       bookImageUrl.attr("src", itemsData.data[0].book_image);
       bookTitle.text(itemsData.data[0].book_title);
       author.text(
-        itemsData.data[0].author_name + " " + itemsData.data[0].author_surname
+        "by " + itemsData.data[0].author_name + " " + itemsData.data[0].author_surname
       );
       bookCategory.text(itemsData.data[0].category);
+      publicationYear.text("published: " + itemsData.data[0].publication_year)
+      numberOfPages.text("number of pages: " + itemsData.data[0].no_of_pages)
     },
     error: function (error) {
       console.log("Error: " + JSON.stringify(error));
@@ -235,7 +239,7 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      location.reload();
+      // location.reload();
     });
     closeModal.click(function () {
       modal.fadeOut(200);
@@ -256,19 +260,20 @@ $(function () {
     contentType: "application/json",
     data: JSON.stringify(getNotes),
     success: function (itemsData) {
-      if(itemsData.data.notes = "end"){
-        createNoteDiv.addClass("hidden")
-      }
-      if ((itemsData.data.length === 0)) {
+      if (itemsData.data.length === 0) {
         bookNotesDiv.addClass("hidden");
       } else {
         itemsData.data.forEach((element) => {
-          let note = `        <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4">
+
+          let note = `<div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4">
       <p>${element.note}</p>
   </div>`;
 
           bookNotesDiv.append(note);
         });
+        if(itemsData.data.length === 5){
+          createNoteDiv.addClass("hidden");
+        }
       }
     },
     error: function (error) {
@@ -306,7 +311,7 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      // location.reload();
+      location.reload();
     });
     closeModal.click(function () {
       modal.fadeOut(200);

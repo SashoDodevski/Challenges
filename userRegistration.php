@@ -35,10 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "INSERT INTO users (email, password, name, surname) 
                 VALUES(:email, :password, :name, :surname)";
             $stmt = $pdo->prepare($sql);
-            // $stmt->bindParam(':name', $name);
-            // $stmt->bindParam(':surname', $surname);
-            // $stmt->bindParam(':email', $email);
-            // $stmt->bindParam(':password', $password);
             $stmt->execute(
                 [
                     'email' => $email,

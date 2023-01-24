@@ -50,7 +50,7 @@ $(function () {
         // books from database
         itemsData.data.forEach((element) => {
           let card = $(`
-                      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 ${element.category}">
+                      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 ${element.category} card">
                           <a href="./book.php#${element.book_id}">
                               <img class="rounded-t-lg mx-auto p-5 max-h-96" src="${
                                 element.book_image
@@ -65,7 +65,7 @@ $(function () {
                           <h6 class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white">${
                             element.author_name + " " + element.author_surname
                           }</h6>
-                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${
+                          <p class="mb-3 font-bold text-green-700 dark:text-gray-400">${
                             element.category
                           }</p>
                           <a href="./book.php#${element.book_id}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -95,13 +95,17 @@ $(function () {
       // books from database
       itemsData.data.forEach((element) => {
         let category = $(`
-        <div class="flex items-center ml-4">
-            <input id="${element.category}" type="checkbox" value="#${element.category}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 categoryCheckbox">
+          <div class="flex items-left ml-4 my-3">
+            <input id="${element.category}" type="checkbox" rel="${element.category}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 categoryCheckbox">
             <label for="${element.category}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">  ${element.category}</label>
-        </div>`);
+          </div>
+        `);
 
         filterCategory.append(category);
       });
+
+
+
     },
     error: function (error) {
       console.log("Error: " + JSON.stringify(error));
@@ -109,11 +113,89 @@ $(function () {
   });
 
 
-  categoryCheckbox.click(
-      console.log("click")
-   )
-
 
   // on load show content in item table
   showContent();
+
+  
+  // Filter category
+  
+  $("body").on("click",".categoryCheckbox", (e) => {
+
+    console.log("Hello from here")
+    change()
+    function change() {
+      let categoryCheckboxes = $(".categoryCheckbox");
+      
+      let filters = {
+        categories: getClassOfCheckedCheckboxes(categoryCheckboxes),
+      };
+    
+      filterResults(filters);
+    }
+    
+    function getClassOfCheckedCheckboxes(checkboxes) {
+      let classes = [];
+    
+      if (checkboxes && checkboxes.length > 0) {
+        for (let i = 0; i < checkboxes.length; i++) {
+          let cb = checkboxes[i];
+    
+          if (cb.checked) {
+            classes.push(cb.getAttribute("rel"));
+            console.log("checked")
+          }
+        }
+      }
+    
+      return classes;
+    }
+    
+    function filterResults(filters) {
+      let rElems = $("#books .card");
+      let hiddenElems = [];
+    
+      if (!rElems || rElems.length <= 0) {
+        return;
+      }
+    
+      for (let i = 0; i < rElems.length; i++) {
+        let el = rElems[i];
+    
+        if (filters.categories.length > 0) {
+          let isHidden = true;
+    
+          for (let j = 0; j < filters.categories.length; j++) {
+            let filter = filters.categories[j];
+    
+            if (el.classList.contains(filter)) {
+              isHidden = false;
+              break;
+            }
+          }
+    
+          if (isHidden) {
+            hiddenElems.push(el);
+          }
+        }
+    
+      }
+    
+      for (let i = 0; i < rElems.length; i++) {
+        rElems[i].style.display = "block";
+      }
+    
+      if (hiddenElems.length <= 0) {
+        return;
+      }
+    
+      for (let i = 0; i < hiddenElems.length; i++) {
+        hiddenElems[i].style.display = "none";
+      }
+    }
+
+});
+
+
+
 });

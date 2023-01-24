@@ -7,13 +7,19 @@ include_once "./page_parts/header.php";
 
 <div class="containter">
 
-<!-- Filter -->
-<div class="flex w-10/12 mx-auto content-centers p-6" style="margin-top: 56px;" id="filterCategory">
-<div class="flex items-center">
-    <input checked id="allCategories" type="checkbox" value="#allCategories" class="w-4 h-4 m-l-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 categoryCheckbox">
-    <label for="allCategories" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
+
+<!-- Left hidden div -->
+<div class="hiddenDiv min-h-screen fixed pt-20 bg-white " id="filterCategory">
+    <div class="showHideFilter min-h-screen fixed pt-20 ml-auto mr-0 absolute top-0 right-0 bg-blue-800 hover:bg-blue-200 " id="filterCategory" style="width:14px;">
+    <div id="showFilter"></div>
+    <div id="hideFilter"></div>
+    </div>
+    <h5 class="mb-2 font-bold tracking-tight text-gray-800 dark:text-white ml-4 pr-3">Filter by category</h5>
+    <h5 class="mb-2 font-bold tracking-tight text-transparent dark:text-white ml-4 pr-3">Books</h5>
+
 </div>
-</div>
+
+
 
 <!-- Book content -->
 <div class="w-10/12 mx-auto">

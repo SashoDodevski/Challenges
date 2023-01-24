@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($data['action'] == 'getBooks') {
 
         $page_number = $data['page'];
-        $itemsPerPage = 6;
+        $itemsPerPage = 100;
         $initial_limit = ($page_number - 1) * $itemsPerPage;
         $active = "ACTIVE";
 
@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $comment_status = 3;
 
         $sql = "SELECT * FROM `comments` 
-        WHERE comments.user_id = '$user_id' AND comments.comment_status = '1'";
+        WHERE comments.user_id = '$user_id' AND comments.book_id = $book_id AND comments.comment_status = '1'";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $note = $data["note"];
 
         $sqlUserNotes = "SELECT COUNT(note_id) FROM `notes`
-                        WHERE notes.user_id = $user_id";
+                        WHERE notes.user_id = $user_id AND notes.book_id = $book_id";
         $stmtUserNotes = $pdo->prepare($sqlUserNotes);
         $stmtUserNotes->execute();
         $userNotes = $stmtUserNotes->fetchAll(PDO::FETCH_ASSOC);
@@ -300,11 +300,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $userNotes['Total_items'] = $userNotes[$count];
         unset($userNotes[$count]);
 
-        print_r($userNotes['Total_items']);
-        die;
 
-
-        if(intval($userNotes['Total_items']) <= 10) {
+        if(intval($userNotes['Total_items']) <= 5) {
             $sql = "INSERT INTO `notes` (book_id, user_id, note) 
             VALUES (:book_id, :user_id, :note)";
             $stmt = $pdo->prepare($sql);
@@ -312,7 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 [
                     'book_id' => $book_id,
                     'user_id' => $user_id,
-                    'note' => $note,
+                    'note' => $note
                 ]
             );
 
