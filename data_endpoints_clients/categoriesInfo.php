@@ -6,7 +6,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 
 $database_table = "categories";
 
-require_once "./database/db.php";
+require_once "../database/db.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

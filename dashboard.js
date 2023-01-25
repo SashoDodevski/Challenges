@@ -1,11 +1,11 @@
 import {
   testFunction,
   createPagination,
-} from "./admin_interface/commonFunctions.js";
+} from "./common_items/commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
-  let urlData = "./booksInfo.php";
+  let urlData = "./data_endpoints_clients/booksInfo.php";
 
   // item elements
   let books = $("#books");
@@ -36,9 +36,9 @@ $(function () {
 
     $.ajax({
       url: url,
-      type: "POST",
+      type: "GET",
       contentType: "application/json",
-      data: JSON.stringify(getItems),
+      data: getItems,
       success: function (itemsData) {
         createPagination(
           pageNumbers,
@@ -83,7 +83,7 @@ $(function () {
 // Category filters
 
   $.ajax({
-    url: "./categoriesInfo.php",
+    url: "./data_endpoints_clients/categoriesInfo.php",
     type: "GET",
     contentType: "application/json",
     success: function (itemsData) {
@@ -119,7 +119,6 @@ $(function () {
   
   $("body").on("click",".categoryCheckbox", (e) => {
 
-    console.log("Hello from here")
     change()
     function change() {
       let categoryCheckboxes = $(".categoryCheckbox");
@@ -140,7 +139,6 @@ $(function () {
     
           if (cb.checked) {
             classes.push(cb.getAttribute("rel"));
-            console.log("checked")
           }
         }
       }

@@ -5,7 +5,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once __DIR__ . "./database/db.php";
+    require_once "./database/db.php";
 
     $email = $_POST['email'];
     $password = $_POST['password'];

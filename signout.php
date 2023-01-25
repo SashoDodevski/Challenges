@@ -7,7 +7,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 if(isset($_SESSION["username"])){
     session_destroy();
 
-    header("Location: index.php");
+    header("Location: ./index.php");
 } else {
     echo "nope!";
 }

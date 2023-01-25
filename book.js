@@ -1,13 +1,13 @@
 import {
   testFunction,
-  createPagination,
-} from "./admin_interface/commonFunctions.js";
+  createPagination
+} from "./common_items/commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
-  let urlData = "./booksInfo.php";
-  let urlAuthors = "../admin_data_endpoints/dataAuthors.php";
-  let urlCategories = "../admin_data_endpoints/dataCategories.php";
+  let urlData = "./data_endpoints_clients/booksInfo.php";
+  let urlAuthors = "./data_endpoints_admins/dataAuthors.php";
+  let urlCategories = "./data_endpoints_admins/dataCategories.php";
 
   // admin item elements
   let bookImageUrl = $("#bookImageUrl");
@@ -45,9 +45,8 @@ $(function () {
 
   $.ajax({
     url: urlData,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(getBook),
+    type: "GET",
+    data: getBook,
     success: function (itemsData) {
       bookImageUrl.attr("src", itemsData.data[0].book_image);
       bookTitle.text(itemsData.data[0].book_title);
@@ -72,9 +71,8 @@ $(function () {
 
   $.ajax({
     url: urlData,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(getPendingComment),
+    type: "GET",
+    data: getPendingComment,
     success: function (itemsData) {
       if (itemsData.data.comment_status == 1) {
         pendingComment.addClass("hidden");
@@ -173,6 +171,46 @@ $(function () {
     },
   });
 
+   // Get user comment
+   let getUserComment = {
+    action: "getUserComment",
+    book_id: location.hash.slice(1),
+    user_id: userId.val(),
+  };
+
+  $.ajax({
+    url: urlData,
+    type: "GET",
+    data: getUserComment,
+    success: function (itemsData) {
+      if ((itemsData.data.length == 0)) {
+        bookComments.addClass("hidden");
+      } else {
+        itemsData.data.forEach((element) => {
+          let comment = `    <div class="mb-6">
+          
+                                <div id="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                
+                                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
+                                  element.name + " " + element.surname
+                                } commented:</p>
+                                <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
+                                  element.comment
+                                }</p>
+                                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Your comment about the book</p>
+                                </div>
+                            </div>`;
+
+          bookComments.append(comment);
+        });
+      }
+    },
+    error: function (error) {
+      console.log("Error: " + JSON.stringify(error));
+    },
+  });
+
+
   // Get book comments
   let getComments = {
     action: "getComments",
@@ -182,11 +220,10 @@ $(function () {
 
   $.ajax({
     url: urlData,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(getComments),
+    type: "GET",
+    data: getComments,
     success: function (itemsData) {
-      if ((itemsData.data = [])) {
+      if ((itemsData.data.length == 0)) {
         bookComments.addClass("hidden");
       } else {
         itemsData.data.forEach((element) => {
@@ -210,6 +247,8 @@ $(function () {
     },
   });
 
+
+ 
   // Submit comment
   btnSubmitComment.click(function (e) {
     e.preventDefault();
@@ -256,9 +295,8 @@ $(function () {
 
   $.ajax({
     url: urlData,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(getNotes),
+    type: "GET",
+    data: getNotes,
     success: function (itemsData) {
       if (itemsData.data.length === 0) {
         bookNotesDiv.addClass("hidden");

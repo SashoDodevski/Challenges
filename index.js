@@ -1,6 +1,6 @@
 $(function () {
   // Endpoint URLs
-  let urlData = "./booksInfo.php";
+  let urlData = "./data_endpoints_clients/booksInfo.php";
 
   // item elements
   let books = $("#books");
@@ -8,10 +8,15 @@ $(function () {
   let showContent = function () {
     // AJAX GET data from endpoint
 
+      let getItems = {
+        action: "getBannerBooks"
+      };
+
+
     $.ajax({
       url: urlData,
       type: "GET",
-      contentType: "application/json",
+      data: getItems,
       success: function (itemsData) {
 
         // data from database

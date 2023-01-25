@@ -1,4 +1,4 @@
-import { testFunction, createPagination } from "./commonFunctions.js";
+import { testFunction, createPagination } from "../common_items/commonFunctions.js";
 
 $(function () {
     // Endpoint URLs
