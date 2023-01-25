@@ -4,27 +4,13 @@ include_once "./page_parts/header.php";
 
 ?>
 
-<div class="mt-24">
-    hello
+
+<div class="min-h-screen">
+    <div class="mt-20">
+    <button id="button" type="button" class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 mt-4 sm:w-20">Submit</button>
+
+    </div>
 </div>
 
-
-<form>
-    <div class="flex">
-
-    </div>
-    <div class="relative w-full">
-
-        <div class="mb-6">
-            <div id="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-4 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${element.name + " " + element.surname} commented:</p>
-                <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${element.comment}</p>
-                <a type="button" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-pen-to-square fa-lg mr-3"></i></a>
-                <a type="button" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-trash-can fa-lg mr-3"></i></a>
-            </div>
-        </div>
-
-
-    </div>
-    </div>
-</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="TEST.js" type="module"></script>

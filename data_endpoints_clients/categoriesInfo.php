@@ -8,11 +8,12 @@ $database_table = "categories";
 
 require_once "../database/db.php";
 
+$active = 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $sql = "SELECT * FROM `categories` 
-            WHERE categories.category_status = 'ACTIVE'";
+            WHERE categories.category_status = $active";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);

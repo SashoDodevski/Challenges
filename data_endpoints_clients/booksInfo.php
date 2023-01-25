@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sqlComments = "SELECT `comments`.`comment_id`, `comments`.`user_id`, `comments`.`book_id`, `comments`.`comment`, `comments`.`comment_status`, `users`.`name`, `users`.`surname`
         FROM `comments`
         LEFT JOIN `users` ON `comments`.`user_id` = `users`.`user_id`
-        WHERE comments.book_id = '$book_id' AND comments.comment_status = '1' AND `comments`.`user_id` != $user_id;";
+        WHERE comments.book_id = '$book_id' AND comments.comment_status = '1'";
 
         $stmtComments = $pdo->prepare($sqlComments);
         $stmtComments->execute();
@@ -271,12 +271,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     } elseif ($data['action'] == 'deleteUserComment') {
 
         $user_id = $data["user_id"];
+        $book_id = $data["book_id"];
 
-        $sql = "DELETE FROM comments WHERE user_id = :user_id";
+        $sql = "DELETE FROM comments WHERE user_id = :user_id AND book_id = :book_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
                 'user_id' => $data['user_id'],
+                'book_id' => $data["book_id"]
             ]
         );
     } elseif ($data['action'] == 'submitComment') {
@@ -352,5 +354,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $jsonobject = json_encode($message);
             echo $jsonobject;
         }
+    }  elseif ($data['action'] == 'editUserNote') {
+
+        $book_id = $data["book_id"];
+        $user_id = $data["user_id"];
+        $new_note = $data["new_note"];
+        $old_note = $data["old_note"];
+
+        $sql = "UPDATE notes
+        SET note = :new_note
+        WHERE notes.user_id = :user_id AND notes.book_id = :book_id AND notes.note = :old_note";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(
+            [
+                'user_id' => $user_id,
+                'book_id' => $book_id,
+                'new_note' => $new_note,
+                'old_note' => $old_note
+            ]
+        );
+    } elseif ($data['action'] == 'deleteUserNote') {
+
+        $user_id = $data["user_id"];
+        $book_id = $data["book_id"];
+        $note = $data["note"];
+
+        $sql = "DELETE FROM notes WHERE user_id = :user_id AND book_id = :book_id AND note = :note";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(
+            [
+                'user_id' => $data['user_id'],
+                'book_id' => $data["book_id"],
+                'note' => $data["note"]
+            ]
+        );
     }
 }

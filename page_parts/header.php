@@ -1,6 +1,6 @@
 <?php
-if(session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
 }
 ?>
 
@@ -15,6 +15,10 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Swwetalert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.css" rel="stylesheet"></link>
 
   <!-- Local CSS -->
   <link rel="stylesheet" href="./style/style.css" />
@@ -50,11 +54,11 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
         <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li class="showContentToClients">
             <p class="py-2 pl-3 pr-4 text-blue-500 rounded md:p-0 dark:text-blue-500 dark:border-blue-700" id="clientName">
-            <?php
-            if(isset($_SESSION["username"])) {
-              echo "Hello ".$_SESSION["username"];
-            }
-            ?>
+              <?php
+              if (isset($_SESSION["username"])) {
+                echo "Hello " . $_SESSION["username"];
+              }
+              ?>
             </p>
           </li>
           <li class="hideContentToClients">

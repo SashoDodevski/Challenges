@@ -85,10 +85,8 @@ $(function () {
   $.ajax({
     url: "./data_endpoints_clients/categoriesInfo.php",
     type: "GET",
-    contentType: "application/json",
     success: function (itemsData) {
       
-
       // books from database
       itemsData.data.forEach((element) => {
         let category = $(`

@@ -33,7 +33,7 @@ include_once "./page_parts/header.php";
 
     </div>
 
-    <div id="commentDiv">
+    <div id="leaveACommentDiv">
     <div href="#" class="p-6 flex items-left bg-white border rounded-lg shadow-md md:flex-col hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full mb-6">
           <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Leave a comment:</label>
           <textarea id="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your comment here..."></textarea>
@@ -44,11 +44,11 @@ include_once "./page_parts/header.php";
     <div id="pendingComment">
         <div class="mb-6">
             <div id="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-4 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-normal">Your comment is sent for approval from the admins. You can edit or delete it until approval.</p>
+            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-normal">Your comment is sent for approval from the admins. You can edit it until approval.</p>
             <p id="pendingCommentUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
             <textarea id="editedComment" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your note here..."></textarea>
-            <a id="btnEditItem" type="button" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-pen-to-square fa-lg my-5 mr-3"></i></a>
-            <a id="btnDeleteItem" type="button" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
+            <a id="btnEditComment" type="button" class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-pen-to-square fa-lg my-5 mr-3"></i></a>
+            <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteComment"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
             </div>
         </div>
     </div>
@@ -84,7 +84,7 @@ include_once "./page_parts/header.php";
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script type="module" src="book.js"></script>
+<script src="book.js" type="module"></script>
 
 <?php
 

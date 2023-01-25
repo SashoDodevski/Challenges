@@ -1,6 +1,6 @@
 import {
   testFunction,
-  createPagination
+  createPagination,
 } from "./common_items/commonFunctions.js";
 
 $(function () {
@@ -23,19 +23,23 @@ $(function () {
   let userId = $("#user_id");
   let pendingComment = $("#pendingComment");
   let pendingCommentUser = $("#pendingCommentUser");
-  let btnDeleteItem = $("#btnDeleteItem");
-  let btnEditItem = $("#btnEditItem");
+  let btnDeleteComment = $(".btnDeleteComment");
+  let btnEditComment = $("#btnEditComment");
   let editedComment = $("#editedComment");
   let modal = $("#modal");
   let modalQuestion = $("#modalQuestion");
   let modalBtn = $(".modalBtn");
   let closeModal = $(".closeModal");
   let backdrop = $("#backdrop");
-  let commentDiv = $("#commentDiv");
+  let leaveACommentDiv = $("#leaveACommentDiv");
   let bookNotesDiv = $("#bookNotesDiv");
   let createNoteDiv = $("#createNoteDiv");
   let note = $("#note");
   let btnSubmitNote = $("#btnSubmitNote");
+
+  btnDeleteComment.click(function () {
+    console.log("CLICK");
+  });
 
   // Get book
   let getBook = {
@@ -51,11 +55,14 @@ $(function () {
       bookImageUrl.attr("src", itemsData.data[0].book_image);
       bookTitle.text(itemsData.data[0].book_title);
       author.text(
-        "by " + itemsData.data[0].author_name + " " + itemsData.data[0].author_surname
+        "by " +
+          itemsData.data[0].author_name +
+          " " +
+          itemsData.data[0].author_surname
       );
       bookCategory.text(itemsData.data[0].category);
-      publicationYear.text("published: " + itemsData.data[0].publication_year)
-      numberOfPages.text("number of pages: " + itemsData.data[0].no_of_pages)
+      publicationYear.text("published: " + itemsData.data[0].publication_year);
+      numberOfPages.text("number of pages: " + itemsData.data[0].no_of_pages);
     },
     error: function (error) {
       console.log("Error: " + JSON.stringify(error));
@@ -76,140 +83,24 @@ $(function () {
     success: function (itemsData) {
       if (itemsData.data.comment_status == 1) {
         pendingComment.addClass("hidden");
-        commentDiv.addClass("hidden");
+        leaveACommentDiv.addClass("hidden");
       } else if (itemsData.data.comment_status == 2) {
         pendingComment.addClass("hidden");
-        commentDiv.addClass("hidden");
+        leaveACommentDiv.addClass("hidden");
       } else if (itemsData.data.comment_status == 3) {
         pendingCommentUser.text(
           itemsData.data.name + " " + itemsData.data.surname
         );
         editedComment.text(itemsData.data.comment);
-        commentDiv.addClass("hidden");
+        leaveACommentDiv.addClass("hidden");
       } else if ((itemsData.data.comment_status = "none")) {
         pendingComment.addClass("hidden");
       }
-
-      // Delete comment in database
-      btnDeleteItem.click(function () {
-        backdrop.fadeIn(100);
-        modal.fadeIn(100);
-        modalQuestion.text("Are you sure you want to delete this comment?");
-        modalBtn.addClass(
-          "bg-red-600 hover:bg-red-800 focus:ring-red-300 dark:focus:ring-red-800 "
-        );
-        modalBtn.click(function () {
-          let deleteItem = {
-            action: "deleteUserComment",
-            user_id: itemsData.data.user_id,
-          };
-
-          $.ajax({
-            url: urlData,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(deleteItem),
-            success: function (success) {},
-            error: function (error) {
-              console.log("Error: " + JSON.stringify(error));
-            },
-          });
-          modal.fadeOut(200);
-          backdrop.fadeOut(200);
-          window.setTimeout(function () {
-            location.reload();
-          }, 200);
-        });
-      });
-
-      closeModal.click(function () {
-        modal.fadeOut(200);
-        backdrop.fadeOut(200);
-      });
-
-      // Edit comment in database
-      btnEditItem.click(function (e) {
-        e.preventDefault();
-
-        backdrop.fadeIn(100);
-        modal.fadeIn(100);
-        modalQuestion.text("Are you sure you want to edit this comment?");
-        modalBtn.addClass(
-          "bg-green-600 hover:bg-green-800 focus:ring-green-300 dark:focus:ring-green-800 "
-        );
-
-        modalBtn.click(function () {
-          let editItem = {
-            action: "editUserComment",
-            book_id: location.hash.slice(1),
-            user_id: itemsData.data.user_id,
-            comment: $("#editedComment").val(),
-            comment_status: "3",
-          };
-
-          $.ajax({
-            url: urlData,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(editItem),
-            success: function (succsess) {},
-            error: function (error) {
-              console.log("Error: " + JSON.stringify(error));
-            },
-          });
-          location.reload();
-        });
-
-        closeModal.click(function () {
-          modal.fadeOut(200);
-          backdrop.fadeOut(200);
-        });
-      });
     },
     error: function (error) {
       console.log("Error: " + JSON.stringify(error));
     },
   });
-
-   // Get user comment
-   let getUserComment = {
-    action: "getUserComment",
-    book_id: location.hash.slice(1),
-    user_id: userId.val(),
-  };
-
-  $.ajax({
-    url: urlData,
-    type: "GET",
-    data: getUserComment,
-    success: function (itemsData) {
-      if ((itemsData.data.length == 0)) {
-        bookComments.addClass("hidden");
-      } else {
-        itemsData.data.forEach((element) => {
-          let comment = `    <div class="mb-6">
-          
-                                <div id="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                
-                                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
-                                  element.name + " " + element.surname
-                                } commented:</p>
-                                <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
-                                  element.comment
-                                }</p>
-                                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Your comment about the book</p>
-                                </div>
-                            </div>`;
-
-          bookComments.append(comment);
-        });
-      }
-    },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
-    },
-  });
-
 
   // Get book comments
   let getComments = {
@@ -223,66 +114,179 @@ $(function () {
     type: "GET",
     data: getComments,
     success: function (itemsData) {
-      if ((itemsData.data.length == 0)) {
+      if(itemsData.data.length == 0){
         bookComments.addClass("hidden");
       } else {
-        itemsData.data.forEach((element) => {
-          let comment = `    <div class="mb-6">
-                                <div id="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
-                                  element.name + " " + element.surname
-                                } commented:</p>
-                                <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
-                                  element.comment
-                                }</p>
-                                </div>
-                            </div>`;
+      itemsData.data.forEach((element) => {
 
-          bookComments.append(comment);
-        });
-      }
+        
+        
+        if (element.user_id == userId.val()) {
+          let comment = `<div class="mb-6 commentDiv">
+                            <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
+                            element.name + " " + element.surname
+                            } commented:</p>
+                            <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
+                            element.comment
+                            }</p>
+                            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Your comment about the book</p>
+                            </div>
+                            <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteComment"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
+                          </div>`;
+                          bookComments.append(comment);
+        } else {
+          let comment = `<div class="mb-6 commentDiv">
+          <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
+          element.name + " " + element.surname
+          } commented:</p>
+          <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
+          element.comment
+          }</p>
+        </div>`;
+        bookComments.append(comment);
+        }
+
+      });
+    }
     },
     error: function (error) {
       console.log("Error: " + JSON.stringify(error));
     },
   });
 
-
- 
   // Submit comment
   btnSubmitComment.click(function (e) {
-    e.preventDefault();
+    new swal({
+      text: "Are you sure you want to submit?",
+      icon: "warning",
+      confirmButtonText: "Submit",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#5ea91d",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been submited!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
 
-    backdrop.fadeIn(100);
-    modal.fadeIn(100);
-    modalQuestion.text("Are you sure you want to submit this comment?");
-    modalBtn.addClass(
-      "bg-green-600 hover:bg-green-800 focus:ring-green-300 dark:focus:ring-green-800 "
-    );
+        let submitComment = {
+          action: "submitComment",
+          book_id: location.hash.slice(1),
+          user_id: userId.val(),
+          comment: comment.val(),
+        };
 
-    modalBtn.click(function () {
-      let submitComment = {
-        action: "submitComment",
-        book_id: location.hash.slice(1),
-        user_id: userId.val(),
-        comment: comment.val(),
-      };
-
-      $.ajax({
-        url: urlData,
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(submitComment),
-        success: function (success) {},
-        error: function (error) {
-          console.log("Error: " + JSON.stringify(error));
-        },
-      });
-      location.reload();
+        $.ajax({
+          url: urlData,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(submitComment),
+          success: function (success) {},
+          error: function (error) {
+            console.log("Error: " + JSON.stringify(error));
+          },
+        });
+        window.setTimeout(function () {
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("button B pressed");
+      }
     });
-    closeModal.click(function () {
-      modal.fadeOut(200);
-      backdrop.fadeOut(200);
+  });
+
+  // Edit comment in database
+  btnEditComment.click(function () {
+    new swal({
+      text: "Are you sure you want to edit this item?",
+      icon: "warning",
+      confirmButtonText: "Edit",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#5ea91d",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been edited!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+
+        let editItem = {
+          action: "editUserComment",
+          book_id: location.hash.slice(1),
+          user_id: userId.val(),
+          comment: $("#editedComment").val(),
+          comment_status: "3",
+        };
+
+        $.ajax({
+          url: urlData,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(editItem),
+          success: function (succsess) {},
+          error: function (error) {
+            console.log("Error: " + JSON.stringify(error));
+          },
+        });
+      } else {
+        console.log("button B pressed");
+      }
+    });
+  });
+
+  // Delete comment in database
+  $("body").on("click", ".btnDeleteComment", (e) => {
+    new swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this item!",
+      icon: "warning",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#DD6B55",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been deleted!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+
+        let deleteItem = {
+          action: "deleteUserComment",
+          book_id: location.hash.slice(1),
+          user_id: userId.val(),
+        };
+
+        $.ajax({
+          url: urlData,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(deleteItem),
+          success: function (success) {},
+          error: function (error) {
+            console.log("Error: " + JSON.stringify(error));
+          },
+        });
+
+        window.setTimeout(function () {
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("button B pressed");
+      }
     });
   });
 
@@ -302,14 +306,16 @@ $(function () {
         bookNotesDiv.addClass("hidden");
       } else {
         itemsData.data.forEach((element) => {
-
-          let note = `<div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4">
-      <p>${element.note}</p>
+          let note = `
+          <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4">
+          <textarea class="existingNote w-full">${element.note}</textarea>
+          <a type="button" class="text-gray-500 hover:text-gray-700 btnEditNote"><i class="fa-solid fa-pen-to-square fa-lg my-5 mr-3"></i></a>
+            <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteNote"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
   </div>`;
 
           bookNotesDiv.append(note);
         });
-        if(itemsData.data.length === 5){
+        if (itemsData.data.length === 5) {
           createNoteDiv.addClass("hidden");
         }
       }
@@ -321,17 +327,23 @@ $(function () {
 
   // Submit note
   btnSubmitNote.click(function (e) {
-    e.preventDefault();
+    new swal({
+      text: "Are you sure you want to submit?",
+      icon: "warning",
+      confirmButtonText: "Submit",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#5ea91d",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been submited!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
 
-    backdrop.fadeIn(100);
-    modal.fadeIn(100);
-    modalQuestion.text("Are you sure you want to submit this note?");
-    modalBtn.addClass(
-      "bg-green-600 hover:bg-green-800 focus:ring-green-300 dark:focus:ring-green-800 "
-    );
-
-    modalBtn.click(function (e) {
-      e.preventDefault();
       let submitNote = {
         action: "submitNote",
         book_id: location.hash.slice(1),
@@ -349,11 +361,104 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      location.reload();
+    window.setTimeout(function () {
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("button B pressed");
+      }
     });
-    closeModal.click(function () {
-      modal.fadeOut(200);
-      backdrop.fadeOut(200);
+  });
+
+    // Edit note in database
+    $("body").on("click", ".btnEditNote", (event) => {
+      event.preventDefault()
+      new swal({
+        text: "Are you sure you want to edit this item?",
+        icon: "warning",
+        confirmButtonText: "Edit",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#5ea91d",
+        showCancelButton: true,
+      }).then(function (result) {
+        if (result.value) {
+          new swal({
+            text: "Item has been edited!",
+            icon: "success",
+            timer: 1500,
+            showCancelButton: false,
+            showConfirmButton: false,
+          });
+  
+          let editItem = {
+            action: "editUserNote",
+            book_id: location.hash.slice(1),
+            user_id: userId.val(),
+            new_note: event.currentTarget.previousSibling.previousSibling.value,
+            old_note: event.currentTarget.previousSibling.previousSibling.textContent,
+          };
+  
+          $.ajax({
+            url: urlData,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(editItem),
+            success: function (succsess) {},
+            error: function (error) {
+              console.log("Error: " + JSON.stringify(error));
+            },
+          });
+        } else {
+          console.log("button B pressed");
+        }
+      });
+    });
+  
+
+  // Delete note in database
+  $("body").on("click", ".btnDeleteNote", (event) => {
+    new swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this item!",
+      icon: "warning",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#DD6B55",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been deleted!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+
+        let deleteItem = {
+          action: "deleteUserNote",
+          book_id: location.hash.slice(1),
+          user_id: userId.val(),
+          note: event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling.textContent,
+        };
+
+        $.ajax({
+          url: urlData,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(deleteItem),
+          success: function (success) {},
+          error: function (error) {
+            console.log("Error: " + JSON.stringify(error));
+          },
+        });
+
+        window.setTimeout(function () {
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("button B pressed");
+      }
     });
   });
 });
