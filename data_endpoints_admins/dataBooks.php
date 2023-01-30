@@ -6,6 +6,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 require_once "../database/db.php";
 
+    $active = 1;
+    $deleted =2;
+    $pending = 3;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET['page'])) {
@@ -25,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sql = "SELECT * FROM `books` 
             LEFT JOIN authors ON books.author_id = authors.author_id
             LEFT JOIN categories ON books.category_id = categories.category_id
+            LEFT JOIN statuses ON books.book_status = statuses.status_id
             LIMIT $initial_limit, $itemsPerPage";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -78,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'publication_year' => $data['publication_year'],
                 'no_of_pages' => $data['no_of_pages'],
                 'book_image' => $data['book_image'],
-                'book_status' => "ACTIVE"
+                'book_status' => $data['book_status']
             ]
         );
     } elseif ($data['action'] == 'edit') {
@@ -104,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
-                'book_status' => $data['book_status'],
                 'book_id' => $data['book_id'],
+                'book_status' => $data['book_status'],
             ]
         );
     } 

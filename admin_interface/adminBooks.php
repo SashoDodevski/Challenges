@@ -1,7 +1,7 @@
 <?php
 
 include_once "./adminHeader.php";
-include_once "../clientRouter.php";
+include_once "../routers/clientRouter.php";
 
 ?>
 

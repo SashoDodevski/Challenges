@@ -162,7 +162,7 @@ $(function () {
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(editItem),
-                success: function (succsess) {},
+                success: function (success) {},
                 error: function (error) {
                   console.log("Error: " + JSON.stringify(error));
                 },
@@ -183,7 +183,8 @@ $(function () {
 
   // Submit new item to database
 
-  let createNewItem = function () {
+
+  btnSubmitItem.click(function () {
     if (
       (authorName.val() === "",
       authorSurname.val() === "",
@@ -204,14 +205,13 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      msgForm.text("Category successfuly added!");
+      msgForm.text("Category successfully added!");
       msgForm.addClass("text-green-500");
       window.setTimeout(function () {
         location.reload();
       }, 700);
     }
-  };
-  createNewItem();
+  })
 
   btnCloseForm.click(function () {
     divMainBackdrop.fadeOut(150);

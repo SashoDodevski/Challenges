@@ -65,47 +65,49 @@ export function createPagination(wrapper, totalPages, page, tableBody) {
     }
   }
 
-  // export function editItemFunction() {
-  //   new swal({
-  //     text: "Are you sure you want to edit this item?",
-  //     icon: "warning",
-  //     confirmButtonText: "Edit",
-  //     cancelButtonText: "Cancel",
-  //     confirmButtonColor: "#5ea91d",
-  //     showCancelButton: true,
-  //   }).then(function (result) {
-  //     if (result.value) {
-  //       new swal({
-  //         text: "Item has been edited!",
-  //         icon: "success",
-  //         timer: 1500,
-  //         showCancelButton: false,
-  //         showConfirmButton: false,
-  //       });
 
-  //       let editItem = {
-  //         action: "editUserComment",
-  //         book_id: location.hash.slice(1),
-  //         user_id: itemsData.data.user_id,
-  //         comment: $("#editedComment").val(),
-  //         comment_status: "3",
-  //       };
+  // Post request
+  export function postRequest(urlData, data) {
+    $.ajax({
+      url: urlData,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function (success) {},
+      error: function (error) {
+        console.log("Error: " + JSON.stringify(error));
+      },
+    });
+  }
 
-  //       $.ajax({
-  //         url: urlData,
-  //         type: "POST",
-  //         contentType: "application/json",
-  //         data: JSON.stringify(editItem),
-  //         success: function (succsess) {},
-  //         error: function (error) {
-  //           console.log("Error: " + JSON.stringify(error));
-  //         },
-  //       });
-  //       window.setTimeout(function () {
-  //         location.reload();
-  //       }, 1500);
-  //     } else {
+// Submit item
 
-  //     }
-  //   });
-  // }
+
+export function submitItem(urlData, data, callback) {
+  new swal({
+    text: "Are you sure you want to submit?",
+    icon: "warning",
+    confirmButtonText: "Submit",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#5ea91d",
+    showCancelButton: true,
+  }).then(function (result) {
+    if (result.value) {
+      new swal({
+        text: "Item has been submited!",
+        icon: "success",
+        timer: 1500,
+        showCancelButton: false,
+        showConfirmButton: false,
+      });
+
+      callback(urlData, data)
+
+  // window.setTimeout(function () {
+  //       location.reload();
+  //     }, 1500);
+    } else {
+      console.log("button B pressed");
+    }
+  });
+}

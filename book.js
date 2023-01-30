@@ -1,6 +1,8 @@
 import {
   testFunction,
   createPagination,
+  postRequest,
+  submitItem,
 } from "./common_items/commonFunctions.js";
 
 $(function () {
@@ -182,16 +184,8 @@ $(function () {
           comment: comment.val(),
         };
 
-        $.ajax({
-          url: urlData,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(submitComment),
-          success: function (success) {},
-          error: function (error) {
-            console.log("Error: " + JSON.stringify(error));
-          },
-        });
+        postRequest(urlData, submitComment);
+
         window.setTimeout(function () {
           location.reload();
         }, 1500);
@@ -220,7 +214,7 @@ $(function () {
           showConfirmButton: false,
         });
 
-        let editItem = {
+        let editComment = {
           action: "editUserComment",
           book_id: location.hash.slice(1),
           user_id: userId.val(),
@@ -228,16 +222,8 @@ $(function () {
           comment_status: "3",
         };
 
-        $.ajax({
-          url: urlData,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(editItem),
-          success: function (succsess) {},
-          error: function (error) {
-            console.log("Error: " + JSON.stringify(error));
-          },
-        });
+        postRequest(urlData, editComment);
+
       } else {
         console.log("button B pressed");
       }
@@ -245,7 +231,7 @@ $(function () {
   });
 
   // Delete comment in database
-  $("body").on("click", ".btnDeleteComment", (e) => {
+  $("body").on("click", ".btnDeleteComment", () => {
     new swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this item!",
@@ -264,22 +250,13 @@ $(function () {
           showConfirmButton: false,
         });
 
-        let deleteItem = {
+        let deleteComment = {
           action: "deleteUserComment",
           book_id: location.hash.slice(1),
           user_id: userId.val(),
         };
 
-        $.ajax({
-          url: urlData,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(deleteItem),
-          success: function (success) {},
-          error: function (error) {
-            console.log("Error: " + JSON.stringify(error));
-          },
-        });
+        postRequest(urlData, deleteComment);
 
         window.setTimeout(function () {
           location.reload();
@@ -325,50 +302,17 @@ $(function () {
     },
   });
 
+
   // Submit note
-  btnSubmitNote.click(function (e) {
-    new swal({
-      text: "Are you sure you want to submit?",
-      icon: "warning",
-      confirmButtonText: "Submit",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#5ea91d",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.value) {
-        new swal({
-          text: "Item has been submited!",
-          icon: "success",
-          timer: 1500,
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
-
-      let submitNote = {
-        action: "submitNote",
-        book_id: location.hash.slice(1),
-        user_id: userId.val(),
-        note: note.val(),
-      };
-
-      $.ajax({
-        url: urlData,
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(submitNote),
-        success: function (success) {},
-        error: function (error) {
-          console.log("Error: " + JSON.stringify(error));
-        },
-      });
-    window.setTimeout(function () {
-          location.reload();
-        }, 1500);
-      } else {
-        console.log("button B pressed");
-      }
-    });
-  });
+  btnSubmitNote.click(() => {
+    let submitNote = {
+      action: "submitNote",
+      book_id: location.hash.slice(1),
+      user_id: userId.val(),
+      note: note.val()
+    };
+    submitItem(urlData, submitNote, postRequest)
+  })
 
     // Edit note in database
     $("body").on("click", ".btnEditNote", (event) => {
@@ -390,7 +334,7 @@ $(function () {
             showConfirmButton: false,
           });
   
-          let editItem = {
+          let editNote = {
             action: "editUserNote",
             book_id: location.hash.slice(1),
             user_id: userId.val(),
@@ -398,16 +342,8 @@ $(function () {
             old_note: event.currentTarget.previousSibling.previousSibling.textContent,
           };
   
-          $.ajax({
-            url: urlData,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(editItem),
-            success: function (succsess) {},
-            error: function (error) {
-              console.log("Error: " + JSON.stringify(error));
-            },
-          });
+          postRequest(urlData, editNote);
+          
         } else {
           console.log("button B pressed");
         }
@@ -435,23 +371,14 @@ $(function () {
           showConfirmButton: false,
         });
 
-        let deleteItem = {
+        let deleteNote = {
           action: "deleteUserNote",
           book_id: location.hash.slice(1),
           user_id: userId.val(),
           note: event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling.textContent,
         };
 
-        $.ajax({
-          url: urlData,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(deleteItem),
-          success: function (success) {},
-          error: function (error) {
-            console.log("Error: " + JSON.stringify(error));
-          },
-        });
+        postRequest(urlData, deleteNote);
 
         window.setTimeout(function () {
           location.reload();
@@ -460,5 +387,5 @@ $(function () {
         console.log("button B pressed");
       }
     });
-  });
+  } );
 });

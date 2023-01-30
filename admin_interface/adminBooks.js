@@ -18,7 +18,6 @@ $(function () {
   let publicationYear = $("#publicationYear");
   let numberOfPages = $("#numberOfPages");
   let bookImageUrl = $("#bookImageUrl");
-
   let msgForm = $("#msgForm");
   let btnSubmitItem = $("#btnSubmitItem");
   let btnSubmitEditedItem = $("#btnSubmitEditedItem");
@@ -82,7 +81,7 @@ $(function () {
                   </td>
                   <td class="px-3 py-3 text-xs">
                     <div>
-                      <p class="text-xs">${element["book_status"]}</p>
+                      <p class="text-xs">${element["status"]}</p>
                     </div>
                   </td>
                   <td class="px-3 py-3 text-right">
@@ -114,7 +113,7 @@ $(function () {
           let item = element["book_id"];
 
           tableBody.append(tableRow);
-          if (element["book_status"] === "DELETED") {
+          if (element["status"] === "DELETED") {
             $(`#btnDeleteItem${item}`).addClass("hidden");
             $(`#btnEditItem${item}`).text("Activate");
             $(`#tableRow${item}`).addClass("bg-red-50");
@@ -122,37 +121,48 @@ $(function () {
 
           // Soft delete item in database
           $(`#btnDeleteItem${item}`).click(function () {
-            divMainBackdrop.fadeIn(100);
-            deleteModal.fadeIn(100);
-            deleteModalBtn.attr("id", `deleteModalBtn${item}`);
-            $(`#deleteModalBtn${item}`).click(function () {
-              let deleteItem = {
-                action: "delete",
-                book_status: "DELETED",
-                book_id: item,
-              };
+            new swal({
+              title: "Are you sure?",
+              icon: "warning",
+              confirmButtonText: "Delete",
+              cancelButtonText: "Cancel",
+              confirmButtonColor: "#DD6B55",
+              showCancelButton: true,
+            }).then(function (result) {
+              if (result.value) {
+                new swal({
+                  text: "Item has been deleted!",
+                  icon: "success",
+                  timer: 1500,
+                  showCancelButton: false,
+                  showConfirmButton: false,
+                });
+        
+                let deleteItem = {
+                  action: "delete",
+                  book_status: "2",
+                  book_id: item,
+                };
+        
+                $.ajax({
+                  url: urlData,
+                  type: "POST",
+                  contentType: "application/json",
+                  data: JSON.stringify(deleteItem),
+                  success: function (success) {},
+                  error: function (error) {
+                    console.log("Error: " + JSON.stringify(error));
+                  },
+                });
+        
+                window.setTimeout(function () {
+                  location.reload();
+                }, 1500);
+              } else {
+              }
+            });
+          })
 
-              $.ajax({
-                url: urlData,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(deleteItem),
-                success: function (success) {},
-                error: function (error) {
-                  console.log("Error: " + JSON.stringify(error));
-                },
-              });
-              deleteModal.fadeOut(200);
-              divMainBackdrop.fadeOut(200);
-              window.setTimeout(function () {
-                location.reload();
-              }, 200);
-            });
-            closeDeleteModal.click(function () {
-              deleteModal.fadeOut(200);
-              divMainBackdrop.fadeOut(200);
-            });
-          });
 
           // Edit item in database
           $(`#btnEditItem${item}`).click(function (e) {
@@ -170,39 +180,61 @@ $(function () {
             numberOfPages.val(element["no_of_pages"]);
             bookImageUrl.val(element["book_image"]);
               
-            $("#divMain h1").text("Edit item")
-
+            $("#divMain h1").text("Edit item");
             divMainBackdrop.fadeIn(150);
             divMain.fadeIn(150);
             btnSubmitItem.addClass("hidden");
             btnSubmitEditedItem.removeClass("hidden");
 
             btnSubmitEditedItem.click(function () {
-              let editItem = {
-                action: "edit",
-                book_status: "ACTIVE",
-                book_id: item,
-                book_title: bookTitle.val(),
-                author_id: author.val(),
-                category_id: bookCategory.val(),
-                publication_year: publicationYear.val(),
-                no_of_pages: numberOfPages.val(),
-                book_image: bookImageUrl.val(),
-              };
 
-              $.ajax({
-                url: urlData,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(editItem),
-                success: function (succsess) {},
-                error: function (error) {
-                  console.log("Error: " + JSON.stringify(error));
-                },
+              new swal({
+                text: "Are you sure you want to edit this item?",
+                icon: "warning",
+                confirmButtonText: "Edit",
+                cancelButtonText: "Cancel",
+                confirmButtonColor: "#5ea91d",
+                showCancelButton: true,
+              }).then(function (result) {
+                if (result.value) {
+                  new swal({
+                    text: "Item has been edited!",
+                    icon: "success",
+                    timer: 1500,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                  });
+          
+                  let editItem = {
+                    action: "edit",
+                    book_status: "1",
+                    book_id: item,
+                    book_title: bookTitle.val(),
+                    author_id: author.val(),
+                    category_id: bookCategory.val(),
+                    publication_year: publicationYear.val(),
+                    no_of_pages: numberOfPages.val(),
+                    book_image: bookImageUrl.val(),
+                  };
+          
+                  $.ajax({
+                    url: urlData,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(editItem),
+                    success: function (success) {},
+                    error: function (error) {
+                      console.log("Error: " + JSON.stringify(error));
+                    },
+                  });
+                  location.reload();
+                } else {
+                  console.log("button B pressed");
+                }
               });
-              location.reload();
-            });
-          });
+          })
+          })
+
         });
       },
       error: function (error) {
@@ -254,52 +286,65 @@ $(function () {
   
 
   // Submit new item to database
-  btnSubmitItem.click(function (e) {
-    e.preventDefault();
+  btnSubmitItem.click(function () {
+    if (
+      bookTitle.val() === "" ||
+      author.val() === "" ||
+      bookCategory.val() === "" ||
+      publicationYear.val() === "" ||
+      numberOfPages.val() === "" ||
+      bookImageUrl.val() === ""
+    ) {
+      msgForm.text("All field are required!");
+      msgForm.addClass("text-red-500");
+    } else {
+  new swal({
+    text: "Are you sure you want to submit?",
+    icon: "warning",
+    confirmButtonText: "Submit",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#5ea91d",
+    showCancelButton: true,
+  }).then(function (result) {
+    if (result.value) {
+      new swal({
+        text: "Item has been submitted!",
+        icon: "success",
+        timer: 1500,
+        showCancelButton: false,
+        showConfirmButton: false,
+      });
 
-    let newItem = {
-      action: "create",
-      book_title: bookTitle.val(),
-      author_id: author.val(),
-      category_id: bookCategory.val(),
-      publication_year: publicationYear.val(),
-      no_of_pages: numberOfPages.val(),
-      book_image: bookImageUrl.val(),
-    };
+      let newItem = {
+        action: "create",
+        book_status: "1",
+        book_title: bookTitle.val(),
+        author_id: author.val(),
+        category_id: bookCategory.val(),
+        publication_year: publicationYear.val(),
+        no_of_pages: numberOfPages.val(),
+        book_image: bookImageUrl.val(),
+      };
 
-    let newItemFormValidation = function () {
-      if (
-        bookTitle.val() === "" ||
-        author.val() === "" ||
-        bookCategory.val() === "" ||
-        publicationYear.val() === "" ||
-        numberOfPages.val() === "" ||
-        bookImageUrl.val() === ""
-      ) {
-        msgForm.text("All field are required!");
-        msgForm.addClass("text-red-500");
-      } else {
-        $.ajax({
-          url: urlData,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(newItem),
-          success: function (newItem) {
-            console.log("Successfuly sent AJAX POST request." + newItem);
-          },
-          error: function (error) {
-            console.log("Error: " + JSON.stringify(error));
-          },
-        });
-        msgForm.text("Book successfuly added!");
-        msgForm.addClass("text-green-500");
-        window.setTimeout(function () {
-          location.reload();
-        }, 700);
-      }
-    };
-    newItemFormValidation();
-  });
+    $.ajax({
+      url: urlData,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(newItem),
+      success: function (success) {},
+      error: function (error) {
+        console.log("Error: " + JSON.stringify(error));
+      },
+    });
+  window.setTimeout(function () {
+        location.reload();
+      }, 1500);
+    } else {
+      console.log("button B pressed");
+    }
+  })
+}
+});
 
   btnCloseForm.click(function () {
     divMainBackdrop.fadeOut(150);
