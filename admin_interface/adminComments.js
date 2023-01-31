@@ -1,4 +1,4 @@
-import { createPagination } from "../common_items/commonFunctions.js";
+import { createPagination, postRequest, editItem, deleteItem } from "../common_items/commonFunctions.js";
 
 $(function () {
     // Endpoint URLs
@@ -6,18 +6,7 @@ $(function () {
     let urlStatuses = "../data_endpoints_admins/dataStatuses.php";
   
     // admin item elements
-    let divMain = $("#divMain");
     let divMainBackdrop = $("#divMain-backdrop");
-    let formMain = $("#formMain");
-  
-    let category = $("#category");
-  
-    let msgForm = $("#msgForm");
-    let btnSubmitItem = $("#btnSubmitItem");
-    let btnSubmitEditedItem = $("#btnSubmitEditedItem");
-    let btnAddNewItem = $("#btnAddNewItem");
-    let btnCloseForm = $(".btnCloseForm");
-    let divTable = $("#divTable");
     let tableBody = $("#tableBody");
     let pageNumbers = $("#pageNumbers");
     let showPageNo = $("#showPageNo");
@@ -113,64 +102,30 @@ $(function () {
                 $(`#tableRow${item}`).addClass("bg-red-50");
             }
 
+              
+            // Activate item in database
+            $(`#btnEditItem${item}`).click(function () {
+              let editItemData = {
+                action: "edit",
+                comment_id: element.comment_id,
+                comment_status: "1",
+              };
+              editItem(urlData, editItemData, postRequest);
+              window.setTimeout(function () {
+                location.reload();
+              }, 2500);
+              });
+
             // Soft delete item in database
             $(`#btnDeleteItem${item}`).click(function () {
-              divMainBackdrop.fadeIn(100);
-              deleteModal.fadeIn(100);
-              deleteModalBtn.attr("id", `deleteModalBtn${item}`);
-
-              $(`#deleteModalBtn${item}`).click(function () {
-                let deleteItem = {
+              let deleteItemData = {
                 action: "delete",
                 comment_id: element.comment_id,
                 comment_status: "2",
                 };
-  
-                $.ajax({
-                  url: urlData,
-                  type: "POST",
-                  contentType: "application/json",
-                  data: JSON.stringify(deleteItem),
-                  success: function (success) {},
-                  error: function (error) {
-                    console.log("Error: " + JSON.stringify(error));
-                  },
-                });
-                deleteModal.fadeOut(200);
-                divMainBackdrop.fadeOut(200);
-                window.setTimeout(function () {
-                  location.reload();
-                }, 200);
-              });
-              closeDeleteModal.click(function () {
-                deleteModal.fadeOut(200);
-                divMainBackdrop.fadeOut(200);
-              });
+                deleteItem(urlData, deleteItemData, postRequest);
             });
-  
-            // Activate item in database
-            $(`#btnEditItem${item}`).click(function (e) {
-              e.preventDefault();
-  
-                let editItem = {
-                    action: "edit",
-                    comment_id: element.comment_id,
-                    comment_status: "1",
-                  };
-  
-                $.ajax({
-                  url: urlData,
-                  type: "POST",
-                  contentType: "application/json",
-                  data: JSON.stringify(editItem),
-                  success: function (succsess) {},
-                  error: function (error) {
-                    console.log("Error: " + JSON.stringify(error));
-                  },
-                });
-                location.reload();
-              
-            });
+
           });
         },
         error: function (error) {
@@ -205,10 +160,6 @@ $(function () {
           console.log("Error: " + JSON.stringify(error));
         },
       });
-      
-
-
-
 
   });
   

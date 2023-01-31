@@ -1,6 +1,6 @@
 <?php
 
-include_once "./adminHeader.php";
+include_once "../page_parts/admins/adminHeader.php";
 include_once "../routers/clientRouter.php";
 
 ?>
