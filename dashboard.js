@@ -1,5 +1,4 @@
 import {
-  testFunction,
   createPagination,
 } from "./common_items/commonFunctions.js";
 

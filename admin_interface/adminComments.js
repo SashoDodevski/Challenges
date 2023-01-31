@@ -1,4 +1,4 @@
-import { testFunction, createPagination } from "../common_items/commonFunctions.js";
+import { createPagination } from "../common_items/commonFunctions.js";
 
 $(function () {
     // Endpoint URLs
@@ -26,13 +26,7 @@ $(function () {
     let closeDeleteModal = $(".closeDeleteModal");
     let selectStatus = $("#selectStatus");
 
-    selectStatus.change(function (){
-      console.log(selectStatus.val()) +
-      tableBody.empty();
-      showContent()
-  })
-
-  
+ 
     let showContent = function () {
       // AJAX GET data from endpoint
       let page = {
@@ -188,6 +182,11 @@ $(function () {
     // on load show content in item table
     $(document).ready(showContent);
 
+// Show content according filter for comment status
+    selectStatus.change(function (){
+      tableBody.empty();
+      showContent()
+  })
   
     // AJAX GET data from statuses endpoint
     $.ajax({

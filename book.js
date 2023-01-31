@@ -1,15 +1,14 @@
 import {
-  testFunction,
   createPagination,
   postRequest,
   submitItem,
+  editItem,
+  deleteItem,
 } from "./common_items/commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
   let urlData = "./data_endpoints_clients/booksInfo.php";
-  let urlAuthors = "./data_endpoints_admins/dataAuthors.php";
-  let urlCategories = "./data_endpoints_admins/dataCategories.php";
 
   // admin item elements
   let bookImageUrl = $("#bookImageUrl");
@@ -21,18 +20,12 @@ $(function () {
   let bookComments = $("#bookComments");
   let comment = $("#comment");
   let btnSubmitComment = $("#btnSubmitComment");
-  let msgWhenCommentSubmitted = $("#msgWhenCommentSubmitted");
   let userId = $("#user_id");
   let pendingComment = $("#pendingComment");
   let pendingCommentUser = $("#pendingCommentUser");
   let btnDeleteComment = $(".btnDeleteComment");
   let btnEditComment = $("#btnEditComment");
   let editedComment = $("#editedComment");
-  let modal = $("#modal");
-  let modalQuestion = $("#modalQuestion");
-  let modalBtn = $(".modalBtn");
-  let closeModal = $(".closeModal");
-  let backdrop = $("#backdrop");
   let leaveACommentDiv = $("#leaveACommentDiv");
   let bookNotesDiv = $("#bookNotesDiv");
   let createNoteDiv = $("#createNoteDiv");
@@ -159,113 +152,38 @@ $(function () {
   });
 
   // Submit comment
-  btnSubmitComment.click(function (e) {
-    new swal({
-      text: "Are you sure you want to submit?",
-      icon: "warning",
-      confirmButtonText: "Submit",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#5ea91d",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.value) {
-        new swal({
-          text: "Item has been submited!",
-          icon: "success",
-          timer: 1500,
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
-
-        let submitComment = {
-          action: "submitComment",
-          book_id: location.hash.slice(1),
-          user_id: userId.val(),
-          comment: comment.val(),
-        };
-
-        postRequest(urlData, submitComment);
-
-        window.setTimeout(function () {
-          location.reload();
-        }, 1500);
-      } else {
-        console.log("button B pressed");
-      }
-    });
-  });
+  btnSubmitComment.click(function () {
+    let submitComment = {
+      action: "submitComment",
+      book_id: location.hash.slice(1),
+      user_id: userId.val(),
+      comment: comment.val(),
+    };
+    submitItem(urlData, submitComment, postRequest)
+  })
 
   // Edit comment in database
   btnEditComment.click(function () {
-    new swal({
-      text: "Are you sure you want to edit this item?",
-      icon: "warning",
-      confirmButtonText: "Edit",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#5ea91d",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.value) {
-        new swal({
-          text: "Item has been edited!",
-          icon: "success",
-          timer: 1500,
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
+    let editComment = {
+      action: "editUserComment",
+      book_id: location.hash.slice(1),
+      user_id: userId.val(),
+      comment: $("#editedComment").val(),
+      comment_status: "3",
+    };
+    editItem(urlData, editComment, postRequest)
+  })
 
-        let editComment = {
-          action: "editUserComment",
-          book_id: location.hash.slice(1),
-          user_id: userId.val(),
-          comment: $("#editedComment").val(),
-          comment_status: "3",
-        };
+    // Delete comment in database
+    $("body").on("click", ".btnDeleteComment", () => {
+      let deleteComment = {
+        action: "deleteUserComment",
+        book_id: location.hash.slice(1),
+        user_id: userId.val(),
+      };
+      deleteItem(urlData, deleteComment, postRequest)
+    })
 
-        postRequest(urlData, editComment);
-
-      } else {
-        console.log("button B pressed");
-      }
-    });
-  });
-
-  // Delete comment in database
-  $("body").on("click", ".btnDeleteComment", () => {
-    new swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this item!",
-      icon: "warning",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#DD6B55",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.value) {
-        new swal({
-          text: "Item has been deleted!",
-          icon: "success",
-          timer: 1500,
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
-
-        let deleteComment = {
-          action: "deleteUserComment",
-          book_id: location.hash.slice(1),
-          user_id: userId.val(),
-        };
-
-        postRequest(urlData, deleteComment);
-
-        window.setTimeout(function () {
-          location.reload();
-        }, 1500);
-      } else {
-        console.log("button B pressed");
-      }
-    });
-  });
 
   // Get book notes
   let getNotes = {
@@ -316,76 +234,25 @@ $(function () {
 
     // Edit note in database
     $("body").on("click", ".btnEditNote", (event) => {
-      event.preventDefault()
-      new swal({
-        text: "Are you sure you want to edit this item?",
-        icon: "warning",
-        confirmButtonText: "Edit",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#5ea91d",
-        showCancelButton: true,
-      }).then(function (result) {
-        if (result.value) {
-          new swal({
-            text: "Item has been edited!",
-            icon: "success",
-            timer: 1500,
-            showCancelButton: false,
-            showConfirmButton: false,
-          });
-  
-          let editNote = {
-            action: "editUserNote",
-            book_id: location.hash.slice(1),
-            user_id: userId.val(),
-            new_note: event.currentTarget.previousSibling.previousSibling.value,
-            old_note: event.currentTarget.previousSibling.previousSibling.textContent,
-          };
-  
-          postRequest(urlData, editNote);
-          
-        } else {
-          console.log("button B pressed");
-        }
-      });
-    });
-  
+      let editNote = {
+        action: "editUserNote",
+        book_id: location.hash.slice(1),
+        user_id: userId.val(),
+        new_note: event.currentTarget.previousSibling.previousSibling.value,
+        old_note: event.currentTarget.previousSibling.previousSibling.textContent,
+      };
+      editItem(urlData, editNote, postRequest)
+    })
 
   // Delete note in database
   $("body").on("click", ".btnDeleteNote", (event) => {
-    new swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this item!",
-      icon: "warning",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#DD6B55",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.value) {
-        new swal({
-          text: "Item has been deleted!",
-          icon: "success",
-          timer: 1500,
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
+    let deleteNote = {
+      action: "deleteUserNote",
+      book_id: location.hash.slice(1),
+      user_id: userId.val(),
+      note: event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling.textContent,
+    };
+    deleteItem(urlData, deleteNote, postRequest)
+  })
 
-        let deleteNote = {
-          action: "deleteUserNote",
-          book_id: location.hash.slice(1),
-          user_id: userId.val(),
-          note: event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling.textContent,
-        };
-
-        postRequest(urlData, deleteNote);
-
-        window.setTimeout(function () {
-          location.reload();
-        }, 1500);
-      } else {
-        console.log("button B pressed");
-      }
-    });
-  } );
 });

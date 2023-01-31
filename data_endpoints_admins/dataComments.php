@@ -83,13 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $itemsPerPage = 6;
     $initial_limit = ($page_number - 1) * $itemsPerPage;
-    $itemsPerPage = 6;
-    $initial_limit = ($page_number - 1) * $itemsPerPage;
 
     $sqlTotalItems = "SELECT COUNT(comment_id) FROM `comments`";
     $stmtTotalItems = $pdo->prepare($sqlTotalItems);
     $stmtTotalItems->execute();
     $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
+
+    $status = $data['status'];
 
     if ($status == 4) {
         $sql = "SELECT * FROM `comments` 
@@ -98,12 +98,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         LEFT JOIN statuses ON comments.comment_status = statuses.status_id
         LIMIT $initial_limit, $itemsPerPage";
  
-    } else {
+    } else if ($status == 1) {
         $sql = "SELECT * FROM `comments` 
         LEFT JOIN users ON comments.user_id = users.user_id
         LEFT JOIN books ON comments.book_id = books.book_id
         LEFT JOIN statuses ON comments.comment_status = statuses.status_id
-        WHERE comment_status = $status
+        WHERE comment_status = 1
+        LIMIT $initial_limit, $itemsPerPage";
+    } else if ($status == 2) {
+        $sql = "SELECT * FROM `comments` 
+        LEFT JOIN users ON comments.user_id = users.user_id
+        LEFT JOIN books ON comments.book_id = books.book_id
+        LEFT JOIN statuses ON comments.comment_status = statuses.status_id
+        WHERE comment_status = 2
+        LIMIT $initial_limit, $itemsPerPage";
+    } else if ($status == 3) {
+        $sql = "SELECT * FROM `comments` 
+        LEFT JOIN users ON comments.user_id = users.user_id
+        LEFT JOIN books ON comments.book_id = books.book_id
+        LEFT JOIN statuses ON comments.comment_status = statuses.status_id
+        WHERE comment_status = 3
         LIMIT $initial_limit, $itemsPerPage";
     }
 

@@ -17,7 +17,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <script src="https://cdn.tailwindcss.com"></script>
 
     
-  <!-- Sweatalert -->
+  <!-- Sweetalert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.css" rel="stylesheet"></link>
 

@@ -4,8 +4,6 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-$database_table = "categories";
-
 require_once "../database/db.php";
 
 
@@ -16,9 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $page_number = $_GET['page'];
     }
 
-
-
-    $sqlTotalItems = "SELECT COUNT(category_id) FROM $database_table";
+    $sqlTotalItems = "SELECT COUNT(category_id) FROM categories";
     $stmtTotalItems = $pdo->prepare($sqlTotalItems);
     $stmtTotalItems->execute();
     $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
@@ -35,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $itemsPerPage = 6;
     $initial_limit = ($page_number - 1) * $itemsPerPage;
 
-    $sql = "SELECT * FROM $database_table 
+    $sql = "SELECT * FROM categories 
+            LEFT JOIN statuses ON categories.category_status = statuses.status_id
             LIMIT $initial_limit, $itemsPerPage";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -70,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($data['action'] == 'create') {
-        $sql = "INSERT INTO $database_table (category, category_status) VALUES (:category, :category_status)";
+        $sql = "INSERT INTO categories (category, category_status) VALUES (:category, :category_status)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
@@ -79,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]
         );
     } elseif ($data['action'] == 'edit') {
-        $sql = "UPDATE $database_table
+        $sql = "UPDATE categories
         SET category = :category, category_status = :category_status
         WHERE category_id = :category_id";
 
@@ -92,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]
         );
     } elseif ($data['action'] == 'delete') {
-        $sql = "UPDATE $database_table SET category_status = :category_status WHERE category_id = :category_id";
+        $sql = "UPDATE categories SET category_status = :category_status WHERE category_id = :category_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [

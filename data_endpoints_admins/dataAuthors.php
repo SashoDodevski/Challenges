@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
 
     $sql = "SELECT * FROM `authors` 
+            LEFT JOIN statuses ON authors.author_status = statuses.status_id
             LIMIT $initial_limit, $itemsPerPage";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

@@ -1,4 +1,10 @@
-import { testFunction, createPagination } from "../common_items/commonFunctions.js";
+import {
+  createPagination,
+  postRequest,
+  submitItem,
+  editItem,
+  deleteItem,
+} from "../common_items/commonFunctions.js";
 
 $(function () {
   // Endpoint URLs
@@ -26,41 +32,40 @@ $(function () {
   let deleteModalBtn = $(".deleteModalBtn");
   let closeDeleteModal = $(".closeDeleteModal");
 
-  let showContent = function () {
-    // AJAX GET data from endpoint
-    let page = {
-      page: location.hash.slice(6),
-    };
-    let url = "";
-    if (location.hash === "") {
-      url = urlData;
-    } else {
-      url = urlData + "?page=" + page["page"];
-    }
+  // AJAX GET data from endpoint
+  let page = {
+    page: location.hash.slice(6),
+  };
+  let url = "";
+  if (location.hash === "") {
+    url = urlData;
+  } else {
+    url = urlData + "?page=" + page["page"];
+  }
 
-    $.ajax({
-      url: url,
-      type: "GET",
-      contentType: "application/json",
-      data: JSON.stringify(page),
-      success: function (itemsData) {
-        // Setup Pagination Buttons
+  $.ajax({
+    url: url,
+    type: "GET",
+    contentType: "application/json",
+    data: JSON.stringify(page),
+    success: function (itemsData) {
+      // Setup Pagination Buttons
 
-        pageNumbers.html(
-          createPagination(
-            pageNumbers,
-            itemsData.Total_pages,
-            itemsData.Page,
-            tableBody
-          )
-        );
+      pageNumbers.html(
+        createPagination(
+          pageNumbers,
+          itemsData.Total_pages,
+          itemsData.Page,
+          tableBody
+        )
+      );
 
-        showPageNo.text(`Page ${itemsData.Page} of ${itemsData.Total_pages}`);
+      showPageNo.text(`Page ${itemsData.Page} of ${itemsData.Total_pages}`);
 
-        // data from database
-        itemsData.data.forEach((element) => {
-          // Fill table with data
-          let tableRow = $(`
+      // data from database
+      itemsData.data.forEach((element) => {
+        // Fill table with data
+        let tableRow = $(`
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="tableRow${element["author_id"]}">
                     <td class="px-3 py-3 grid content-start">
                     <form method="POST">
@@ -73,7 +78,7 @@ $(function () {
                     </form>
                     </td>
                     <td class="px-3 py-3 text-xs h-full align-text-top text-center">
-                        ${element["author_status"]}
+                        ${element["status"]}
                     </td>
                     <td class="px-3 py-3 align-text-top text-right">
                         ${element["author_id"]}
@@ -89,129 +94,82 @@ $(function () {
                     </td>
                 </tr>`);
 
-          tableBody.append(tableRow);
+        tableBody.append(tableRow);
 
-          if (element.author_status === "DELETED") {
-            $(`#btnDeleteItem${element.author_id}`).addClass("hidden");
-            $(`#btnEditItem${element.author_id}`).text("Activate");
-            $(`#tableRow${element.author_id}`).addClass("bg-red-50");
+        if (element["status"] === "DELETED") {
+          $(`#btnDeleteItem${element.author_id}`).addClass("hidden");
+          $(`#btnEditItem${element.author_id}`).text("Activate");
+          $(`#tableRow${element.author_id}`).addClass("bg-red-50");
+        }
+
+        // Submit new item to database
+        btnSubmitItem.click(function () {
+          if (
+            (authorName.val() === "",
+            authorSurname.val() === "",
+            authorCV.val() === "")
+          ) {
+            msgForm.text("All field are required!");
+            msgForm.addClass("text-red-500");
+          } else {
+            let submitItemData = {
+              action: "create",
+              author_status: "1",
+              author_name: authorName.val(),
+              author_surname: authorSurname.val(),
+              author_CV: authorCV.val(),
+            };
+            submitItem(urlData, submitItemData, postRequest);
           }
+        });
 
-          // Soft delete item in database
-          $(`#btnDeleteItem${element.author_id}`).click(function () {
-            divMainBackdrop.fadeIn(100);
-            deleteModal.fadeIn(100);
-            deleteModalBtn.attr("id", `deleteModalBtn${element.author_id}`);
-            $(`#deleteModalBtn${element.author_id}`).click(function () {
-              let deleteItem = {
-                action: "delete",
-                author_status: "DELETED",
-                author_id: element.author_id,
-              };
+        // Edit item in database
+        $(`#btnEditItem${element.author_id}`).click(function (e) {
+          e.preventDefault();
 
-              $.ajax({
-                url: urlData,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(deleteItem),
-                success: function (success) {},
-                error: function (error) {
-                  console.log("Error: " + JSON.stringify(error));
-                },
-              });
+          authorName.val(element.author_name);
+          authorSurname.val(element.author_surname);
+          authorCV.val(element.author_CV);
 
-              deleteModal.fadeOut(200);
-              divMainBackdrop.fadeOut(200);
-              window.setTimeout(function () {
-                location.reload();
-              }, 200);
-            });
-            closeDeleteModal.click(function () {
-              deleteModal.fadeOut(200);
-              divMainBackdrop.fadeOut(200);
-            });
-          });
+          $("#divMain h1").text("Edit item");
 
-          // Edit item in database
-          $(`#btnEditItem${element.author_id}`).click(function (e) {
-            e.preventDefault();
+          divMainBackdrop.fadeIn(150);
+          divMain.fadeIn(150);
+          btnSubmitItem.addClass("hidden");
+          btnSubmitEditedItem.removeClass("hidden");
 
-            authorName.val(element.author_name);
-            authorSurname.val(element.author_surname);
-            authorCV.val(element.author_CV);
-
-            $("#divMain h1").text("Edit item");
-
-            divMainBackdrop.fadeIn(150);
-            divMain.fadeIn(150);
-            btnSubmitItem.addClass("hidden");
-            btnSubmitEditedItem.removeClass("hidden");
-
-            btnSubmitEditedItem.click(function () {
-              let editItem = {
-                action: "edit",
-                author_status: "ACTIVE",
-                author_id: element.author_id,
-                author_name: authorName.val(),
-                author_surname: authorSurname.val(),
-                author_CV: authorCV.val(),
-              };
-
-              $.ajax({
-                url: urlData,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(editItem),
-                success: function (success) {},
-                error: function (error) {
-                  console.log("Error: " + JSON.stringify(error));
-                },
-              });
+          btnSubmitEditedItem.click(function () {
+            let editItemData = {
+              action: "edit",
+              author_status: "1",
+              author_id: element.author_id,
+              author_name: authorName.val(),
+              author_surname: authorSurname.val(),
+              author_CV: authorCV.val(),
+            };
+            editItem(urlData, editItemData, postRequest);
+            window.setTimeout(function () {
               location.reload();
-            });
+            }, 2500);
           });
         });
-      },
-      error: function (error) {
-        console.log("Error: " + JSON.stringify(error));
-      },
-    });
-  };
 
-  // on load show content in item table
-  showContent();
+        // Soft delete item in database
+        $(`#btnDeleteItem${element.author_id}`).click(function () {
+            let deleteItemData = {
+              action: "delete",
+              author_status: "2",
+              author_id: element.author_id,
+            };
+            deleteItem(urlData, deleteItemData, postRequest);
+          });
 
-  // Submit new item to database
-
-
-  btnSubmitItem.click(function () {
-    if (
-      (authorName.val() === "",
-      authorSurname.val() === "",
-      authorCV.val() === "")
-    ) {
-      msgForm.text("All field are required!");
-      msgForm.addClass("text-red-500");
-    } else {
-      $.ajax({
-        url: urlData,
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(newItem),
-        success: function (success) {
-          console.log(success);
-        },
-        error: function (error) {
-          console.log("Error: " + JSON.stringify(error));
-        },
       });
-      msgForm.text("Category successfully added!");
-      msgForm.addClass("text-green-500");
-      window.setTimeout(function () {
-        location.reload();
-      }, 700);
-    }
-  })
+    },
+    error: function (error) {
+      console.log("Error: " + JSON.stringify(error));
+    },
+  });
 
   btnCloseForm.click(function () {
     divMainBackdrop.fadeOut(150);
