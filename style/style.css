@@ -5,13 +5,22 @@
     scroll-behavior: smooth;
 }
 
+
 /* Commons */
 
-.negative-top-positioning {
+.negative-top-positioning-60 {
     margin-top: -60px;
 }
+.negative-top-positioning-68 {
+  margin-top: -68px;
+}
+
 .top-positioning {
     margin-top: 60px;
+}
+
+.top-positioning-136 {
+  margin-top: 136px;
 }
 .navbar {
     z-index: 1;

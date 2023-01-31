@@ -1,6 +1,6 @@
 <?php
 
-include_once "./page_parts/header.php";
+include_once "./page_parts/clients/header.php";
 
 ?>
 
@@ -47,6 +47,6 @@ include_once "./page_parts/header.php";
 
 <?php
 
-include_once "./page_parts/footer.php";
+include_once "./page_parts/clients/footer.php";
 
 ?>

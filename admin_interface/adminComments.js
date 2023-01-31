@@ -6,13 +6,9 @@ $(function () {
     let urlStatuses = "../data_endpoints_admins/dataStatuses.php";
   
     // admin item elements
-    let divMainBackdrop = $("#divMain-backdrop");
     let tableBody = $("#tableBody");
     let pageNumbers = $("#pageNumbers");
     let showPageNo = $("#showPageNo");
-    let deleteModal = $("#deleteModal");
-    let deleteModalBtn = $(".deleteModalBtn");
-    let closeDeleteModal = $(".closeDeleteModal");
     let selectStatus = $("#selectStatus");
 
  

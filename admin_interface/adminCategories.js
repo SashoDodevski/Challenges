@@ -127,7 +127,7 @@ $(function () {
           btnSubmitEditedItem.removeClass("hidden");
 
           btnSubmitEditedItem.click(function () {
-            let edieditItemDatatCategory = {
+            let editItemData = {
               action: "edit",
               category_id: element["category_id"],
               category: category.val(),
