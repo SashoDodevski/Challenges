@@ -2,8 +2,8 @@ import { createPagination, postRequest, editItem, deleteItem } from "../common_i
 
 $(function () {
     // Endpoint URLs
-    let urlData = "../data_endpoints_admins/dataComments.php";
-    let urlStatuses = "../data_endpoints_admins/dataStatuses.php";
+    let urlData = "../data_endpoints/admins/dataComments.php";
+    let urlStatuses = "../data_endpoints/admins/dataStatuses.php";
   
     // admin item elements
     let tableBody = $("#tableBody");

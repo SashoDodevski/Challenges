@@ -8,7 +8,7 @@ import {
 
 $(function () {
   // Endpoint URLs
-  let urlData = "../data_endpoints_admins/dataAuthors.php";
+  let urlData = "../data_endpoints/admins/dataAuthors.php";
 
   // admin item elements
   let divMain = $("#divMain");

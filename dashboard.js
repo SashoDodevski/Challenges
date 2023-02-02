@@ -4,13 +4,16 @@ import {
 
 $(function () {
   // Endpoint URLs
-  let urlData = "./data_endpoints_clients/booksInfo.php";
+  let urlData = "./data_endpoints/clients/booksInfo.php";
 
   // item elements
   let books = $("#books");
   let pageNumbers = $("#pageNumbers");
   let filterCategory = $("#filterCategory");
-  let categoryCheckbox = $(".categoryCheckbox")
+  let categoryCheckbox = $(".categoryCheckbox");
+  let showHideFilter = $(".showHideFilter");
+  let hiddenDiv = $(".hiddenDiv");
+
 
   let showContent = function () {
     // AJAX GET data from endpoint
@@ -49,26 +52,18 @@ $(function () {
         // books from database
         itemsData.data.forEach((element) => {
           let card = $(`
-                      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 ${element.category} card">
-                          <a href="./book.php#${element.book_id}">
-                              <img class="rounded-t-lg mx-auto p-5 max-h-96" src="${
-                                element.book_image
-                              }" alt="" />
-                          </a>
-                          <div class="p-5">
-                          <a href="./book.php#${element.book_id}">
-                              <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">${
-                                element.book_title
-                              }</h5>
-                          </a>
-                          <h6 class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white">by ${
-                            element.author_name + " " + element.author_surname
-                          }</h6>
-                          <p class="mb-3 font-bold text-green-700 dark:text-gray-400">${
-                            element.category
-                          }</p>
-                          </div>
-                      </div>`);
+          <div class="max-w-fit bg-none text-center my-10 ${element.category} card">
+          <a href="./book.php#${element.book_id}">
+              <img class="rounded-xl shadow-lg mx-auto min-w-28 max-h-96" src="${element.book_image}" alt="" />
+          </a>
+          <div class="p-2">
+              <a href="./book.php#${element.book_id}">
+                  <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-white">${element.book_title}</h5>
+              </a>
+              <h6 class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white">by ${element.author_name} ${element.author_surname}</h6>
+              <p class="mb-3 font-bold text-teal-700 dark:text-gray-400">${element.category}</p>
+          </div>
+      </div>`);
 
           books.append(card);
         });
@@ -82,7 +77,7 @@ $(function () {
 // Category filters
 
   $.ajax({
-    url: "./data_endpoints_clients/categoriesInfo.php",
+    url: "./data_endpoints/clients/categoriesInfo.php",
     type: "GET",
     success: function (itemsData) {
       
@@ -188,6 +183,18 @@ $(function () {
 
 });
 
+
+showHideFilter.click(function(){
+  if(hiddenDiv.css("left") == "0px") {
+    hiddenDiv.animate({left: '286px'})
+    $('#showFilter').addClass('hidden')
+    $('#hideFilter').removeClass('hidden')
+  } else if (hiddenDiv.css("left") == "286px") {
+    hiddenDiv.animate({left: '0px'})
+    $('#hideFilter').addClass('hidden')
+    $('#showFilter').removeClass('hidden')
+  }
+  })
 
 
 });

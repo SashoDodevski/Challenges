@@ -15,13 +15,23 @@
   margin-top: -68px;
 }
 
-.top-positioning {
+.top-positioning-60 {
     margin-top: 60px;
 }
 
-.top-positioning-136 {
-  margin-top: 136px;
+.top-positioning-68 {
+  margin-top: 68px;
 }
+
+
+.top-positioning-170 {
+  margin-top: 170px;
+}
+
+.bottom-positioning-50 {
+  margin-top: 50px;
+}
+
 .navbar {
     z-index: 1;
 }
@@ -48,55 +58,103 @@
   transform: translate(-50%, -50%);
 }
 
+/* Navbar */
+#navbar {
+  background-image: url(../style/images/header-img.png);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* Banner */
 
+.banner-top {
+  margin-top: 56px;
+  background-image: url(../style/images/yellow2.png);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size:cover;
+  height: 25vh;
+}
+
 .banner {
-    margin-top: 56px;
-    background-image: url(../images/banner_img.png);
+
+    background-image: url(../style/images/books_banner4.png);
     background-position: top;
     background-repeat: no-repeat;
     background-size:cover;
-    height: 93.2vh;
+    height: 55vh;
+    display: flex;
 }
 
-.banner a {
-    width: 90%;
-    font-size: 60px;
-    font-weight: 600;
-    color: transparent;
-    background-image: linear-gradient(to right ,#553c9a, #ee4b2b, #00c2cb, #ff7f50, #553c9a);
-    -webkit-background-clip: text;
-    background-clip: text;    
-    background-size: 200%;
-    background-position: -200%;
-    animation: animated-gradient 2s infinite alternate-reverse;      
-  }
+#registerDiv {
+  position: relative;
+  height: 120px;
+  width: 250px;
+  border-radius: 10px;
+}
 
-@keyframes animated-gradient{
-    to{
-      background-position: 200%;
-    }
-  }
+#booksCatalogue {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  
+}
 
+  
+/* Banner-bottom */
 #filterCategory{
     width: 300px;
 }
 
   #showFilter{
+    position: relative;
     width: 0;
     height: 0;
-    margin-top: 50%;
     border-top: 20px solid transparent;
-    border-left: 14px solid #ff5a00;
+    border-left: 14px solid #7ed432;
     border-bottom: 20px solid transparent;
   }
 
   #hideFilter{
+    position: relative;
     width: 0;
     height: 0;
-    margin-top: 50%;
     border-top: 20px solid transparent;
-    border-right: 14px solid #5ea91d;
+    border-right: 14px solid #ff6232;
     border-bottom: 20px solid transparent;
   }
   
+#book-content{
+  background-image: url(../style/images/yellow2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 73vh;
+}
+
+#readersChoice {
+  background-image: url(../style/images/cyan2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#editorsChoice {
+  background-image: url(../style/images/yellow2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Footer */
+#footer {
+  background-image: url(../style/images/footer-img.png);
+  background-position:top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 50;
+}
+
+/* Dashboard */
+
+#hiddenDiv {
+ z-index: 1;
+}

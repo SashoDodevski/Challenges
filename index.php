@@ -4,44 +4,82 @@ include_once "./page_parts/clients/header.php";
 
 ?>
 
+
+
 <!-- Banner -->
-<div class="w-full banner flex flex-wrap text-center">
-  <a class="mx-auto" href="#books">Book library</a>
-  <p href="#" class="text-sm text-red-500 h-1">
-    <?php if (isset($_SESSION['msg'])) {
-      echo $_SESSION['msg'];
-    }
-    unset($_SESSION['msg']) ?>
-  </p>
+<div class="w-full mx-auto banner-top flex flex-wrap text-center dark:bg-gray-900">
+  <div class="w-8/12 py-8 mx-auto text-left flex justify-between">
+    <div>
+    <h1 class="text-5xl tracking-tight text-cyan-900 dark:text-gray-500 my-5">Book Library</h1>
+    <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">All bestsellers at one place</p>
+    <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">Promotion of new book every week</p>
+    </div>
+    <div class="p-3 bg-cyan-600/90 text-center my-auto" id="registerDiv">
+    <h2 class="font-semibold text-lg text-white">Register for full access</h2>
+    <a type="button" class="text-cyan-900 bg-gray-100 hover:text-white hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-100 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800 mb-4 mt-4" href="register.php">Register now</a>
+  </div>
+  </div>
+
+</div>
+
+<div class="w-full banner flex flex-wrap text-center dark:bg-gray-900">
+<div class="p-4 bg-gray-800/70 text-center mx-auto mb-12 mt-auto" id="booksCatalogue">
+    <h2 class="font-regular text-2xl text-white mt-60">Search the main catalogue</h2>
+    <a type="button" class="text-white hover:text-white border border-white hover:bg-cyan-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center mr-2 mb-2 mt-6 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 text-xl" href="dashboard.php"><span class="italic">go to </span>Book Library</a>
+  </div>
 </div>
 
 <!-- Book content -->
-<div class="w-10/12 mx-auto grid grid-cols-3 gap-10 content-centers p-12" id="books" style="height: 1259px;">
-
+<div class="w-full mx-auto" id="book-content">
+<div class="w-10/12 mx-auto">
+    <h4 class="text-left text-2xl font-semibold tracking-tight text-cyan-900 dark:text-gray-500 pt-6 pb-4 pl-12">Check out some of the bestselling books</h4>
+  </div>
+  <div class="w-10/12 mx-auto grid grid-cols-6 gap-8 content-centers p-12" id="books">
+  </div>
 </div>
 
 
-<!-- Modal -->
-<div id="registerModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-    <div class="w-full h-full max-w-md md:h-auto mx-auto center-item">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white closeDeleteModal" data-modal-hide="popup-modal">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Close modal</span>
-            </button>
-            <div class="p-6 text-center">
-                <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this book?</h3>
-                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 deleteModalBtn">
-                    Yes, I'm sure
-                </button>
-                <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 closeDeleteModal">No, cancel</button>
-            </div>
-        </div>
+<!-- Readers' choice -->
+<div class="dark:bg-gray-500" id="readersChoice">
+  <div class="grid grid-cols-10 gap-4 w-8/12 mx-auto ">
+    <div class="col-span-4 ...">
+      <img class="object-cover h-96 md:h-auto w-full pb-8 px-8 pt-12" src="./style/images/readersbook.png" alt="Book image">
     </div>
+    <div class="col-span-6 flex">
+      <div class="flex flex-col justify-between leading-normal my-auto">
+        <h3 class="text-cyan-900 dark:text-gray-500 text-4xl py-6 font-bold">This week readers' choice</h3>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-cyan-900 dark:text-gray-500 ">DUNE</h5>
+        <h6 class="mb-2 text-md font-bold tracking-tight text-cyan-900 dark:text-gray-500 ">by Frank Herbert</h6>
+        <p class="mb-3 font-bold text-teal-700 dark:text-cyan-400">Science fiction</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 ">Publication year: 1965</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 ">Pages: 412</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 font-semibold">Dune is set in the distant future amidst a feudal interstellar society in which various noble houses control planetary fiefs. It tells the story of young Paul Atreides, whose family accepts the stewardship of the planet Arrakis. While the planet is an inhospitable and sparsely populated desert wasteland, it is the only source of melange, or "spice", a drug that extends life and enhances mental abilities. Melange is also necessary for space navigation, which requires a kind of multidimensional awareness and foresight that only the drug provides. As melange can only be produced on Arrakis, control of the planet is a coveted and dangerous undertaking. The story explores the multilayered interactions of politics, religion, ecology, technology, and human emotion, as the factions of the empire confront each other in a struggle for the control of Arrakis and its spice.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="hidden flex opacity-25 fixed inset-0 z-40 bg-black" id="backdrop"></div>
+<!-- Editors' choice -->
+<div class="bg-yellow-100/50 dark:bg-gray-500 p-4" id="editorsChoice">
+  <div class="grid grid-cols-10 gap-4 w-8/12 mx-auto ">
+    <div class="col-span-6 flex">
+      <div class="flex flex-col justify-between leading-normal my-auto">
+        <h3 class="text-cyan-900 dark:text-gray-500 text-4xl py-6 font-bold">This week editors' choice</h3>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-cyan-900 dark:text-gray-500 ">One Two Three</h5>
+        <h6 class="mb-2 text-md font-bold tracking-tight text-cyan-900 dark:text-gray-500 ">by Laurie Frankel</h6>
+        <p class="mb-3 font-bold text-teal-700 dark:text-cyan-400">Literary fiction</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 ">Publication year: 2021</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 ">Pages: 416</p>
+        <p class="mb-3 font-normal text-cyan-900 dark:text-gray-500 font-semibold">Everyone knows everyone in the tiny town of Bourne, but the Mitchell triplets are especially beloved. Mirabel is the smartest person anyone knows, and no one doubts it just because she can’t speak. Monday is the town’s purveyor of books now that the library’s closed—tell her the book you think you want, and she’ll pull the one you actually do from the microwave or her sock drawer. Mab’s job is hardest of all: get good grades, get into college, get out of Bourne.
+
+          For a few weeks seventeen years ago, Bourne was national news when its water turned green. The girls have come of age watching their mother’s endless fight for justice. But just when it seems life might go on the same forever, the first moving truck anyone’s seen in years pulls up and unloads new residents and old secrets. Soon, the Mitchell sisters are taking on a system stacked against them and uncovering mysteries buried longer than they’ve been alive...because it’s hard to let go of the past when the past won’t let go of you.​</p>
+      </div>
+    </div>
+    <div class="col-span-4 ...">
+      <img class="object-cover h-96 md:h-auto w-full p-8" src="./style/images/one-two-three-paperback-3d-bookshot_orig.png" alt="Book image">
+    </div>
+  </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="index.js"></script>
