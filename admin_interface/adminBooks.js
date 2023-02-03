@@ -32,9 +32,14 @@ $(function () {
   let showPageNo = $("#showPageNo");
 
   // AJAX GET data from AUTHORS endpoint
+  let getAuthorsData = {
+    form: "yes",
+  }
   $.ajax({
     url: urlAuthors,
     type: "GET",
+    contentType: "application/json",
+    data: getAuthorsData,
     success: function (dataAuthors) {
       dataAuthors.data.forEach((element) => {
         let authorOption = $(
@@ -52,8 +57,12 @@ $(function () {
   });
 
   // AJAX GET data from CATEGORIES endpoint
+  let getCategoriesData = {
+    form: "yes",
+  }
   $.ajax({
     url: urlCategories,
+    data: getCategoriesData,
     type: "GET",
     success: function (dataCategories) {
       dataCategories.data.forEach((element) => {

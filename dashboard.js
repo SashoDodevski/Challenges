@@ -85,7 +85,7 @@ $(function () {
       itemsData.data.forEach((element) => {
         let category = $(`
           <div class="flex items-left ml-4 my-3">
-            <input id="${element.category}" type="checkbox" rel="${element.category}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 categoryCheckbox">
+            <input id="${element.category}" type="checkbox" rel="${element.category}" class="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 rounded focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 categoryCheckbox">
             <label for="${element.category}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">  ${element.category}</label>
           </div>
         `);

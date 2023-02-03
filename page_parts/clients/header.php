@@ -2,7 +2,9 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
 }
-
+if ((isset($_SESSION["username"]) && $_SESSION["username"] === "admin")) {
+  header('Location: ./admin_interface/adminInterface.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +24,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
   <!-- Sweetalert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.css" rel="stylesheet"></link>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.css" rel="stylesheet">
+  </link>
 
   <!-- Local CSS -->
   <link rel="stylesheet" href="style/style.css" />
@@ -56,24 +59,29 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 dark:border-gray-700">
-          <li class="showContentToClients">
-            <p class="py-2 pl-3 pr-4 text-white rounded md:p-0 dark:text-white dark:border-blue-700" id="clientName">
-              <?php
-              if (isset($_SESSION["username"])) {
-                echo "Hello " . $_SESSION["username"];
-              }
-              ?>
-            </p>
-          </li>
-          <li class="hideContentToClients">
-            <a href="register.php" class="py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-900 md:p-0 md:dark:hover:text-white dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarRegister">Register</a>
-          </li>
-          <li class="hideContentToClients">
-            <a href="signin.php" class="py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-900 md:p-0 md:dark:white:text-white dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarSignIn">Sign in</a>
-          </li>
-          <li class="showContentToClients">
-            <a href="./authentication/signout.php" class="py-2 px-3 text-white rounded hover:bg-gray-200 md:hover:bg-transparent md:hover:text-blue-900 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarSignOut">Sign out</a>
-          </li>
+          <?php
+          if (isset($_SESSION["username"])) {
+          ?>
+            <li>
+              <p class="py-2 pl-3 pr-4 text-white rounded md:p-0 dark:text-white dark:border-cyan-700" id="clientName">
+                <?= "Hello " . $_SESSION["username"]; ?>
+              </p>
+            </li>
+            <li>
+              <a href="./authentication/signout.php" class="py-2 px-3 text-white rounded hover:bg-gray-200 md:hover:bg-transparent md:hover:text-cyan-900 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarSignOut">Sign out</a>
+            </li>
+          <?php
+          } else {
+          ?>
+            <li>
+              <a href="register.php" class="py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-900 md:p-0 md:dark:hover:text-white dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarRegister">Register</a>
+            </li>
+            <li>
+              <a href="signin.php" class="py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-900 md:p-0 md:dark:white:text-white dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" id="navbarSignIn">Sign in</a>
+            </li>
+          <?php }
+          ?>
+
         </ul>
       </div>
     </div>

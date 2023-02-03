@@ -30,10 +30,10 @@ $(function () {
         </a>
         <div class="p-2">
             <a href="./book.php#${element.book_id}">
-                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-white">${element.book_title}</h5>
+                <h5 class="mb-2 text-lg font-semibold tracking-tight text-gray-800 dark:text-white">${element.book_title}</h5>
             </a>
-            <h6 class="mb-2 text-sm font-bold tracking-tight text-gray-700 dark:text-white">by ${element.author_name} ${element.author_surname}</h6>
-            <p class="mb-3 font-bold text-teal-700 dark:text-gray-400">${element.category}</p>
+            <h6 class="mb-2 text-sm font-semibold tracking-tight text-gray-700 dark:text-white">by ${element.author_name} ${element.author_surname}</h6>
+            <p class="mb-3 font-semibold text-teal-700 dark:text-gray-400">${element.category}</p>
         </div>
     </div>`);
 

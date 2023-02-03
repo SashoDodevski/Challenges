@@ -8,6 +8,20 @@ require_once "../../database/db.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (array_key_exists('form', $_GET)) {
+        $sql = "SELECT * FROM `authors` 
+           LEFT JOIN statuses ON authors.author_status = statuses.status_id
+           ORDER BY author_name";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $authors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $authors = ["data" => $authors];
+
+        header("Content-Type:application/json");
+        $jsonobject = json_encode($authors);
+        echo $jsonobject;
+    } else {
+
     if (!isset($_GET['page'])) {
         $page_number = 1;
     } else {
@@ -50,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $jsonobject = json_encode($data);
     echo $jsonobject;
 }
-
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';

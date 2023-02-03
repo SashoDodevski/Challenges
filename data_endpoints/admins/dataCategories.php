@@ -1,6 +1,6 @@
 <?php
 
-if(session_status() !== PHP_SESSION_ACTIVE) {
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
@@ -8,49 +8,62 @@ require_once "../../database/db.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (!isset($_GET['page'])) {
-        $page_number = 1;
-    } else {
-        $page_number = $_GET['page'];
-    }
+    if (array_key_exists('form', $_GET)) {
+        $sql = "SELECT * FROM categories 
+        LEFT JOIN statuses ON categories.category_status = statuses.status_id
+        ORDER BY category";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $categories = ["data" => $categories];
 
-    $sqlTotalItems = "SELECT COUNT(category_id) FROM categories";
-    $stmtTotalItems = $pdo->prepare($sqlTotalItems);
-    $stmtTotalItems->execute();
-    $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
-    
+        header("Content-Type:application/json");
+        $jsonobject = json_encode($categories);
+        echo $jsonobject;
+    } else {
+        if (!isset($_GET['page'])) {
+            $page_number = 1;
+        } else {
+            $page_number = $_GET['page'];
+        }
+
+        $sqlTotalItems = "SELECT COUNT(category_id) FROM categories";
+        $stmtTotalItems = $pdo->prepare($sqlTotalItems);
+        $stmtTotalItems->execute();
+        $items = $stmtTotalItems->fetchAll(PDO::FETCH_ASSOC);
+
         $newItems = [];
         foreach ($items as $item) {
             $items = array_merge($newItems, $item);
         };
-        
-            $count = "COUNT(category_id)";
-            $items['Total_items'] = $items[$count];
-            unset($items[$count]);
 
-    $itemsPerPage = 6;
-    $initial_limit = ($page_number - 1) * $itemsPerPage;
+        $count = "COUNT(category_id)";
+        $items['Total_items'] = $items[$count];
+        unset($items[$count]);
 
-    $sql = "SELECT * FROM categories 
+        $itemsPerPage = 6;
+        $initial_limit = ($page_number - 1) * $itemsPerPage;
+
+        $sql = "SELECT * FROM categories 
             LEFT JOIN statuses ON categories.category_status = statuses.status_id
             LIMIT $initial_limit, $itemsPerPage";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $categories = ["data" => $categories];
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $categories = ["data" => $categories];
 
-    $itemsPerPage = ["Items_per_page" => $itemsPerPage];
-    $page_number = ["Page" => $page_number];
-    $totalPages = ceil($items['Total_items'] / $itemsPerPage["Items_per_page"]);
-    $totalPages = ["Total_pages" => $totalPages];
+        $itemsPerPage = ["Items_per_page" => $itemsPerPage];
+        $page_number = ["Page" => $page_number];
+        $totalPages = ceil($items['Total_items'] / $itemsPerPage["Items_per_page"]);
+        $totalPages = ["Total_pages" => $totalPages];
 
-    $data = array_merge($page_number, $itemsPerPage, $items, $totalPages, $categories);
+        $data = array_merge($page_number, $itemsPerPage, $items, $totalPages, $categories);
 
-    header("Content-Type:application/json");
-    $jsonobject = json_encode($data);
-    echo $jsonobject;
+        header("Content-Type:application/json");
+        $jsonobject = json_encode($data);
+        echo $jsonobject;
+    }
 }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
@@ -97,5 +110,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'category_status' => $data['category_status'],
             ]
         );
-    } 
+    }
 }

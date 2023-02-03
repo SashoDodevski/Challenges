@@ -87,7 +87,7 @@ export function submitItem(urlData, data, callback) {
   }).then(function (result) {
     if (result.value) {
       new swal({
-        text: "Item has been submited!",
+        text: "Item has been submitted!",
         icon: "success",
         timer: 1500,
         showCancelButton: false,
