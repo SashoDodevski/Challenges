@@ -114,30 +114,36 @@ $(function () {
       } else {
         itemsData.data.forEach((element) => {
           if (element.user_id == userId.val()) {
-            let comment = `<div class="mb-6 commentDiv">
+            let commentDiv = `<div class="mb-6 commentDiv">
                             <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500">
-                            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
+                            <p class="block text-sm font-medium text-gray-900 dark:text-white">${
                               element.name + " " + element.surname
                             } commented:</p>
-                            <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
+                            <p class="block mb-2 text-sm font-light italic text-gray-700 dark:text-white">${
+                              element.created
+                            }</p>
+                            <p class="block mb-2 text-xs font-small text-gray-900 dark:text-white">${
                               element.comment
                             }</p>
                             <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Your comment about the book</p>
                             </div>
                             <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteComment"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
                           </div>`;
-            bookComments.append(comment);
+            bookComments.append(commentDiv);
           } else {
-            let comment = `<div class="mb-6 commentDiv">
+            let commentDiv = `<div class="mb-6 commentDiv">
           <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500">
-          <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">${
+          <p class="block text-sm font-medium text-gray-900 dark:text-white">${
             element.name + " " + element.surname
           } commented:</p>
+          <p class="block mb-2 text-xs font-light italic text-gray-700 dark:text-white">${
+            element.created
+          }</p>
           <p class="block mb-2 text-sm font-small text-gray-900 dark:text-white">${
             element.comment
           }</p>
         </div>`;
-            bookComments.append(comment);
+            bookComments.append(commentDiv);
           }
         });
       }
@@ -195,6 +201,7 @@ $(function () {
         itemsData.data.forEach((element) => {
           let noteDiv = `
           <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 my-4">
+          <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mb-3">Note:</p>
           <textarea class="existingNote w-full block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500">${element.note}</textarea>
           <a type="button" class="text-gray-500 hover:text-gray-700 btnEditNote"><i class="fa-solid fa-pen-to-square fa-lg my-5 mr-3"></i></a>
             <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteNote"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>
@@ -239,6 +246,7 @@ $(function () {
 
         let noteDiv = `
           <div class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 my-4">
+          <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mb-3">Note:</p>
           <textarea class="existingNote w-full block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500">${note.val()}</textarea>
           <a type="button" class="text-gray-500 hover:text-gray-700 btnEditNote"><i class="fa-solid fa-pen-to-square fa-lg my-5 mr-3"></i></a>
             <a type="button" class="text-gray-500 hover:text-gray-700 btnDeleteNote"><i class="fa-solid fa-trash-can fa-lg my-5 mr-3"></i></a>

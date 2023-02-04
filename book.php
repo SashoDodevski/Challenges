@@ -32,7 +32,6 @@ include_once "./page_parts/clients/header.php";
     </div>
     
     <div  id="bookNotesDiv" class="mb-6">
-        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mb-3">Your notes about the book:</p>
 
     </div>
 

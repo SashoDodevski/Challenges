@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $book_id = $_GET["book_id"];
         $user_id = $_GET["user_id"];
 
-        $sqlComments = "SELECT `comments`.`comment_id`, `comments`.`user_id`, `comments`.`book_id`, `comments`.`comment`, `comments`.`comment_status`, `users`.`name`, `users`.`surname`
+        $sqlComments = "SELECT `comments`.`comment_id`, `comments`.`user_id`, `comments`.`book_id`, `comments`.`comment`, `comments`.`comment_status`,`comments`.`created`, `users`.`name`, `users`.`surname`
         FROM `comments`
         LEFT JOIN `users` ON `comments`.`user_id` = `users`.`user_id`
         WHERE comments.book_id = '$book_id' AND comments.comment_status = '1'";

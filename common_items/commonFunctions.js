@@ -141,6 +141,7 @@ export function editItem(urlData, data, callback){
       confirmButtonColor: "#DD6B55",
       showCancelButton: true,
     }).then(function (result) {
+      event.currentTarget.parentElement.remove();
       if (result.value) {
         new swal({
           text: "Item has been deleted!",
