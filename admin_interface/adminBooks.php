@@ -7,7 +7,7 @@ include_once "../page_parts/admins/adminHeader.php";
 <!-- Book data -->
 
 <!-- Create Book form / Modal - shows on Add new book button -->
-    <div class="w-4/12 p-6 space-y-4 md:space-y-6 sm:p-8 bg-gray-50 text-cyan-900 shadow-lg rounded-lg mx-auto hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex top-positioning-170 mb-10" id="divMain">
+    <div class="w-4/12 p-6 space-y-4 md:space-y-6 sm:p-8 bg-gray-50 dark:bg-gray-600 text-cyan-900 shadow-lg rounded-lg mx-auto hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex top-positioning-170 mb-10" id="divMain">
         <div class="w-10/12 mx-auto">
             <div class="flex justify-end"><i class="fa-solid fa-xmark btnCloseForm hover:text-cyan-700"></i></div>
 
@@ -74,9 +74,7 @@ include_once "../page_parts/admins/adminHeader.php";
                     <th scope="col" class="px-3 py-3 w-20 text-center">
                         Actions
                     </th>
-                    <th scope="col" class="px-3 py-3 w-20 text-center">
-                        Book status
-                    </th>
+
                     <th scope="col" class="px-3 py-3">
                         Book title
                     </th>

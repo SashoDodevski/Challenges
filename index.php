@@ -15,7 +15,7 @@ include_once "./page_parts/clients/header.php";
     <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">Promotion of new book every week</p>
     </div>
     <div class="p-3 bg-cyan-600/90 text-center my-auto" id="registerDiv">
-    <h2 class="font-semibold text-lg text-white">Register for full access</h2>
+    <h2 class="text-lg text-white">Register for full access</h2>
     <a type="button" class="text-cyan-900 bg-gray-100 hover:text-white hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-100 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800 mb-4 mt-4" href="register.php">Register now</a>
   </div>
   </div>

@@ -128,11 +128,6 @@ $(function () {
                     }">Delete</button>
                   </form>
                   </td>
-                  <td class="px-3 py-3 text-xs">
-                    <div>
-                      <p class="text-xs">${element["status"]}</p>
-                    </div>
-                  </td>
                   <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       ${element["book_title"]}
                   </th>
@@ -240,10 +235,38 @@ $(function () {
         $(`#btnDeleteItem${item}`).click(function (event) {
           let deleteItemData = {
             action: "delete",
-            book_status: "2",
             book_id: item,
           };
-          deleteItem(urlData, deleteItemData, postRequest, event);
+          new swal({
+            title: "Are you sure you want to delete?",
+            text: "By deleting this book you will delete all book's comments and notes!",
+            icon: "warning",
+            confirmButtonText: "Delete",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#DD6B55",
+            showCancelButton: true,
+          }).then(function (result) {
+            if (result.value) {
+              event.currentTarget.parentElement.parentElement.nextSibling.nextSibling.innerHTML= "DELETED";
+              event.currentTarget.parentElement.classList.add("hidden");
+              event.currentTarget.parentElement.previousSibling.previousSibling.firstChild.nextSibling.nextSibling.nextSibling.innerHTML= "Activate"
+              event.currentTarget.parentElement.parentElement.parentElement.classList.add("bg-red-50");
+              new swal({
+                text: "Item has been deleted!",
+                icon: "success",
+                timer: 1500,
+                showCancelButton: false,
+                showConfirmButton: false,
+              });
+      
+              postRequest(urlData, deleteItemData);
+              window.setTimeout(function () {
+                location.reload();
+              }, 1500);
+      
+            } else {
+            }
+          });
         });
       });
     },

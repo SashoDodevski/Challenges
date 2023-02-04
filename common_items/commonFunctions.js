@@ -136,7 +136,6 @@ export function editItem(urlData, data, callback1, event){
 
   // Delete item in database (add delete status)
   export function deleteItem(urlData, data, callback, event){
-    console.log(event.currentTarget.parentElement.previousSibling.previousSibling.firstChild.nextSibling.nextSibling.nextSibling)
     new swal({
       text: "Are you sure you want to delete this item?",
       icon: "warning",

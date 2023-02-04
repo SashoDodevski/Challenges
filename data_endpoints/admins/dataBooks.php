@@ -104,12 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]
         );
     } elseif ($data['action'] == 'delete') {
-        $sql = "UPDATE books SET book_status = :book_status WHERE book_id = :book_id";
+        $sql = "DELETE FROM books WHERE book_id = :book_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [
                 'book_id' => $data['book_id'],
-                'book_status' => $data['book_status'],
             ]
         );
     } 
