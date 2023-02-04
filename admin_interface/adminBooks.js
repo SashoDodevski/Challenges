@@ -194,7 +194,6 @@ $(function () {
           $(`#author value:${element["author_id"]}`).prop("selected", true);
           $(`#bookCategory value:${element["category_id"]}`).prop("selected",true);
 
-
           bookTitle.val(element["book_title"]);
           author.val(element["author_id"]);
           bookCategory.val(element["category_id"]);
@@ -209,9 +208,6 @@ $(function () {
           btnSubmitEditedItem.removeClass("hidden");
 
           btnSubmitEditedItem.click(() => {
-
-
-            // console.log(event.currentTarget.parentElement.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = element.author_name + " " + element.author_surname)
 
             let editItemData = {
               action: "edit",
