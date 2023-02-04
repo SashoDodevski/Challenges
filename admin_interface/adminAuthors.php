@@ -32,7 +32,7 @@ include_once "../page_parts/admins/adminHeader.php";
                 </div>
 
                 <div class="mt-0">
-
+                    <p class="text-sm h-1 mb-1 text-center" id="msgForm"></p>
                 </div>
                 <button type="button" class="w-full text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-900 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800" id="btnSubmitItem">Submit</button>
                 <button type="button" class="w-full text-white bg-green-800/80 hover:bg-green-700/80 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-900 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800" id="btnSubmitEditedItem">Submit</button>

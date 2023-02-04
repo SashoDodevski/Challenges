@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../admin_interface/adminInterface.php');
         } else {
             $_SESSION['msg'] = 'Wrong password!';
-
+            $_SESSION['email'] = $email;
             header('Location: ../signin.php');
             die();
         }
@@ -48,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../dashboard.php');
         } else {
             $_SESSION['msg'] = 'Wrong password!';
-
+            $_SESSION['email'] = $email;
             header('Location: ../signin.php');
             die();
         } 
     } else {
         $_SESSION['msg'] = 'Wrong credentials!';
-
+        $_SESSION['email'] = $email;
         header('Location: ../signin.php');
         die();
     }

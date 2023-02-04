@@ -1,6 +1,6 @@
 <?php
 
-if(session_status() !== PHP_SESSION_ACTIVE) {
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
@@ -21,7 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($_POST['name'] == "" || $_POST['surname'] == "" || $_POST['email'] == "" || $_POST['password'] == "") {
         $_SESSION['msg'] = 'All fields are required!';
-        header('Location: register.php');
+        header('Location: ../register.php');
+    } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { {
+            $_SESSION['msg'] = 'Invalid email format!';
+            $_SESSION['name'] = $name;
+            $_SESSION['surname'] = $surname;
+            $_SESSION['email'] = $email;
+            header('Location: ../register.php');
+        }
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['name'])) {
+        $_SESSION['msg'] = "Only letters and white space allowed";
+        $_SESSION['name'] = $name;
+        $_SESSION['surname'] = $surname;
+        $_SESSION['email'] = $email;
+        header('Location: ../register.php');
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['surname'])) {
+        $_SESSION['msg'] = "Only letters and white space allowed";
+        $_SESSION['name'] = $name;
+        $_SESSION['surname'] = $surname;
+        $_SESSION['email'] = $email;
+        header('Location: ../register.php');
     } else {
         if ($stmt->rowCount() == 1) {
             $user = $stmt->fetch();

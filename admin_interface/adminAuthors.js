@@ -24,13 +24,9 @@ $(function () {
   let btnSubmitEditedItem = $("#btnSubmitEditedItem");
   let btnAddNewItem = $("#btnAddNewItem");
   let btnCloseForm = $(".btnCloseForm");
-  let divTable = $("#divTable");
   let tableBody = $("#tableBody");
   let pageNumbers = $("#pageNumbers");
   let showPageNo = $("#showPageNo");
-  let deleteModal = $("#deleteModal");
-  let deleteModalBtn = $(".deleteModalBtn");
-  let closeDeleteModal = $(".closeDeleteModal");
 
   // AJAX GET data from endpoint
   let page = {
