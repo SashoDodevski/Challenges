@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $totalItems = $totalItems['Total_items'];
         $itemsPerPage = 6;
-        $initial_limit = rand(1, ceil($totalItems/$itemsPerPage));
+        $initial_limit = rand(0, ($totalItems-$itemsPerPage));
 
         $sql = "SELECT * FROM `books` 
             LEFT JOIN authors ON books.author_id = authors.author_id

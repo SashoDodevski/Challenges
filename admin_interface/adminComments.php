@@ -32,12 +32,6 @@ include_once "../page_parts/admins/adminHeader.php";
                         <th scope="col" class="px-3 py-3 w-20 text-center">
                             Comment status
                         </th>
-                        <th scope="col" class="px-3 py-3 w-20 text-center">
-                            Comment ID
-                        </th>
-                        <th scope="col" class="px-3 py-3 w-20 text-center">
-                            User ID
-                        </th>
                         <th scope="col" class="px-3 py-3">
                             User
                         </th>

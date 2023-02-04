@@ -94,6 +94,12 @@
   border-radius: 10px;
 }
 
+@media (max-width:800px) { 
+  #registerDiv {
+      display: none;
+  }
+}
+
 #booksCatalogue {
   position: relative;
   height: 100%;

@@ -69,12 +69,6 @@ $(function () {
                     <td class="px-3 py-3 text-xs h-full align-text-top text-center">
                         ${element.status}
                     </td>
-                    <td class="px-3 py-3 align-text-top text-right">
-                        ${element.comment_id}
-                    </td>
-                    <td class="px-3 py-3 align-text-top text-right">
-                        ${element.user_id}
-                    </td>
                     <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top">
                     ${element.name + " " + element.surname}
                     </th>
