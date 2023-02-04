@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../register.php');
         }
     } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['name'])) {
-        $_SESSION['msg'] = "Only letters and white space allowed";
+        $_SESSION['msg'] = "Only letters and white space allowed in name input!";
         $_SESSION['name'] = $name;
         $_SESSION['surname'] = $surname;
         $_SESSION['email'] = $email;
         header('Location: ../register.php');
     } else if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['surname'])) {
-        $_SESSION['msg'] = "Only letters and white space allowed";
+        $_SESSION['msg'] = "Only letters and white space allowed in surname input!";
         $_SESSION['name'] = $name;
         $_SESSION['surname'] = $surname;
         $_SESSION['email'] = $email;
