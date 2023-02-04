@@ -70,7 +70,7 @@ $(function () {
                     <td class="px-3 py-3 grid content-start">
                     <form method="POST">
                     <input type="hidden" name="action" value="edit">
-                      <button type="submit" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${element["author_id"]}">Edit</button>
+                      <button type="button" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${element["author_id"]}">Edit</button>
                       </form>
                       <form method="POST">
                       <input type="hidden" name="action" value="delete">
@@ -79,9 +79,6 @@ $(function () {
                     </td>
                     <td class="px-3 py-3 text-xs h-full align-text-top text-center">
                         ${element["status"]}
-                    </td>
-                    <td class="px-3 py-3 align-text-top text-right">
-                        ${element["author_id"]}
                     </td>
                     <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top">
                     ${element["author_name"]}
@@ -124,8 +121,7 @@ $(function () {
         });
 
         // Edit item in database
-        $(`#btnEditItem${element.author_id}`).click(function (e) {
-          e.preventDefault();
+        $(`#btnEditItem${element.author_id}`).click(function (event) {
 
           authorName.val(element.author_name);
           authorSurname.val(element.author_surname);
@@ -147,7 +143,9 @@ $(function () {
               author_surname: authorSurname.val(),
               author_CV: authorCV.val(),
             };
-            editItem(urlData, editItemData, postRequest);
+            editItem(urlData, editItemData, postRequest, event);
+            divMainBackdrop.fadeOut(150);
+            divMain.fadeOut(150);
             window.setTimeout(function () {
               location.reload();
             }, 2500);
@@ -155,13 +153,13 @@ $(function () {
         });
 
         // Soft delete item in database
-        $(`#btnDeleteItem${element.author_id}`).click(function () {
+        $(`#btnDeleteItem${element.author_id}`).click(function (event) {
             let deleteItemData = {
               action: "delete",
               author_status: "2",
               author_id: element.author_id,
             };
-            deleteItem(urlData, deleteItemData, postRequest);
+            deleteItem(urlData, deleteItemData, postRequest, event);
           });
 
       });

@@ -105,7 +105,7 @@ export function submitItem(urlData, data, callback) {
 }
 
 // Edit item in database
-export function editItem(urlData, data, callback){
+export function editItem(urlData, data, callback1, event){
   new swal({
     text: "Are you sure you want to edit this item?",
     icon: "warning",
@@ -115,6 +115,9 @@ export function editItem(urlData, data, callback){
     showCancelButton: true,
   }).then(function (result) {
     if (result.value) {
+      event.currentTarget.parentElement.parentElement.nextSibling.nextSibling.innerHTML= "ACTIVE";
+      event.currentTarget.parentElement.nextSibling.nextSibling[1].classList.remove("hidden")
+      event.currentTarget.parentElement.parentElement.parentElement.classList.remove("bg-red-50");
       new swal({
         text: "Item has been edited!",
         icon: "success",
@@ -123,7 +126,7 @@ export function editItem(urlData, data, callback){
         showConfirmButton: false,
       });
 
-      callback(urlData, data);
+      callback1(urlData, data);
 
     } else {
     }
@@ -132,7 +135,8 @@ export function editItem(urlData, data, callback){
 
 
   // Delete item in database (add delete status)
-  export function deleteItem(urlData, data, callback){
+  export function deleteItem(urlData, data, callback, event){
+    console.log(event.currentTarget.parentElement.previousSibling.previousSibling.firstChild.nextSibling.nextSibling.nextSibling)
     new swal({
       text: "Are you sure you want to delete this item?",
       icon: "warning",
@@ -141,8 +145,11 @@ export function editItem(urlData, data, callback){
       confirmButtonColor: "#DD6B55",
       showCancelButton: true,
     }).then(function (result) {
-      event.currentTarget.parentElement.remove();
       if (result.value) {
+        event.currentTarget.parentElement.parentElement.nextSibling.nextSibling.innerHTML= "DELETED";
+        event.currentTarget.parentElement.classList.add("hidden");
+        event.currentTarget.parentElement.previousSibling.previousSibling.firstChild.nextSibling.nextSibling.nextSibling.innerHTML= "Activate"
+        event.currentTarget.parentElement.parentElement.parentElement.classList.add("bg-red-50");
         new swal({
           text: "Item has been deleted!",
           icon: "success",
@@ -153,11 +160,7 @@ export function editItem(urlData, data, callback){
 
         callback(urlData, data);
 
-        window.setTimeout(function () {
-          location.reload();
-        }, 1500);
       } else {
-        console.log("button B pressed");
       }
     });
   }

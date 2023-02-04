@@ -100,30 +100,27 @@ $(function () {
 
               
             // Activate item in database
-            $(`#btnEditItem${item}`).click(function () {
+            $(`#btnEditItem${item}`).click(function (event) {
               let editItemData = {
                 action: "edit",
                 comment_id: element.comment_id,
                 comment_status: "1",
               };
-              editItem(urlData, editItemData, postRequest);
-              window.setTimeout(function () {
-                location.reload();
-              }, 2500);
+              editItem(urlData, editItemData, postRequest, event);
+
               });
 
             // Soft delete item in database
-            $(`#btnDeleteItem${item}`).click(function () {
+            $(`#btnDeleteItem${item}`).click(function (event) {
               let deleteItemData = {
                 action: "delete",
                 comment_id: element.comment_id,
                 comment_status: "2",
-                };
-                deleteItem(urlData, deleteItemData, postRequest);
+                }
+                deleteItem(urlData, deleteItemData, postRequest, event);
+              });
             });
-
-          });
-        },
+          },
         error: function (error) {
           console.log("Error: " + JSON.stringify(error));
         },

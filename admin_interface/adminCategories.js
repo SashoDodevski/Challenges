@@ -64,7 +64,7 @@ $(function () {
                     <td class="px-3 py-3 grid content-start">
                     <form method="POST">
                     <input type="hidden" name="action" value="edit">
-                      <button type="submit" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${element["category_id"]}">Edit</button>
+                      <button type="button" class="w-20 text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${element["category_id"]}">Edit</button>
                       </form>
                       <form method="POST">
                       <input type="hidden" name="action" value="delete">
@@ -73,9 +73,6 @@ $(function () {
                     </td>
                     <td class="px-3 py-3 text-xs h-full align-text-top text-center">
                         ${element["status"]}
-                    </td>
-                    <td class="px-3 py-3 align-text-top text-right">
-                        ${element["category_id"]}
                     </td>
                     <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white align-text-top">
                     ${element["category"]}
@@ -94,8 +91,7 @@ $(function () {
         }
 
         // Submit new item to database
-        btnSubmitItem.click(function (e) {
-          e.preventDefault();
+        btnSubmitItem.click(function (event) {
 
           let newItemFormValidation = function () {
             if (category.val() === "") {
@@ -114,9 +110,7 @@ $(function () {
         });
 
         // Edit item in database
-        $(`#btnEditItem${item}`).click(function (e) {
-          e.preventDefault();
-
+        $(`#btnEditItem${item}`).click(function (event) {
           category.val(element["category"]);
 
           $("#divMain h1").text("Edit item");
@@ -133,7 +127,9 @@ $(function () {
               category: category.val(),
               category_status: "1",
             };
-            editItem(urlData, editItemData, postRequest);
+            editItem(urlData, editItemData, postRequest, event);
+            divMainBackdrop.fadeOut(150);
+            divMain.fadeOut(150);
             window.setTimeout(function () {
               location.reload();
             }, 2500);
@@ -141,13 +137,13 @@ $(function () {
         });
 
         // Soft delete item in database
-        $(`#btnDeleteItem${item}`).click(function () {
+        $(`#btnDeleteItem${item}`).click(function (event) {
           let deleteItemData = {
             action: "delete",
             category_id: element["category_id"],
             category_status: "2",
           };
-          deleteItem(urlData, deleteItemData, postRequest);
+          deleteItem(urlData, deleteItemData, postRequest, event);
         });
       });
     },

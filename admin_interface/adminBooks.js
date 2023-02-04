@@ -43,7 +43,7 @@ $(function () {
     success: function (dataAuthors) {
       dataAuthors.data.forEach((element) => {
         let authorOption = $(
-          `<option value="${element["author_id"]}"></option>`
+          `<option rel="${element.author_name} ${element.author_surname}" value="${element["author_id"]}"></option>`
         );
         authorOption.text(
           element["author_name"] + " " + element["author_surname"]
@@ -67,7 +67,7 @@ $(function () {
     success: function (dataCategories) {
       dataCategories.data.forEach((element) => {
         let categoryOption = $(
-          `<option value="${element["category_id"]}"></option>`
+          `<option rel="${element.category}" value="${element["category_id"]}"></option>`
         );
         categoryOption.text(element["category"]);
         bookCategory.append(categoryOption);
@@ -117,7 +117,7 @@ $(function () {
                   <td class="px-3 py-3">
                   <form method="POST">
                   <input type="hidden" name="action" value="edit">
-                    <button type="submit" class="w-full text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${
+                    <button type="button" class="w-full text-white bg-green-700/80 hover:bg-green-600/80 focus:ring-1 focus:outline-none focus:ring-green-300 font-medium rounded text-xs px-2 py-1 my-1 text-center dark:bg-green-900 dark:hover:bg-green-800 dark:focus:ring-green-800" id="btnEditItem${
                       element["book_id"]
                     }">Edit</button>
                     </form>
@@ -132,9 +132,6 @@ $(function () {
                     <div>
                       <p class="text-xs">${element["status"]}</p>
                     </div>
-                  </td>
-                  <td class="px-3 py-3 text-right">
-                      ${element["book_id"]}
                   </td>
                   <th scope="row" class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       ${element["book_title"]}
@@ -197,13 +194,11 @@ $(function () {
         });
 
         // Edit item in database
-        $(`#btnEditItem${item}`).click((e) => {
-          e.preventDefault();
+        $(`#btnEditItem${item}`).click((event) => {
+
           $(`#author value:${element["author_id"]}`).prop("selected", true);
-          $(`#bookCategory value:${element["category_id"]}`).prop(
-            "selected",
-            true
-          );
+          $(`#bookCategory value:${element["category_id"]}`).prop("selected",true);
+
 
           bookTitle.val(element["book_title"]);
           author.val(element["author_id"]);
@@ -219,6 +214,10 @@ $(function () {
           btnSubmitEditedItem.removeClass("hidden");
 
           btnSubmitEditedItem.click(() => {
+
+
+            // console.log(event.currentTarget.parentElement.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = element.author_name + " " + element.author_surname)
+
             let editItemData = {
               action: "edit",
               book_status: "1",
@@ -230,21 +229,21 @@ $(function () {
               no_of_pages: numberOfPages.val(),
               book_image: bookImageUrl.val(),
             };
-            editItem(urlData, editItemData, postRequest);
+            editItem(urlData, editItemData, postRequest, event);
             window.setTimeout(function () {
               location.reload();
             }, 2500);
           });
         });
 
-        // Soft delete item in database
-        $(`#btnDeleteItem${item}`).click(function () {
+        // Delete item in database
+        $(`#btnDeleteItem${item}`).click(function (event) {
           let deleteItemData = {
             action: "delete",
             book_status: "2",
             book_id: item,
           };
-          deleteItem(urlData, deleteItemData, postRequest);
+          deleteItem(urlData, deleteItemData, postRequest, event);
         });
       });
     },

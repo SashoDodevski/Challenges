@@ -53,7 +53,7 @@ if ((!isset($_SESSION["username"])) || (isset($_SESSION["username"]) && $_SESSIO
                     <li>
                         <a href="./adminAuthors.php" class="py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Authors</a>
                     </li>
-                    <li class="showContentToClients">
+                    <li>
                         <a href="./adminCategories.php" class="py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
                     </li>
                     <li>

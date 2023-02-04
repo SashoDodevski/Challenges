@@ -77,9 +77,6 @@ include_once "../page_parts/admins/adminHeader.php";
                     <th scope="col" class="px-3 py-3 w-20 text-center">
                         Book status
                     </th>
-                    <th scope="col" class="px-3 py-3 w-20 text-center">
-                        Book ID
-                    </th>
                     <th scope="col" class="px-3 py-3">
                         Book title
                     </th>
