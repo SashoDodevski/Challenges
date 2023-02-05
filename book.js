@@ -32,9 +32,6 @@ $(function () {
   let note = $("#note");
   let btnSubmitNote = $("#btnSubmitNote");
 
-  btnDeleteComment.click(function () {
-    console.log("CLICK");
-  });
 
   // Get book
   let getBook = {
@@ -84,7 +81,7 @@ $(function () {
         leaveACommentDiv.addClass("hidden");
       } else if (itemsData.data.comment_status == 3) {
         pendingCommentUser.text(
-          itemsData.data.name + " " + itemsData.data.surname
+          itemsData.data.created
         );
         editedComment.text(itemsData.data.comment);
         leaveACommentDiv.addClass("hidden");
@@ -173,17 +170,60 @@ $(function () {
       comment: $("#editedComment").val(),
       comment_status: "3",
     };
-    editItem(urlData, editComment, postRequest);
-  });
+    new swal({
+      text: "Are you sure you want to edit this item?",
+      icon: "warning",
+      confirmButtonText: "Edit",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#5ea91d",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been edited!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+  
+        postRequest(urlData, editComment);
+  
+      } else {
+      }
+    });  });
 
   // Delete comment in database
-  $("body").on("click", ".btnDeleteComment", () => {
+  $("body").on("click", ".btnDeleteComment", (event) => {
     let deleteComment = {
       action: "deleteUserComment",
       book_id: location.hash.slice(1),
       user_id: userId.val(),
     };
-    deleteItem(urlData, deleteComment, postRequest);
+    new swal({
+      text: "Are you sure you want to delete this item?",
+      icon: "warning",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#DD6B55",
+      showCancelButton: true,
+    }).then(function (result) {
+      event.currentTarget.parentElement.remove();
+      leaveACommentDiv.removeClass('hidden')
+      if (result.value) {
+        new swal({
+          text: "Item has been deleted!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+
+        postRequest(urlData, deleteComment);
+
+      } else {
+      }
+    });
   });
 
   // Get book notes
@@ -269,7 +309,28 @@ $(function () {
       new_note: event.currentTarget.previousSibling.previousSibling.value,
       old_note: event.currentTarget.previousSibling.previousSibling.textContent,
     };
-    editItem(urlData, editNote, postRequest);
+    new swal({
+      text: "Are you sure you want to edit this item?",
+      icon: "warning",
+      confirmButtonText: "Edit",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#5ea91d",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.value) {
+        new swal({
+          text: "Item has been edited!",
+          icon: "success",
+          timer: 1500,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+  
+        postRequest(urlData, editNote);
+  
+      } else {
+      }
+    });
   });
 
   // Delete note in database

@@ -12,14 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sqlAdmins = "SELECT * FROM admins WHERE email = :email LIMIT 1";
     $stmtAdmins = $pdo->prepare($sqlAdmins);
-    $stmtAdmins->bindParam('email', $email);
     $stmtAdmins->execute([
           'email' => $email
     ]);
 
     $sqlUsers = "SELECT * FROM users WHERE email = :email LIMIT 1";
     $stmtUsers = $pdo->prepare($sqlUsers);
-    $stmtUsers->bindParam('email', $email);
     $stmtUsers->execute([
           'email' => $email
     ]);

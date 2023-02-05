@@ -109,7 +109,7 @@ export function editItem(urlData, data, callback1, event){
   new swal({
     text: "Are you sure you want to edit this item?",
     icon: "warning",
-    confirmButtonText: "Edit",
+    confirmButtonText: "Yes, i'm sure",
     cancelButtonText: "Cancel",
     confirmButtonColor: "#5ea91d",
     showCancelButton: true,
