@@ -1,7 +1,9 @@
 <?php
 
 include_once "./page_parts/clients/header.php";
-
+if(isset($_SESSION['username'])){
+    header('Location: index.php');
+}
 ?>
 
     <!-- Register Form-->

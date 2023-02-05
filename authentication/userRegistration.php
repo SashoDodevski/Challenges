@@ -41,6 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['surname'] = $surname;
         $_SESSION['email'] = $email;
         header('Location: ../register.php');
+    } else if (strlen($_POST['name']) < 4) {
+        $_SESSION['msg'] = 'Name must be at least 4 characters';
+        header('Location: ../register.php');
+    } else if (strlen($_POST['surname']) < 6) {
+        $_SESSION['msg'] = 'Surname must be at least 6 characters';
+        header('Location: ../register.php');
+    } else if (strlen($_POST['password']) < 6) {
+        $_SESSION['msg'] = 'Password must be at least 6 characters';
+        header('Location: ../register.php');
     } else {
         if ($stmt->rowCount() == 1) {
             $user = $stmt->fetch();

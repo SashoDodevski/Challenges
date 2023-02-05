@@ -7,7 +7,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once "../database/db.php";
 
-    $email = $_POST['email'];
+    $email = stripslashes($_POST['email']);
     $password = $_POST['password'];
 
     $sqlAdmins = "SELECT * FROM admins WHERE email = :email LIMIT 1";
@@ -30,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (password_verify($password, $admin['password'])) {
             $_SESSION['username'] = $admin['name'];
-
             header('Location: ../admin_interface/adminInterface.php');
         } else {
             $_SESSION['msg'] = 'Wrong password!';
@@ -44,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $user['name'];
             $_SESSION['user_id'] = $user['user_id'];
-
             header('Location: ../dashboard.php');
         } else {
             $_SESSION['msg'] = 'Wrong password!';
