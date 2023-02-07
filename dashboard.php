@@ -21,7 +21,7 @@ include_once "./page_parts/clients/header.php";
 
 
     <!-- Book content -->
-    <div class="w-10/12 mx-auto top-positioning-60  min-h-screen">
+    <div class="w-10/12 mx-auto top-positioning-60 min-h-screen">
         <div class="flex justify-end">
             <button type="submit" class="w-40 mt-4 ml-auto mr-20 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-900 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800 showHideFilter">Filter by category</button>
         </div>
