@@ -7,8 +7,8 @@ if(isset($_SESSION['username'])){
 ?>
 
 <!-- SignIn Form-->
-<section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 pt-24 pb-14 mx-auto my-20">
+<section class="bg-amber-50/40 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 pt-24 pb-14 mx-auto my-20 ">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8 text-cyan-900">
                 <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
