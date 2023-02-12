@@ -1,0 +1,11 @@
+.banner {
+    background-image: url(../images/about-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 40vh;
+    background-position: center;
+}
+
+.background-effect {
+    background-color: rgba(0, 0, 0, 0.4);
+}
