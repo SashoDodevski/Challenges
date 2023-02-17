@@ -1,0 +1,57 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+    scroll-behavior: smooth;
+} */
+
+/* Common elements */
+
+.color-primary {
+    color: #FCD232!important;
+}
+
+.bg-primary {
+    background-color: #FCD232!important;
+}
+
+.color-secondary {
+    color: #302F38!important;
+}
+
+.bg-secondary {
+    background-color: #ecebeb!important;
+}
+
+.dark-opacity {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.brainster-logo {
+    width: 40px;
+}
+
+.navbar-list-item {
+    font-size: smaller;
+    font-weight: 500;
+}
+
+.banner {
+    height: 70vh!important;
+    background-image: url(./Images/synthesio-0301.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.heart-img {
+    width: 17px;
+}
+
+.footer {
+    font-size: 12px;
+}
+
+.footer-list {
+    list-style-type: none;
+}
