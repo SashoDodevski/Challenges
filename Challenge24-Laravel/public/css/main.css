@@ -27,11 +27,15 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+.font-12 {
+    font-size: 12px;
+}
+
 .brainster-logo {
     width: 40px;
 }
 
-.navbar-list-item {
+.navbar-item {
     font-size: smaller;
     font-weight: 500;
 }
@@ -43,6 +47,12 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.card:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
 
 .heart-img {
     width: 17px;
