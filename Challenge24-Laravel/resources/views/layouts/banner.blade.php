@@ -3,6 +3,10 @@
 
         <h1 class="mb-4 text-2xl font-semibold tracking-tight leading-none md:text-5xl lg:text-4xl">Brainster Labs</h1>
         <p class="mb-8 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">Brainster Academies Projects</p>
-
+        @if(Session::has('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 font-semibold rounded-lg bg-green-100/80 dark:bg-gray-800 dark:text-green-400 text-center" role="alert">
+            {{ Session::get('success') }}
+        </div>
+        @endif
     </div>
 </section>

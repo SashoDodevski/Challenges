@@ -17,11 +17,11 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         $projects = [];
-        for($i = 0; $i < 9; $i++) {
+        for($i = 0; $i < 6; $i++) {
             array_push($projects, [
                 'title' => fake()->words(3, true),
                 'subtitle' => fake()->sentence(),
-                'description' => fake()->sentences(5, true),
+                'description' => fake()->sentences(3, true),
                 'image' => fake()->imageUrl(),
                 'url' => fake()->url(),
                 'created_at' => now(),
