@@ -1,5 +1,5 @@
   $(function(){
-    let urlData = "http://api.quotable.io/random";
+    let urlData = "https://api.quotable.io/random";
 
     let quote = $("#quote")
 

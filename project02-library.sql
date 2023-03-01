@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2023 at 06:45 PM
+-- Generation Time: Feb 07, 2023 at 09:34 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -137,7 +137,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`category_id`, `category`, `category_status`) VALUES
 (1, 'Adventure', 1),
 (2, 'Classics', 1),
-(3, 'Crime', 1),
+(3, 'Crime', 2),
 (5, 'Fantasy', 1),
 (6, 'Historical fiction', 1),
 (8, 'Humour and satire', 1),
@@ -172,13 +172,17 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `user_id`, `book_id`, `comment`, `comment_status`, `created`) VALUES
-(64, 10, 112, 'Comment', 1, '2023-02-04 17:44:43'),
 (65, 9, 112, 'Woow, what a book! I really liked it.', 1, '2023-02-04 17:44:38'),
-(66, 9, 117, 'I loved the climax of the book!', 1, '2023-02-04 10:18:17'),
+(66, 9, 117, 'I loved the climax of the book!', 2, '2023-02-04 18:09:58'),
 (67, 9, 108, 'Really easy to read.', 1, '2023-02-04 09:46:00'),
-(68, 9, 109, 'Nice read', 3, '2023-02-04 08:49:45'),
+(68, 9, 109, 'Nice read', 1, '2023-02-05 19:13:27'),
 (69, 9, 115, 'I recommend the book', 1, '2023-02-04 08:49:45'),
-(70, 14, 126, 'great book!', 1, '2023-02-04 17:27:00');
+(70, 14, 126, 'great book!', 1, '2023-02-04 17:27:00'),
+(71, 14, 111, 'wow', 1, '2023-02-05 19:13:39'),
+(72, 14, 113, 'What a book to read', 3, '2023-02-07 08:34:12'),
+(73, 10, 115, 'Nice book to read', 2, '2023-02-05 19:13:45'),
+(78, 10, 113, 'New comment ', 1, '2023-02-05 19:07:14'),
+(81, 10, 124, 'Comment', 3, '2023-02-05 19:46:23');
 
 -- --------------------------------------------------------
 
@@ -204,7 +208,12 @@ INSERT INTO `notes` (`note_id`, `user_id`, `book_id`, `note`) VALUES
 (122, 9, 108, 'Note 2'),
 (123, 9, 109, 'Note 3'),
 (125, 9, 115, 'Note 2'),
-(126, 14, 126, 'hello');
+(126, 14, 126, 'hello'),
+(127, 14, 111, 'wow'),
+(128, 14, 111, 'page 202'),
+(129, 10, 115, 'Note 1'),
+(131, 10, 115, 'Note 3'),
+(132, 10, 115, 'Note 4');
 
 -- --------------------------------------------------------
 
@@ -343,13 +352,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `statuses`
@@ -361,7 +370,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

@@ -10,28 +10,28 @@ include_once "./page_parts/clients/header.php";
 <div class="w-full mx-auto banner-top flex flex-wrap text-center dark:bg-gray-900">
   <div class="w-8/12 py-8 mx-auto text-left flex justify-between">
     <div>
-    <h1 class="text-5xl tracking-tight text-cyan-900 dark:text-gray-500 my-5">Book Library</h1>
-    <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">All bestsellers at one place</p>
-    <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">Promotion of new book every week</p>
+      <h1 class="text-5xl tracking-tight text-cyan-900 dark:text-gray-500 my-5">Book Library</h1>
+      <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">All bestsellers at one place</p>
+      <p class="text-lg font-semibold tracking-tight text-cyan-900 dark:text-gray-500">Promotion of new book every week</p>
     </div>
-    <div class="p-3 bg-cyan-600/90 text-center my-auto" id="registerDiv">
-    <h2 class="text-lg text-white">Register for full access</h2>
-    <a type="button" class="text-cyan-900 bg-gray-100 hover:text-white hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-100 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800 mb-4 mt-4" href="register.php">Register now</a>
-  </div>
+    <div class="p-3 bg-cyan-600/90 text-center my-auto drop-shadow-xl drop-shadow-xl" id="registerDiv">
+      <h2 class="text-lg text-white">Register for full access</h2>
+      <a type="button" class="text-cyan-900 bg-gray-100 hover:text-white hover:border hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-100 dark:hover:bg-cyan-800 dark:focus:ring-cyan-800 mb-4 mt-4" href="register.php">Register now</a>
+    </div>
   </div>
 
 </div>
 
 <div class="w-full banner flex flex-wrap text-center dark:bg-gray-900">
-<div class="p-4 bg-gray-800/70 text-center mx-auto mb-12 mt-auto" id="booksCatalogue">
+  <div class="p-4 bg-gray-800/70 text-center mx-auto mb-12 mt-auto" id="booksCatalogue">
     <h2 class="font-regular text-2xl text-white mt-60">Search the main catalogue</h2>
-    <a type="button" class="text-white hover:text-white border border-white hover:bg-cyan-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center mr-2 mb-2 mt-6 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 text-xl" href="dashboard.php"><span class="italic">go to </span>Book Library</a>
+    <a type="button" class="text-white hover:text-white border border-white hover:bg-cyan-900/70 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center mr-2 mb-2 mt-6 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 text-xl" href="dashboard.php"><span class="italic">go to </span>Book Library</a>
   </div>
 </div>
 
 <!-- Book content -->
 <div class="w-full mx-auto" id="book-content">
-<div class="w-10/12 mx-auto">
+  <div class="w-10/12 mx-auto">
     <h4 class="text-left text-2xl font-semibold tracking-tight text-cyan-900 dark:text-gray-500 pt-6 pb-4 pl-12">Check out some of the bestselling books</h4>
   </div>
   <div class="w-10/12 mx-auto grid grid-cols-6 gap-8 content-centers p-12" id="books">
