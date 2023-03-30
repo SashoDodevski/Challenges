@@ -19,8 +19,8 @@
                 <div class="h-full flex">
                     <ul class="flex flex-col p-4 border border-gray-100 rounded-lg bg-primary md:flex-row md:space-x-8 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 my-auto">
 
-
-                        @if (Auth::guest())
+                        
+                        @if (Auth::guest() or Auth::user()->name != 'Admin')
 
                         <li>
                             <a href="https://brainster.co/full-stack/" target="_blank" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Academy <br>for Development</a>

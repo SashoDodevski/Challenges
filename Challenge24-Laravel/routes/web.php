@@ -21,13 +21,7 @@ use App\Http\Controllers\ProjectController;
 
 
 Route::get('/', [ProjectController::class, 'index'])->name('index');
-Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
-Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
-Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-Route::put('projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
 Route::get('projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
-
 Route::post('company', [EmailController::class, 'firstEmail'])->name('company.firstEmail');
 
 Route::get('/dashboard', function () {
@@ -39,6 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -20,6 +20,6 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('admin@123'),
         ];        
 
-        DB::table('admins')->insert($admin);
+        DB::table('users')->insert($admin);
     }
 }

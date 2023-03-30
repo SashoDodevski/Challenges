@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
         if(!Auth::user()->isAdmin()) {
-            return redirect('guest');
+            return redirect('index');
         }
 
         return $next($request);
