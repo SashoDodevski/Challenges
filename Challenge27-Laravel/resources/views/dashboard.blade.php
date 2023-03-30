@@ -24,6 +24,7 @@
             <div class="p-4 bg-white dark:bg-gray-900">
                 <a type="button" href="{{ route('vehicles.create')}}" class="text-sm text-emerald-600  ml-0 mr-auto font-semibold">+ Add new vehicle</a>
             </div>
+
             <table id="vehiclesTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -42,7 +43,6 @@
                         <th scope="col" class="px-6 py-3">
                             Actions
                         </th>
-
                     </tr>
                 </thead>
                 <tbody id="tBody">
@@ -59,91 +59,53 @@
 
 
     <script>
-        $(function() {
-            $.get("/api/vehicles",
-                function(data, textStatus, jqXHR) {
-                    renderTableBody(data)
-                }
-            );
-
-            function renderTableBody(vehicles) {
-                let tbody = '';
-
-                $.each(vehicles, function(index, vehicle) {
-
-                    tbody += `
-                     <tr id='${vehicle.id}' class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4">
-                            ${vehicle.brand}
-                        </td>
-                        <td class="px-6 py-4">
-                            ${vehicle.model}
-                        </td>
-                        <td class="px-6 py-4">
-                            ${vehicle.plate_number}
-                        </td>
-                        <td class="px-6 py-4">
-                            ${vehicle.insurance_date}
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href='/vehicles/${vehicle.id}/edit' class='text-yellow-600'>Edit</a>
-                            <button data-id='${vehicle.id}' class='text-red-600 delete ml-3'>Delete</button>
-                        </td>
-                    </tr>`
-                });
-
-                $('tbody').html(tbody)
-            }
-
-            $(document).on('click', '.delete', function() {
-                let id = $(this).data('id')
-
-                swal({
-                        title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this vehicle!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("The vehicle has been deleted!", {
-                                icon: "success",
-                            });
-
-                            $.ajax({
-                                type: "DELETE",
-                                url: "/api/vehicles/" + id,
-                                data: {
-                                    _token: '{{csrf_token()}}'
-                                },
-                                success: function(response) {
-                                    $(`#${id}`).remove()
-                                },
-                                error: function(data, textStatus, errorThrown) {
-                                    console.log(data.responseJSON);
-                                },
-                            });
-
-                        } else {
-                            swal("Your vehicle is safe!");
-                        }
-                    });
-            });
-
-            $('#table-search').on('keyup', function() {
-                let data = {
-                    'search': $(this).val()
-                }
-
-                $.get("/api/vehicles", data,
-                    function(data, textStatus, jqXHR) {
-                        renderTableBody(data)
-                    }
-                );
-            })
-
+       $(document).ready(function() {
+            
+        
+            // New record
+            $('a.editor-create').on('click', function (e) {
+                e.preventDefault();
+        
+                editor.create( {
+                    title: 'Create new record',
+                    buttons: 'Add'
+                } );
+            } );
+        
+            // Edit record
+            $('#vehiclesTable').on('click', 'td.editor-edit', function (e) {
+                e.preventDefault();
+        
+                editor.edit( $(this).closest('tr'), {
+                    title: 'Edit record',
+                    buttons: 'Update'
+                } );
+            } );
+        
+            // Delete a record
+            $('#vehiclesTable').on('click', 'td.editor-delete', function (e) {
+                e.preventDefault();
+        
+                editor.remove( $(this).closest('tr'), {
+                    title: 'Delete record',
+                    message: 'Are you sure you wish to remove this record?',
+                    buttons: 'Delete'
+                } );
+            } );
+        
+            $('#vehiclesTable').DataTable( {
+                ajax: "/vehicles",
+                columns: [
+                    { data: "brand" },
+                    { data: "model" },
+                    { data: "plate_number" },
+                    { data: "insurance_date" },
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            } );
         });
+
+
     </script>
 
     </body>

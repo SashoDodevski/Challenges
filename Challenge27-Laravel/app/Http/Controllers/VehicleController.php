@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DataTables;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 
@@ -67,9 +68,26 @@ class VehicleController extends Controller
         //
     }
 
-    public function vehicles(){
-        $vehicles = Vehicle::query();
+    public function vehicles(Request $request){
 
-        return DataTables::eloquent($vehicles)->toJson();
+        if ($request->ajax()) {
+            $data = Vehicle::query();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+     
+                        $btn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm">View</a>';
+                        $btn = $btn.'<a href="/vehicles/${id}/edit" class="edit btn btn-primary btn-sm">Edit</a>';
+                        $btn = $btn.'<a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
+         
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        // $vehicles = Vehicle::query();
+
+        // return DataTables::eloquent($vehicles)->toJson();
     }
 }
